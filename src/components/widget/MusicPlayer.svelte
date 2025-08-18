@@ -82,7 +82,7 @@ let playlist = [
 	{
 		id: 7,
 		title: "温柔的回忆",
-		artist: "《蔚蓝档案》最终章",
+		artist: "《蔚蓝档案》最终章ED",
 		cover: "https://cdn-2.chenhen.top/音乐/温柔的回忆.webp",
 		url: "https://cdn-2.chenhen.top/音乐/温柔的回忆.opus",
 		duration: 220,
@@ -114,7 +114,7 @@ let playlist = [
 	{
 		id: 11,
 		title: "恋のうた",
-		artist: "Yunomi/鬼頭明里",
+		artist: "《总之就是非常可爱》OP",
 		cover: "https://cdn-2.chenhen.top/音乐/恋のうた.webp",
 		url: "https://cdn-2.chenhen.top/音乐/恋のうた.opus",
 		duration: 209,
@@ -170,7 +170,7 @@ let playlist = [
 	{
 		id: 18,
 		title: "味噌汁とバター",
-		artist: "《PA饭》ED",
+		artist: "《时光流逝 饭菜已经美味》ED",
 		cover: "https://cdn-2.chenhen.top/音乐/味噌汁とバター.webp",
 		url: "https://cdn-2.chenhen.top/音乐/味噌汁とバター.opus",
 		duration: 232,
@@ -194,7 +194,7 @@ let playlist = [
 	{
 		id: 21,
 		title: "刹那の誓い",
-		artist: "《总之就是非常可爱 第二季》",
+		artist: "《总之就是非常可爱 第二季》OP",
 		cover: "https://cdn-2.chenhen.top/音乐/刹那の誓い.webp",
 		url: "https://cdn-2.chenhen.top/音乐/刹那の誓い.opus",
 		duration: 220,
@@ -266,7 +266,7 @@ let playlist = [
 	{
 		id: 30,
 		title: "ムリムリ進化論",
-		artist: "《我怎恋人 不行不行》OP",
+		artist: "《我怎么可能成为你的恋人，不行不行！》OP",
 		cover: "https://cdn-2.chenhen.top/音乐/ムリムリ進化論.webp",
 		url: "https://cdn-2.chenhen.top/音乐/ムリムリ進化論.opus",
 		duration: 195,
@@ -393,8 +393,8 @@ let playlist = [
 	},
 	{
 		id: 46,
-		title: "《我推的孩子》OP",
-		artist: "YOASOBI",
+		title: "アイドル",
+		artist: "《我推的孩子》OP",
 		cover: "https://cdn-2.chenhen.top/音乐/アイドル.webp",
 		url: "https://cdn-2.chenhen.top/音乐/アイドル.opus",
 		duration: 213,
@@ -426,7 +426,7 @@ let playlist = [
 	{
 		id: 50,
 		title: "ふたりのスタートボタン",
-		artist: "《游戏中心的少女异文化交流》OP",
+		artist: "《与游戏中心的少女异文化交流的故事》OP",
 		cover: "https://cdn-2.chenhen.top/音乐/ふたりのスタートボタン.webp",
 		url: "https://cdn-2.chenhen.top/音乐/ふたりのスタートボタン.opus",
 		duration: 225,
@@ -482,7 +482,8 @@ let playlist = [
 	{
 		id: 57,
 		title: "そんなもんね",
-		artist: "《PA饭》OP",
+		artist: "《时光流逝 饭菜已经美味》OP",
+
 		cover: "https://cdn-2.chenhen.top/音乐/そんなもんね.webp",
 		url: "https://cdn-2.chenhen.top/音乐/そんなもんね.opus",
 		duration: 180,
@@ -514,7 +515,7 @@ let playlist = [
 	{
 		id: 61,
 		title: "万众瞩目",
-		artist: "CS 2音乐盒",
+		artist: "CS2 音乐盒",
 		cover: "https://cdn-2.chenhen.top/音乐/Under Bright Lights (feat. Indy Skies).webp",
 		url: "https://cdn-2.chenhen.top/音乐/Under Bright Lights (feat. Indy Skies).opus",
 		duration: 228,
@@ -626,7 +627,7 @@ let playlist = [
 	{
 		id: 75,
 		title: "1番輝く星",
-		artist: "《艾莉同学》OP",
+		artist: "《不时用俄语小声说真心话的邻桌艾莉同学》OP",
 		cover: "https://cdn-2.chenhen.top/音乐/不时轻声地以俄语遮羞的邻座艾莉同学.webp",
 		url: "https://cdn-2.chenhen.top/音乐/不时轻声地以俄语遮羞的邻座艾莉同学.opus",
 		duration: 245,
