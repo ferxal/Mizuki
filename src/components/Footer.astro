@@ -1,4 +1,6 @@
 ---
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 import { profileConfig } from "../config";
 import { url } from "../utils/url-utils";
@@ -11,13 +13,300 @@ const currentYear = new Date().getFullYear();
 <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
 <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
     <div class="transition text-50 text-sm text-center">
-        &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
-        Powered by
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/matsuzaka-yuki/mizuki">Mizuki</a><br>
-        
 
+        <div class="flex flex-wrap justify-center gap-3 mb-4">
+            <a target="_blank" href="https://astro.build/" rel="external nofollow noreferrer noopener"><img title="博客框架为Astro" alt="博客框架为Astro" src="https://img.shields.io/badge/Frame-Astro-d021d6?style=flat&amp;logo=astro" data-ll-status="loading"></a>
+            <a target="_blank" href="https://github.com/ferxal/MyBlog" rel="external nofollow noreferrer noopener"><img title="主题采用Mizuki" alt="主题采用Mizuki" src="https://img.shields.io/badge/Theme-Mizuki-6513df?style=flat&amp;logo=thumbtack" data-ll-status="loading"></a>
+            <a target="_blank" href="https://www.cloudflare.com/" rel="external nofollow noreferrer noopener"><img title="Cloudflaret提供加速与防护" alt="Cloudflaret提供加速与防护" src="https://img.shields.io/badge/CDN-Cloudflare-f38020?style=flat&amp&logo=cloudflare" data-ll-status="loading"></a>
+            <a target="_blank" href="https://www.netlify.com/" rel="external nofollow noreferrer noopener"><img title="本站部署于Vercel" alt="本站部署于Vercel" src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" data-ll-status="loading"></a>
+            <a target="_blank" href="https://github.com/" rel="external nofollow noreferrer noopener"><img title="本站项目由Gtihub托管" alt="本站项目由Gtihub托管" src="https://img.shields.io/badge/Source-Github-blue?style=flat&amp;logo=GitHub" data-ll-status="loading"></a>
+            <a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer noopener"><img title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" alt="知识共享署名" src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" data-ll-status="loading"></a>
+        </div>
+
+        <script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://jsd-proxy.ygxz.in/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+        <!--引入JQuery和flag-icons，如果别处引入过滤，可省略-->
+        <div class="flex flex-wrap justify-center items-center gap-1 mt-4">
+            <span>你连接的CDN节点是：</span>
+            <span id="cdn" class="font-medium inline-flex items-center gap-1">
+                <span class="fi fi-xx fis mr-1"></span>检测中...
+            </span>
+        </div>
+        &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name} All Rights Reserved
+        <!--在适当的地方放入需要显示CDN节点的信息-->
+        <script>
+            // 检测是否为离线环境
+            function isOfflineEnvironment() {
+                const hostname = window.location.hostname;
+                const offlinePatterns = [
+                    '127.0.0.1',
+                    'localhost',
+                    '192.168.',
+                    '10.',
+                    '172.16.',
+                    '172.17.',
+                    '172.18.',
+                    '172.19.',
+                    '172.20.',
+                    '172.21.',
+                    '172.22.',
+                    '172.23.',
+                    '172.24.',
+                    '172.25.',
+                    '172.26.',
+                    '172.27.',
+                    '172.28.',
+                    '172.29.',
+                    '172.30.',
+                    '172.31.'
+                ];
+                
+                return offlinePatterns.some(pattern => hostname.startsWith(pattern));
+            }
+
+            // CDN信息缓存 - 使用sessionStorage持久化
+            let cdnInfoCache = null;
+            let cdnInfoFetched = false;
+
+            // 从sessionStorage恢复缓存
+            function restoreCache() {
+                try {
+                    const cached = sessionStorage.getItem('cdnInfoCache');
+                    if (cached) {
+                        cdnInfoCache = cached;
+                        cdnInfoFetched = true;
+                        return true;
+                    }
+                } catch (e) {
+                    // 忽略存储错误
+                }
+                return false;
+            }
+
+            // 保存缓存到sessionStorage
+            function saveCache(content) {
+                try {
+                    sessionStorage.setItem('cdnInfoCache', content);
+                } catch (e) {
+                    // 忽略存储错误
+                }
+            }
+
+            // 定义CDN检测函数
+            function getCDNinfo() {
+                // 如果已经获取过CDN信息，直接使用缓存
+                if (cdnInfoCache) {
+                    updateAllCDNElements(cdnInfoCache);
+                    return;
+                }
+
+                // 首先检查是否为离线环境
+                if (isOfflineEnvironment()) {
+                    const offlineInfo = '<span class="text-gray-500">🖥️ 离线环境</span>';
+                    cdnInfoCache = offlineInfo;
+                    cdnInfoFetched = true;
+                    saveCache(offlineInfo);
+                    updateAllCDNElements(offlineInfo);
+                    return;
+                }
+
+                const locationMap = {
+                    'HKG': {flag: 'hk', country: '中国', name: '香港'},
+                    'NRT': {flag: 'jp', country: '日本', name: '东京(成田)'},
+                    'KIX': {flag: 'jp', country: '日本', name: '大阪'},
+                    'SIN': {flag: 'sg', country: '新加坡', name: '新加坡'},
+                    'TPE': {flag: 'tw', country: '中国', name: '台北'},
+                    'ICN': {flag: 'kr', country: '韩国', name: '首尔'},
+                    'BKK': {flag: 'th', country: '泰国', name: '曼谷'},
+                    'DEL': {flag: 'in', country: '印度', name: '新德里'},
+                    'BOM': {flag: 'in', country: '印度', name: '孟买'},
+                    'SYD': {flag: 'au', country: '澳大利亚', name: '悉尼'},
+                    'MEL': {flag: 'au', country: '澳大利亚', name: '墨尔本'},
+                    'LAX': {flag: 'us', country: '美国', name: '洛杉矶'},
+                    'SJC': {flag: 'us', country: '美国', name: '圣何塞'},
+                    'DFW': {flag: 'us', country: '美国', name: '达拉斯'},
+                    'ORD': {flag: 'us', country: '美国', name: '芝加哥'},
+                    'IAD': {flag: 'us', country: '美国', name: '华盛顿'},
+                    'EWR': {flag: 'us', country: '美国', name: '纽约'},
+                    'AMS': {flag: 'nl', country: '荷兰', name: '阿姆斯特丹'},
+                    'FRA': {flag: 'de', country: '德国', name: '法兰克福'},
+                    'CDG': {flag: 'fr', country: '法国', name: '巴黎'},
+                    'LHR': {flag: 'gb', country: '英国', name: '伦敦'},
+                    'MAD': {flag: 'es', country: '西班牙', name: '马德里'},
+                    'DXB': {flag: 'ae', country: '阿联酋', name: '迪拜'},
+                    'MAA': {flag: 'in', country: '印度', name: '金奈'},
+                    'BLR': {flag: 'in', country: '印度', name: '班加罗尔'},
+                    'CGK': {flag: 'id', country: '印度尼西亚', name: '雅加达'},
+                    'KUL': {flag: 'my', country: '马来西亚', name: '吉隆坡'},
+                    'MNL': {flag: 'ph', country: '菲律宾', name: '马尼拉'},
+                    'HAN': {flag: 'vn', country: '越南', name: '河内'},
+                    'SGN': {flag: 'vn', country: '越南', name: '胡志明市'},
+                    'PNH': {flag: 'kh', country: '柬埔寨', name: '金边'},
+                    'RUH': {flag: 'sa', country: '沙特阿拉伯', name: '利雅得'},
+                    'DOH': {flag: 'qa', country: '卡塔尔', name: '多哈'},
+                    'TLV': {flag: 'il', country: '以色列', name: '特拉维夫'},
+                    'JNB': {flag: 'za', country: '南非', name: '约翰内斯堡'},
+                    'CPT': {flag: 'za', country: '南非', name: '开普敦'},
+                    'GRU': {flag: 'br', country: '巴西', name: '圣保罗'},
+                    'EZE': {flag: 'ar', country: '阿根廷', name: '布宜诺斯艾利斯'},
+                    'AKL': {flag: 'nz', country: '新西兰', name: '奥克兰'},
+                    'YVR': {flag: 'ca', country: '加拿大', name: '温哥华'},
+                    'YYZ': {flag: 'ca', country: '加拿大', name: '多伦多'}
+                };
+                
+                // 使用原生fetch替代jQuery的ajax，提高兼容性
+                fetch("/cdn-cgi/trace")
+                    .then(response => response.text())
+                    .then(data => {
+                        if(data && data.includes("colo=")) {
+                            let code = data.split("colo=")[1].split("\n")[0];
+                            let location = locationMap[code];
+                            if(location) {
+                                const cdnInfo = `<span class="fi fi-${location.flag} fis mr-1"></span>${location.country} ${location.name}`;
+                                cdnInfoCache = cdnInfo;
+                                cdnInfoFetched = true;
+                                saveCache(cdnInfo);
+                                updateAllCDNElements(cdnInfo);
+                            } else {
+                                const cdnInfo = `<span class="fi fi-xx fis mr-1"></span>${code}`;
+                                cdnInfoCache = cdnInfo;
+                                cdnInfoFetched = true;
+                                saveCache(cdnInfo);
+                                updateAllCDNElements(cdnInfo);
+                            }
+                        } else {
+                            const cdnInfo = '<span class="fi fi-xx fis mr-1"></span>未知';
+                            cdnInfoCache = cdnInfo;
+                            cdnInfoFetched = true;
+                            saveCache(cdnInfo);
+                            updateAllCDNElements(cdnInfo);
+                        }
+                    })
+                    .catch(error => {
+                        const cdnInfo = '<span class="text-yellow-500">🛠️ 网络错误</span>';
+                        cdnInfoCache = cdnInfo;
+                        cdnInfoFetched = true;
+                        saveCache(cdnInfo);
+                        updateAllCDNElements(cdnInfo);
+                    });
+            }
+
+            // 更新所有CDN元素的辅助函数
+            function updateAllCDNElements(content) {
+                const cdnElements = document.querySelectorAll('#cdn');
+                cdnElements.forEach(cdnElement => {
+                    if (cdnElement) {
+                        cdnElement.innerHTML = content;
+                    }
+                });
+            }
+
+            // 初始化CDN检测
+            function initCDN() {
+                // 首先尝试从缓存恢复
+                if (restoreCache()) {
+                    updateAllCDNElements(cdnInfoCache);
+                    return;
+                }
+
+                // 如果已经有缓存信息，直接使用
+                if (cdnInfoCache) {
+                    updateAllCDNElements(cdnInfoCache);
+                    return;
+                }
+
+                // 更新所有CDN元素为检测中状态
+                const cdnElements = document.querySelectorAll('#cdn');
+                cdnElements.forEach(cdnElement => {
+                    if (cdnElement) {
+                        cdnElement.innerHTML = '<span class="fi fi-xx fis mr-1"></span>检测中...';
+                    }
+                });
+
+                // 如果还没获取过CDN信息，则获取
+                if (!cdnInfoFetched) {
+                    getCDNinfo();
+                }
+            }
+
+            // 使用多种方式确保CDN检测能正常工作
+            function setupCDNDetection() {
+                // 方法1: DOMContentLoaded事件
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initCDN);
+                } else {
+                    initCDN();
+                }
+
+                // 方法2: 使用setTimeout确保在DOM完全加载后执行
+                setTimeout(initCDN, 100);
+                setTimeout(initCDN, 500);
+                setTimeout(initCDN, 1000);
+
+                // 方法3: 监听窗口大小变化（优化版本）
+                let resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        // 只在必要时重新初始化（比如新添加的CDN元素）
+                        const cdnElements = document.querySelectorAll('#cdn');
+                        let hasNewElements = false;
+                        cdnElements.forEach(cdnElement => {
+                            if (cdnElement && cdnElement.textContent && cdnElement.textContent.includes("检测中")) {
+                                hasNewElements = true;
+                            }
+                        });
+                        
+                        // 只有当有新元素需要初始化时才重新执行
+                        if (hasNewElements) {
+                            initCDN();
+                        }
+                    }, 300);
+                });
+
+                // 方法4: 使用MutationObserver监听DOM变化
+                if (typeof MutationObserver !== 'undefined') {
+                    const observer = new MutationObserver(function(mutations) {
+                        let shouldReinit = false;
+                        mutations.forEach(function(mutation) {
+                            if (mutation.type === 'childList') {
+                                mutation.addedNodes.forEach(function(node) {
+                                    if (node.nodeType === 1 && (node as Element).id === 'cdn') {
+                                        shouldReinit = true;
+                                    }
+                                });
+                            }
+                        });
+                        if (shouldReinit) {
+                            setTimeout(initCDN, 100);
+                        }
+                    });
+
+                    if (document.body) {
+                        observer.observe(document.body, {
+                            childList: true,
+                            subtree: true
+                        });
+                    }
+                }
+
+                // 方法5: 定期检查并重新初始化（作为备用方案，但频率降低）
+                setInterval(function() {
+                    const cdnElements = document.querySelectorAll('#cdn');
+                    let shouldReinit = false;
+                    cdnElements.forEach(cdnElement => {
+                        if (cdnElement && cdnElement.textContent && cdnElement.textContent.includes("检测中")) {
+                            shouldReinit = true;
+                        }
+                    });
+                    if (shouldReinit) {
+                        initCDN();
+                    }
+                }, 10000); // 从5秒改为10秒，减少检查频率
+            }
+
+            // 启动CDN检测系统
+            setupCDNDetection();
+        </script>
     </div>
 </div>

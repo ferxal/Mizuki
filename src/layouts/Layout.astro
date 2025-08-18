@@ -106,7 +106,17 @@ const bannerOffset =
 <html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
 	  data-overlayscrollbars-initialize
 >
-	<head>
+<head>
+  <script is:inline>
+    // 为所有外部链接添加rel="noreferrer noopener"
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[target="_blank"]').forEach(link => {
+        if (!link.href.startsWith(window.location.origin)) {
+          link.rel = (link.rel ? link.rel + ' ' : '') + 'noreferrer noopener';
+        }
+      });
+    });
+  </script>
 
 		<title>{pageTitle}</title>
 
@@ -129,8 +139,11 @@ const bannerOffset =
 		<meta name="twitter:title" content={pageTitle}>
 		<meta name="twitter:description" content={description || pageTitle}>
 
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+		<meta name="referrer" content="no-referrer">
+		<!-- <meta name="referrer" content="no-referrer"> -->
+
 		{favicons.map(favicon => (
 			<link rel="icon"
 				  href={favicon.src.startsWith('/') ? url(favicon.src) : favicon.src}
@@ -179,7 +192,8 @@ const bannerOffset =
 
 
 
-	</head>
+  <base target="_blank" />
+</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
 	>
