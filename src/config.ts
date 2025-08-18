@@ -2,6 +2,7 @@ import type {
 	CommentConfig,
 	ExpressiveCodeConfig,
 	LicenseConfig,
+	MusicPlayerConfig,
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
@@ -149,9 +150,12 @@ export const announcementConfig: AnnouncementConfig = {
 	content: "Welcome to my blog! This is a sample announcement.", // Announcement content
 	closable: true, // Allow users to close the announcement
 	link: {
-		enable: true, // Show link button
 		text: "Learn More", // Link text
 		url: "/about/", // Link URL
 		external: true, // Internal link
 	},
+};
+
+export const musicPlayerConfig: MusicPlayerConfig = {
+	enable: true, // Enable music player feature
 };
