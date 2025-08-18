@@ -72,8 +72,8 @@ export const siteConfig: SiteConfig = {
 		},
 
 		credit: {
-			enable: false,
-			text: "Describe",
+			enable: true,
+			text: "关于背景图",
 			url: "",
 		},
 	},
@@ -146,13 +146,13 @@ export const commentConfig: CommentConfig = {
 
 export const announcementConfig: AnnouncementConfig = {
 	enable: true, // Enable announcement feature
-	title: "Announcement", // Announcement title
-	content: "Welcome to my blog! This is a sample announcement.", // Announcement content
-	closable: true, // Allow users to close the announcement
+	title: "公告", // Announcement title
+	content: "欢迎来到我的博客", // Announcement content
+	closable: false, // Allow users to close the announcement
 	link: {
-		text: "Learn More", // Link text
+		text: "了解更多", // Link text
 		url: "/about/", // Link URL
-		external: true, // Internal link
+		external: false, // Internal link
 	},
 };
 

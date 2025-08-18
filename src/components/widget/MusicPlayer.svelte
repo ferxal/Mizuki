@@ -17,7 +17,7 @@ let volume = 0.7;
 let isMuted = false;
 let isLoading = false;
 let isShuffled = false;
-let isRepeating = 0; // 0: 不循环, 1: 单曲循环, 2: 列表循环
+let isRepeating = 2; // 0: 不循环, 1: 单曲循环, 2: 列表循环
 let errorMessage = "";
 let showError = false;
 
