@@ -7,6 +7,21 @@ draft: false
 pinned: false
 ---
 
+<script>
+  function showMessage() {
+    alert('Hello from blog post!');
+  }
+</script>
+
+<button onclick="showMessage()">点击我</button>
+
+<!-- 或者使用事件监听 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('文章页面已加载');
+  });
+</script>
+
 博客终于配置好了....还一篇文章没写又陷进性能优化的大坑💀
 
 如果你是被搜索引擎引到这里的,可以走了，我的文章没啥质量，只是给自己学习用的

@@ -201,6 +201,202 @@ const bannerOffset =
 		<!-- Music Player -->
 		<MusicPlayer client:load />
 
+		<!-- SakanaWidget Global -->
+		<script>
+			// 全局加载SakanaWidget
+			(async () => {
+				try {
+					const SakanaWidget = await import('sakana-widget');
+					await import('sakana-widget/lib/index.css');
+					
+					// 注册到全局
+					window.SakanaWidget = SakanaWidget.default;
+					
+						// 自动初始化所有sakana组件
+				const initSakanaWidgets = () => {
+					const containers = document.querySelectorAll('[data-sakana]');
+					containers.forEach(container => {
+						if (container.hasAttribute('data-initialized')) return;
+						
+						// 布局参数
+						const align = container.getAttribute('data-align') || 'center';
+						const margin = container.getAttribute('data-margin') || '2rem 0';
+						const display = container.getAttribute('data-display') || 'flex';
+						const width = container.getAttribute('data-width') || 'auto';
+						const height = container.getAttribute('data-height') || 'auto';
+						
+						// 应用布局样式
+						container.style.display = display;
+						container.style.margin = margin;
+						
+						// 对齐方式
+						switch(align) {
+							case 'left':
+								container.style.justifyContent = 'flex-start';
+								break;
+							case 'right':
+								container.style.justifyContent = 'flex-end';
+								break;
+							case 'center':
+							default:
+								container.style.justifyContent = 'center';
+								break;
+						}
+						
+						// 设置尺寸
+						if (width !== 'auto') container.style.width = width;
+						if (height !== 'auto') container.style.height = height;
+						
+						// 功能参数
+						const size = parseInt(container.getAttribute('data-size') || '200');
+						const character = container.getAttribute('data-character') || 'chisato';
+						const controls = container.getAttribute('data-controls') !== 'false';
+						const draggable = container.getAttribute('data-draggable') !== 'false';
+						const autoFit = container.getAttribute('data-auto-fit') === 'true';
+						const rod = container.getAttribute('data-rod') !== 'false';
+						const customImage = container.getAttribute('data-image');
+						
+						// 创建内部容器
+						const innerContainer = document.createElement('div');
+						innerContainer.style.position = 'relative';
+						innerContainer.style.width = `${size}px`;
+						innerContainer.style.height = `${size}px`;
+						
+						container.appendChild(innerContainer);
+						
+						// 创建配置对象
+						const config = {
+							size,
+							controls,
+							draggable,
+							autoFit,
+							rod
+						};
+						
+						// 处理自定义图片的referrer问题
+									const processCustomImage = (imageUrl) => {
+										// 如果是B站图片，使用图片代理服务
+										if (imageUrl.includes('hdslb.com')) {
+											// 使用images.weserv.nl代理服务
+											return `https://images.weserv.nl/?url=${encodeURIComponent(imageUrl)}&referrerpolicy=no-referrer`;
+										}
+										return imageUrl;
+									};
+
+									// 如果有自定义图片，创建新角色
+									if (customImage) {
+										const baseCharacter = SakanaWidget.default.getCharacter(character);
+										if (baseCharacter) {
+											// 处理图片URL
+											const processedImage = processCustomImage(customImage);
+											
+											// 创建图片加载器
+											const loadImageWithReferrer = (url) => {
+												return new Promise((resolve, reject) => {
+													const img = new Image();
+													img.crossOrigin = 'anonymous';
+													img.referrerPolicy = 'no-referrer';
+													
+													img.onload = () => {
+														// 创建canvas来处理图片
+														const canvas = document.createElement('canvas');
+														const ctx = canvas.getContext('2d');
+														canvas.width = img.width;
+														canvas.height = img.height;
+														ctx.drawImage(img, 0, 0);
+														
+														// 转换为data URL
+														try {
+															const dataUrl = canvas.toDataURL('image/png');
+															resolve(dataUrl);
+														} catch (e) {
+															console.warn('Canvas转换失败，使用原URL:', e);
+															resolve(url);
+														}
+													};
+													
+													img.onerror = () => {
+														console.warn('图片加载失败，尝试使用备用方案');
+														// 创建代理URL
+														const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}&referrerpolicy=no-referrer`;
+														resolve(proxyUrl);
+													};
+													
+													img.src = url;
+													});
+											};
+
+											// 异步加载图片并创建角色
+											loadImageWithReferrer(processedImage).then(imageSrc => {
+												const customCharacter = {
+													...baseCharacter,
+													image: imageSrc
+												};
+												
+												const uniqueName = `custom-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+												SakanaWidget.default.registerCharacter(uniqueName, customCharacter);
+												
+												// 更新配置
+												const finalConfig = { ...config, character: uniqueName };
+												
+												// 创建并挂载组件
+												new SakanaWidget.default(finalConfig).mount(innerContainer);
+												
+											}).catch(() => {
+												// 如果图片加载失败，使用默认角色
+												console.warn('自定义图片加载失败，使用默认角色');
+												new SakanaWidget.default(config).mount(innerContainer);
+											});
+											
+											// 标记为已初始化
+											container.setAttribute('data-initialized', 'true');
+											return; // 跳过下面的同步初始化
+										}
+									} else {
+										config.character = character as 'chisato' | 'takina';
+									}
+						
+						new SakanaWidget.default(config).mount(innerContainer);
+						
+						// 添加自适应调整功能
+						const resizeObserver = new ResizeObserver(entries => {
+							entries.forEach(entry => {
+								const newSize = Math.min(entry.contentRect.width, entry.contentRect.height);
+								if (newSize > 0) {
+									const widget = container.querySelector('.sakana-widget');
+									if (widget) {
+										// 通知组件调整大小
+										const canvas = widget.querySelector('canvas');
+										if (canvas) {
+											const event = new CustomEvent('resize-widget', { detail: { size: newSize } });
+											canvas.dispatchEvent(event);
+										}
+									}
+								}
+							});
+						});
+						
+						resizeObserver.observe(container);
+						container.setAttribute('data-initialized', 'true');
+					});
+				};
+					
+					// 页面加载完成后初始化
+					if (document.readyState === 'loading') {
+						document.addEventListener('DOMContentLoaded', initSakanaWidgets);
+					} else {
+						initSakanaWidgets();
+					}
+					
+					// 监听swup页面切换后重新初始化
+					document.addEventListener('swup:contentReplaced', initSakanaWidgets);
+					
+				} catch (error) {
+					console.error('Failed to load SakanaWidget:', error);
+				}
+			})();
+		</script>
+
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 
