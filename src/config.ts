@@ -39,17 +39,17 @@ export const siteConfig: SiteConfig = {
 
 		src: {
 			desktop: [
-				"https://i0.hdslb.com/bfs/openplatform/88e4d7d77216cbd8018b7a761fbe3ebc8e4c3480.png@1500w.webp",
-				"https://i0.hdslb.com/bfs/openplatform/575ce11089a773b84d904991f410b84f460d762f.png@1500w.webp",
-				"https://i0.hdslb.com/bfs/openplatform/af7e274ee118ee4e6b7b999d9e09429fe53f0825.png@1500w.webp",
-				"https://i0.hdslb.com/bfs/openplatform/1618858e6b9b28bb2f83dac7e040e639967aaafb.png@1500w.webp",
-				"https://i0.hdslb.com/bfs/openplatform/ed8eaa7cbb9576d4807dd1d46a9086ac0ae7b171.png@1500w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/88e4d7d77216cbd8018b7a761fbe3ebc8e4c3480.png@1500w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/575ce11089a773b84d904991f410b84f460d762f.png@1500w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/af7e274ee118ee4e6b7b999d9e09429fe53f0825.png@1500w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/1618858e6b9b28bb2f83dac7e040e639967aaafb.png@1500w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/ed8eaa7cbb9576d4807dd1d46a9086ac0ae7b171.png@1500w.webp",
 			],
 			mobile: [
-				"https://i0.hdslb.com/bfs/openplatform/4d2a047d5bdd5425ea474a3cc8d457757b0bf3fc.png@1400w.webp",
-				"https://i0.hdslb.com/bfs/openplatform/6f2ff5dafc9a3d3c7a4a02f0605b0f2be6eaad14.png@1400w.webp",
-				"https://i0.hdslb.com/bfs/openplatform/84521ffeb80a00fb30cdf4a9e491c7ae05b0a78a.png@1400w.webp",
-				"https://i0.hdslb.com/bfs/openplatform/e4049615f3c5eeb6d0706edad06c2ed01ed32485.png@1400w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/4d2a047d5bdd5425ea474a3cc8d457757b0bf3fc.png@1400w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/6f2ff5dafc9a3d3c7a4a02f0605b0f2be6eaad14.png@1400w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/84521ffeb80a00fb30cdf4a9e491c7ae05b0a78a.png@1400w.webp",
+				"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/e4049615f3c5eeb6d0706edad06c2ed01ed32485.png@1400w.webp",
 			],
 		},
 
@@ -116,7 +116,7 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
 	avatar:
-		"https://i0.hdslb.com/bfs/openplatform/c9c1d43e62d2159ccc375689a39be6bcdc58a42e.png@400w_400h.webp",
+		"https://bili-proxy.api.chenhen.top/https://i0.hdslb.com/bfs/openplatform/c9c1d43e62d2159ccc375689a39be6bcdc58a42e.png@400w_400h.webp",
 	name: "Ferxa1", // 修改为指定昵称
 	bio: "净整没用的", // 修改为指定简介
 	links: [
