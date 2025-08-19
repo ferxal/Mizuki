@@ -516,8 +516,8 @@ let playlist = [
 		id: 61,
 		title: "万众瞩目",
 		artist: "CS2 音乐盒",
-		cover: "https://cdn-2.chenhen.top/音乐/Under Bright Lights (feat. Indy Skies).webp",
-		url: "https://cdn-2.chenhen.top/音乐/Under Bright Lights (feat. Indy Skies).opus",
+		cover: "https://cdn-2.chenhen.top/音乐/Under Bright Lights.webp",
+		url: "https://cdn-2.chenhen.top/音乐/Under Bright Lights.opus",
 		duration: 228,
 	},
 	{
@@ -588,8 +588,8 @@ let playlist = [
 		id: 70,
 		title: "Lockdown",
 		artist: "PIKASONIC/Tatsunoshin/Neona",
-		cover: "https://cdn-2.chenhen.top/音乐/Lockdown (Tatsunoshin VIP).webp",
-		url: "https://cdn-2.chenhen.top/音乐/Lockdown (Tatsunoshin VIP).opus",
+		cover: "https://cdn-2.chenhen.top/音乐/Lockdown.webp",
+		url: "https://cdn-2.chenhen.top/音乐/Lockdown.opus",
 		duration: 209,
 	},
 	{
