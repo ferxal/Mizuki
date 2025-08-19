@@ -86,11 +86,16 @@ export const siteConfig: SiteConfig = {
 	favicon: [
 		// 留空则使用默认favicon
 				// Leave empty to use default favicon
-		// {
-		//   src: '/favicon/icon.png',    // Icon file path
-		//   theme: 'light',              // Optional, specify theme 'light' | 'dark'
-		//   sizes: '32x32',              // Optional, icon size
-		// }
+		{
+		   src: '/favicon/icon_light_32.ico',    // Icon file path
+		   theme: 'light',              // Optional, specify theme 'light' | 'dark'
+		   sizes: '32x32',              // Optional, icon size
+		},
+		{
+		   src: '/favicon/icon_dark_32.ico',    // Icon file path
+		   theme: 'dark',              // Optional, specify theme 'light' | 'dark'
+		   sizes: '32x32',              // Optional, icon size
+		}
 	],
 };
 
