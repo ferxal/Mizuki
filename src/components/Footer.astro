@@ -13,7 +13,13 @@ const currentYear = new Date().getFullYear();
 <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
 <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
     <div class="transition text-50 text-sm text-center">
-
+        &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/matsuzaka-yuki/mizuki">Mizuki</a><br>
+        
         <div class="flex flex-wrap justify-center gap-3 mb-4">
             <a target="_blank" href="https://astro.build/" rel="external nofollow noreferrer noopener"><img title="博客框架为Astro" alt="博客框架为Astro" src="https://img.shields.io/badge/Frame-Astro-d021d6?style=flat&amp;logo=astro" data-ll-status="loading"></a>
             <a target="_blank" href="https://github.com/ferxal/MyBlog" rel="external nofollow noreferrer noopener"><img title="主题采用Mizuki" alt="主题采用Mizuki" src="https://img.shields.io/badge/Theme-Mizuki-6513df?style=flat&amp;logo=thumbtack" data-ll-status="loading"></a>
@@ -308,5 +314,7 @@ const currentYear = new Date().getFullYear();
             // 启动CDN检测系统
             setupCDNDetection();
         </script>
+    </div>
+</div>
     </div>
 </div>

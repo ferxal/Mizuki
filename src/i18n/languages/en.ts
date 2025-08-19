@@ -51,7 +51,7 @@ export const en: Translation = {
 	[Key.animeCompleted]: "Completed",
 	[Key.animeStatusWatching]: "Watching",
 	[Key.animeStatusCompleted]: "Completed",
-
+	
 	// 追番评价
 	[Key.animeReview]: "Review",
 
@@ -68,8 +68,7 @@ export const en: Translation = {
 	// 404页面
 	[Key.notFound]: "404",
 	[Key.notFoundTitle]: "Page Not Found",
-	[Key.notFoundDescription]:
-		"Sorry, the page you are looking for doesn't exist or has been moved.",
+	[Key.notFoundDescription]: "Sorry, the page you are looking for doesn't exist or has been moved.",
 	[Key.backToHome]: "Back to Home",
 
 	// Music Player
