@@ -624,14 +624,6 @@ let playlist = [
 		url: "https://cdn-2.chenhen.top/音乐/Abyss (from Kaiju No. 8).opus",
 		duration: 123,
 	},
-	{
-		id: 75,
-		title: "1番輝く星",
-		artist: "《不时用俄语小声说真心话的邻桌艾莉同学》OP",
-		cover: "https://cdn-2.chenhen.top/音乐/不时轻声地以俄语遮羞的邻座艾莉同学.webp",
-		url: "https://cdn-2.chenhen.top/音乐/不时轻声地以俄语遮羞的邻座艾莉同学.opus",
-		duration: 245,
-	},
 ];
 
 let currentIndex = 0;
