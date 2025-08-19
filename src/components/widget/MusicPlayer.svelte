@@ -91,8 +91,8 @@ let playlist = [
 		id: 8,
 		title: "武装乙女",
 		artist: "星尘infinity cover",
-		cover: "https://cdn-2.chenhen.top/音乐/武装乙女（武装少女）【星尘infinity cover】.webp",
-		url: "https://cdn-2.chenhen.top/音乐/武装乙女（武装少女）【星尘infinity cover】.opus",
+		cover: "https://cdn-2.chenhen.top/音乐/武装乙女.webp",
+		url: "https://cdn-2.chenhen.top/音乐/武装乙女.opus",
 		duration: 182,
 	},
 	{
@@ -117,7 +117,7 @@ let playlist = [
 		artist: "《总之就是非常可爱》OP",
 		cover: "https://cdn-2.chenhen.top/音乐/恋のうた.webp",
 		url: "https://cdn-2.chenhen.top/音乐/恋のうた.opus",
-		duration: 209,
+		duration: 91,
 	},
 	{
 		id: 12,

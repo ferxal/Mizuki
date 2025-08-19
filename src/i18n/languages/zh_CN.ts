@@ -51,6 +51,9 @@ export const zh_CN: Translation = {
 	[Key.animeStatusWatching]: "追番中",
 	[Key.animeStatusCompleted]: "已追完",
 
+	// 追番评价
+	[Key.animeReview]: "评价",
+
 	// 短文页面
 	[Key.diarySubtitle]: "随时随地，分享生活",
 	[Key.diaryCount]: "条短文",

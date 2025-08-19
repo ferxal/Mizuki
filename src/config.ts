@@ -74,7 +74,7 @@ export const siteConfig: SiteConfig = {
 		credit: {
 			enable: true,
 			text: "关于背景图",
-			url: "",
+			url: "/Bei-Jing",
 		},
 	},
 	toc: {
