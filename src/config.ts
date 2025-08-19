@@ -60,11 +60,10 @@ export const siteConfig: SiteConfig = {
 			interval: 2, // 轮播间隔时间（秒）
 		},
 
-
 		homeText: {
 			enable: true,
 			title: "Ferxa1", // 修改为指定横幅标题
-			subtitle: ["记录技术","个人日记","我的备忘录","学习与交流"],
+			subtitle: ["记录技术", "个人日记", "我的备忘录", "学习与交流"],
 			typewriter: {
 				enable: true, // 启用副标题打字机效果
 				speed: 100, // 打字速度（毫秒）
@@ -85,17 +84,16 @@ export const siteConfig: SiteConfig = {
 	},
 	favicon: [
 		// 留空则使用默认favicon
-				// Leave empty to use default favicon
 		{
-		   src: '/favicon/icon_light_32.ico',    // Icon file path
-		   theme: 'light',              // Optional, specify theme 'light' | 'dark'
-		   sizes: '32x32',              // Optional, icon size
+			src: "/favicon/icon_light_32.ico", // 图标文件路径
+			theme: "light", // 可选，指定主题 'light' | 'dark'
+			sizes: "32x32", // 可选，图标尺寸
 		},
 		{
-		   src: '/favicon/icon_dark_32.ico',    // Icon file path
-		   theme: 'dark',              // Optional, specify theme 'light' | 'dark'
-		   sizes: '32x32',              // Optional, icon size
-		}
+			src: "/favicon/icon_dark_32.ico", // 图标文件路径
+			theme: "dark", // 可选，指定主题 'light' | 'dark'
+			sizes: "32x32", // 可选，图标尺寸
+		},
 	],
 };
 
@@ -107,17 +105,18 @@ export const navBarConfig: NavBarConfig = {
 		//LinkPreset.Friends,
 		LinkPreset.Anime,
 		//LinkPreset.Diary, // 添加日记菜单
-//自定义链接格式：
-//		{
-//			name: "GitHub",
-//			url: "https://github.com/matsuzaka-yuki",
-//			external: true,
-//		},
+		//自定义链接格式：
+		//		{
+		//			name: "GitHub",
+		//			url: "https://github.com/matsuzaka-yuki",
+		//			external: true,
+		//		},
 	],
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "https://i0.hdslb.com/bfs/openplatform/c9c1d43e62d2159ccc375689a39be6bcdc58a42e.png@400w_400h.webp",
+	avatar:
+		"https://i0.hdslb.com/bfs/openplatform/c9c1d43e62d2159ccc375689a39be6bcdc58a42e.png@400w_400h.webp",
 	name: "Ferxa1", // 修改为指定昵称
 	bio: "净整没用的", // 修改为指定简介
 	links: [
@@ -152,19 +151,20 @@ export const commentConfig: CommentConfig = {
 };
 
 export const announcementConfig: AnnouncementConfig = {
-	enable: true, // Enable announcement feature
-	title: "公告", // Announcement title
-	content: "欢迎来到我的博客", // Announcement content
-	closable: false, // Allow users to close the announcement
+	enable: true, // 启用公告功能
+	title: "公告", // 公告标题
+	content: "欢迎来到我的博客", // 公告内容
+	closable: false, // 允许用户关闭公告
 	link: {
-		text: "了解更多", // Link text
-		url: "/about/", // Link URL
-		external: false, // Internal link
+		enable: true, // 启用链接
+		text: "了解更多", // 链接文本
+		url: "/about/", // 链接URL
+		external: false, // 内部链接
 	},
 };
 
 export const musicPlayerConfig: MusicPlayerConfig = {
-	enable: true, // Enable music player feature
+	enable: true, // 启用音乐播放器功能
 };
 
 /**

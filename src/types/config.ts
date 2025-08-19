@@ -206,6 +206,7 @@ export type SidebarLayoutConfig = {
 			tablet: number; // 平板端断点（px）
 			desktop: number; // 桌面端断点（px）
 		};
+		//hidden:不显示侧边栏 sidebar:显示侧边栏
 		layout: {
 			mobile: "hidden" | "bottom" | "drawer"; // 移动端布局模式
 			tablet: "sidebar" | "bottom" | "drawer"; // 平板端布局模式
