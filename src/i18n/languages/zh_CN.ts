@@ -50,7 +50,7 @@ export const zh_CN: Translation = {
 	[Key.animeCompleted]: "已追完",
 	[Key.animeStatusWatching]: "追番中",
 	[Key.animeStatusCompleted]: "已追完",
-	
+
 	// 追番评价
 	[Key.animeReview]: "评价",
 

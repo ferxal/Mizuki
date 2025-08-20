@@ -109,33 +109,12 @@ export const navBarConfig: NavBarConfig = {
 		//		},
 		// 支持自定义导航栏链接,并且支持多级菜单,3.1版本新加
 		{
-			name: "Links",
-			url: "/links/",
-			children: [
-				{
-					name: "GitHub",
-					url: "https://github.com/matsuzaka-yuki/Mizuki",
-					external: true,
-				},
-				{
-					name: "Bilibili",
-					url: "https://space.bilibili.com/701864046",
-					external: true,
-				},
-				{
-					name: "Gitee",
-					url: "https://gitee.com/matsuzakayuki/Mizuki",
-					external: true,
-				},
-			],
-		},
-		{
-			name: "My",
+			name: "我的",
 			url: "/content/",
 			children: [LinkPreset.Anime, LinkPreset.Diary, LinkPreset.Gallery],
 		},
 		{
-			name: "About",
+			name: "关于",
 			url: "/content/",
 			children: [LinkPreset.About, LinkPreset.Friends],
 		},
