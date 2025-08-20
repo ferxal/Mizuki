@@ -101,16 +101,44 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-		LinkPreset.About,
-		//LinkPreset.Friends,
-		LinkPreset.Anime,
-		//LinkPreset.Diary, // 添加日记菜单
 		//自定义链接格式：
 		//		{
 		//			name: "GitHub",
 		//			url: "https://github.com/matsuzaka-yuki",
 		//			external: true,
 		//		},
+		// 支持自定义导航栏链接,并且支持多级菜单,3.1版本新加
+		{
+			name: "Links",
+			url: "/links/",
+			children: [
+				{
+					name: "GitHub",
+					url: "https://github.com/matsuzaka-yuki/Mizuki",
+					external: true,
+				},
+				{
+					name: "Bilibili",
+					url: "https://space.bilibili.com/701864046",
+					external: true,
+				},
+				{
+					name: "Gitee",
+					url: "https://gitee.com/matsuzakayuki/Mizuki",
+					external: true,
+				},
+			],
+		},
+		{
+			name: "My",
+			url: "/content/",
+			children: [LinkPreset.Anime, LinkPreset.Diary, LinkPreset.Gallery],
+		},
+		{
+			name: "About",
+			url: "/content/",
+			children: [LinkPreset.About, LinkPreset.Friends],
+		},
 	],
 };
 
@@ -151,15 +179,14 @@ export const commentConfig: CommentConfig = {
 };
 
 export const announcementConfig: AnnouncementConfig = {
-	enable: true, // 启用公告功能
-	title: "公告", // 公告标题
-	content: "欢迎来到我的博客", // 公告内容
-	closable: false, // 允许用户关闭公告
+	title: "公告", // Announcement title
+	content: "欢迎来到我的博客", // Announcement content
+	closable: false, // Allow users to close the announcement
 	link: {
-		enable: true, // 启用链接
-		text: "了解更多", // 链接文本
-		url: "/about/", // 链接URL
-		external: false, // 内部链接
+		enable: true, // Enable link
+		text: "了解更多", // Link text
+		url: "/about/", // Link URL
+		external: false, // Internal link
 	},
 };
 
@@ -272,7 +299,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		// 不同设备的布局模式
 		//hidden:不显示侧边栏 sidebar:显示侧边栏
 		layout: {
-			// 移动端：隐藏侧边栏
+			// 移动端：抽屉模式
 			mobile: "sidebar",
 			// 平板端：显示侧边栏
 			tablet: "sidebar",

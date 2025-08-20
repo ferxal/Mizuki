@@ -1,4 +1,4 @@
-import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
+import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "../constants/constants";
 
 export type SiteConfig = {
 	title: string;
@@ -81,12 +81,14 @@ export enum LinkPreset {
 	Friends = 3,
 	Anime = 4,
 	Diary = 5,
+	Gallery = 6,
 }
 
 export type NavBarLink = {
 	name: string;
 	url: string;
 	external?: boolean;
+	children?: (NavBarLink | LinkPreset)[]; // 支持子菜单，可以是NavBarLink或LinkPreset
 };
 
 export type NavBarConfig = {
@@ -167,13 +169,13 @@ export type MusicPlayerConfig = {
 };
 
 // 组件配置类型定义
-export type WidgetComponentType = 
-	| "profile" 
-	| "announcement" 
-	| "categories" 
-	| "tags" 
-	| "toc" 
-	| "music-player" 
+export type WidgetComponentType =
+	| "profile"
+	| "announcement"
+	| "categories"
+	| "tags"
+	| "toc"
+	| "music-player"
 	| "custom";
 
 export type WidgetComponentConfig = {
@@ -206,7 +208,6 @@ export type SidebarLayoutConfig = {
 			tablet: number; // 平板端断点（px）
 			desktop: number; // 桌面端断点（px）
 		};
-		//hidden:不显示侧边栏 sidebar:显示侧边栏
 		layout: {
 			mobile: "hidden" | "bottom" | "drawer"; // 移动端布局模式
 			tablet: "sidebar" | "bottom" | "drawer"; // 平板端布局模式
