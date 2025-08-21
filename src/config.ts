@@ -39,7 +39,6 @@ export const siteConfig: SiteConfig = {
 
 		src: {
 			desktop: [
-				"https://bili-proxy.api.chenhen.top/bfs/openplatform/88e4d7d77216cbd8018b7a761fbe3ebc8e4c3480.png@1500w.webp",
 				"https://bili-proxy.api.chenhen.top/bfs/openplatform/575ce11089a773b84d904991f410b84f460d762f.png@1500w.webp",
 				"https://bili-proxy.api.chenhen.top/bfs/openplatform/af7e274ee118ee4e6b7b999d9e09429fe53f0825.png@1500w.webp",
 				"https://bili-proxy.api.chenhen.top/bfs/openplatform/1618858e6b9b28bb2f83dac7e040e639967aaafb.png@1500w.webp",

@@ -3,6 +3,7 @@
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/700.css";
 
+import LittleXR from '@/components/widget/LittleXR.astro'
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import MusicPlayer from "@components/widget/MusicPlayer.svelte";
 import { profileConfig, siteConfig } from "@/config";
@@ -167,6 +168,7 @@ const bannerOffset =
 			offset = offset - offset % 4;
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
 		</script>
+
 		<style define:vars={{
 			configHue,
 			'page-width': `${PAGE_WIDTH}rem`,
@@ -180,45 +182,24 @@ const bannerOffset =
 
 
 	</head>
-	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
+	<body class=" min-h-screen transition " class:list={[{ "lg:is-home": isHomePage, "enable-banner": enableBanner }]}
 		  data-overlayscrollbars-initialize
 	>
 		<ConfigCarrier></ConfigCarrier>
+		<MusicPlayer client:only="svelte" />
 		<slot />
-		
-		<!-- Music Player -->
-		<MusicPlayer client:load />
-
-		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
-		<div id="page-height-extend" class="hidden h-[300vh]"></div>
-
-		<!-- Translate.js integration - lazy loading -->
-		{siteConfig.translate?.enable && (
-			<script>
-				// 懒加载translate.js，只有在需要时才加载
-				window.loadTranslateScript = function() {
-					if (window.translate || document.getElementById('translate-script')) {
-						return Promise.resolve();
-					}
-					
-					return new Promise((resolve, reject) => {
-						const script = document.createElement('script');
-						script.src = '/translate.js';
-						script.id = 'translate-script';
-						script.async = true;
-						script.onload = () => {
-							if (typeof window.translate !== 'undefined') {
-								resolve();
-							} else {
-								reject(new Error('translate.js loaded but window.translate not available'));
-							}
-						};
-						script.onerror = reject;
-						document.head.appendChild(script);
-					});
-				};
-			</script>
-		)}
+		<script is:inline src="/translate.js"></script>
+		<script is:inline>
+			// 翻译功能初始化
+			window.addEventListener('DOMContentLoaded', function() {
+				if (window.initTranslation) {
+					window.initTranslation();
+				}
+			});
+		</script>
+	</body>
+</html>
+		</script>
 	</body>
 </html>
 
