@@ -29,7 +29,7 @@ export const siteConfig: SiteConfig = {
 		fixed: true, // 对访客隐藏主题颜色选择器
 	},
 	translate: {
-		enable: true, // 启用翻译功能
+		enable: false, // 启用翻译功能
 		service: "client.edge", // 使用 Edge 浏览器翻译服务
 		defaultLanguage: getTranslateLanguageFromConfig(SITE_LANG), // 根据站点语言自动设置默认翻译语言
 		showSelectTag: false, // 不显示默认语言选择下拉菜单，使用自定义按钮
@@ -130,11 +130,6 @@ export const navBarConfig: NavBarConfig = {
 			url: "/content/",
 			children: [LinkPreset.About, LinkPreset.Friends],
 		},
-		{
-			name: "群组",
-			url: "/chat/",
-			external: false,
-		}
 	],
 };
 
@@ -158,7 +153,7 @@ export const profileConfig: ProfileConfig = {
 	// Umami统计部份，记得在layout插入Umami的head标签
 	umami: {
 		enable: true, // 是否显示umami统计
-		shareId: "8cFvWExVZ0oRW2kh", //填入共享URL最后面那一串  比如：https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr 你就填入2dKQ5T0WrUn6AYtr
+		shareId: "yk2SS7hzu2isHg8F", //填入共享URL最后面那一串  比如：https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr 你就填入2dKQ5T0WrUn6AYtr
 		region: "eu", //Umami有两个区域，按需选择即可  比如：https://eu.umami.is 你就填入eu
 	},
 };

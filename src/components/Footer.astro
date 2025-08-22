@@ -46,13 +46,13 @@ if (footerConfig.enable) {
         <script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://jsd-proxy.ygxz.in/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
         <!--引入JQuery和flag-icons，如果别处引入过滤，可省略-->
-        <div class="flex flex-wrap justify-center items-center gap-1 mt-4">
+<!--        <div class="flex flex-wrap justify-center items-center gap-1 mt-4">  
             <span>你连接的CDN节点是：</span>
             <span id="cdn" class="font-medium inline-flex items-center gap-1">
                 <span class="fi fi-xx fis mr-1"></span>检测中...
             </span>
         </div>
-
+-->
         <script>    
             // 检测是否为离线环境
             function isOfflineEnvironment() {
@@ -325,7 +325,7 @@ if (footerConfig.enable) {
             }
 
             // 启动CDN检测系统
-            setupCDNDetection();
+            //setupCDNDetection();
         </script>
     </div>
 </div>
