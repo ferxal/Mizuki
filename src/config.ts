@@ -2,6 +2,7 @@ import type {
 	AnnouncementConfig,
 	CommentConfig,
 	ExpressiveCodeConfig,
+	FooterConfig,
 	LicenseConfig,
 	MusicPlayerConfig,
 	NavBarConfig,
@@ -12,8 +13,10 @@ import type {
 import { LinkPreset } from "./types/config";
 import { getTranslateLanguageFromConfig } from "./utils/language-utils";
 
+// 移除i18n导入以避免循环依赖
+
 // 定义站点语言
-const SITE_LANG = "zh_CN"; // 语言代码，例如 'en'，'zh_CN'，'ja' 等
+const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 
 export const siteConfig: SiteConfig = {
 	title: "フルショのブログ", // 修改为指定标题
@@ -26,17 +29,18 @@ export const siteConfig: SiteConfig = {
 		fixed: true, // 对访客隐藏主题颜色选择器
 	},
 	translate: {
-		enable: false, // 禁用翻译功能
-		service: "client.edge",
-		defaultLanguage: getTranslateLanguageFromConfig(SITE_LANG),
-		showSelectTag: false,
-		autoDiscriminate: true,
-		ignoreClasses: ["ignore", "banner-title", "banner-subtitle"],
-		ignoreTags: ["script", "style", "code", "pre"],
+		enable: true, // 启用翻译功能
+		service: "client.edge", // 使用 Edge 浏览器翻译服务
+		defaultLanguage: getTranslateLanguageFromConfig(SITE_LANG), // 根据站点语言自动设置默认翻译语言
+		showSelectTag: false, // 不显示默认语言选择下拉菜单，使用自定义按钮
+		autoDiscriminate: true, // 自动检测用户语言
+		ignoreClasses: ["ignore", "banner-title", "banner-subtitle"], // 翻译时忽略的 CSS 类名
+		ignoreTags: ["script", "style", "code", "pre"], // 翻译时忽略的 HTML 标签
 	},
 	banner: {
-		enable: true,
+		enable: true, // 暂时禁用横幅以提高加载速度
 
+		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
 			desktop: [
 				"https://bili-proxy.api.chenhen.top/bfs/openplatform/575ce11089a773b84d904991f410b84f460d762f.png@1800w.webp",
@@ -52,34 +56,43 @@ export const siteConfig: SiteConfig = {
 			],
 		},
 
-		position: "center", // 相当于 object-position，仅支持 'top'、'center'、'bottom'，默认为 'center'
+		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 
 		carousel: {
-			enable: true,
-			interval: 2, // 轮播间隔时间（秒）
+			enable: true, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
+
+			interval: 1, // 轮播间隔时间（秒）
 		},
 
 		homeText: {
-			enable: true,
-			title: "Ferxa1", // 修改为指定横幅标题
-			subtitle: ["记录技术", "个人日记", "我的备忘录", "学习与交流"],
+			enable: true, // 在主页显示自定义文本
+			title: "Mizuki", // 主页横幅主标题
+
+			subtitle: [
+				"One demo website",
+				"Carousel Text1",
+				"Carousel Text2",
+				"Carousel Text3",
+			], // 主页横幅副标题，支持多文本
 			typewriter: {
 				enable: true, // 启用副标题打字机效果
+
 				speed: 100, // 打字速度（毫秒）
 				deleteSpeed: 50, // 删除速度（毫秒）
-				pauseTime: 2000, // 完整显示后的暂停时间（毫秒）
+				pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
 			},
 		},
 
 		credit: {
-			enable: false,
-			text: "关于背景图",
-			url: "/Bei-Jing",
+			enable: false, // Display banner image source text
+
+			text: "关于背景图", // Source text to display
+			url: "", // (Optional) URL link to original artwork or artist page
 		},
 	},
 	toc: {
 		enable: true, // 启用目录功能
-		depth: 3, // 修改为指定目录深度
+		depth: 3, // 目录深度，1-6，1 表示只显示 h1 标题，2 表示显示 h1 和 h2 标题，依此类推
 	},
 	favicon: [
 		// 留空则使用默认favicon
@@ -142,6 +155,12 @@ export const profileConfig: ProfileConfig = {
 			url: "https://github.com/ferxal", // 修改为指定链接
 		},
 	],
+	// Umami统计部份，记得在layout插入Umami的head标签
+	umami: {
+		enable: true, // 是否显示umami统计
+		shareId: "8cFvWExVZ0oRW2kh", //填入共享URL最后面那一串  比如：https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr 你就填入2dKQ5T0WrUn6AYtr
+		region: "eu", //Umami有两个区域，按需选择即可  比如：https://eu.umami.is 你就填入eu
+	},
 };
 
 export const licenseConfig: LicenseConfig = {
@@ -151,6 +170,8 @@ export const licenseConfig: LicenseConfig = {
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
+	// 注意：某些样式（如背景颜色）已被覆盖，请参阅 astro.config.mjs 文件。
+	// 请选择深色主题，因为此博客主题目前仅支持深色背景
 	theme: "github-dark",
 };
 
@@ -166,16 +187,22 @@ export const announcementConfig: AnnouncementConfig = {
 	content: "欢迎来到我的博客", // Announcement content
 	closable: false, // Allow users to close the announcement
 	link: {
-		enable: true, // Enable link
-		text: "了解更多", // Link text
-		url: "/about/", // Link URL
-		external: false, // Internal link
+		enable: true, // 启用链接
+		text: "了解更多", // 链接文本
+		url: "/about/", // 链接 URL
+		external: false, // 内部链接
 	},
 };
 
 export const musicPlayerConfig: MusicPlayerConfig = {
 	enable: true, // 启用音乐播放器功能
 };
+
+export const footerConfig: FooterConfig = {
+	enable: false, // 是否启用Footer HTML注入功能
+};
+
+// 直接编辑 FooterConfig.html 文件来添加备案号等自定义内容
 
 /**
  * 侧边栏布局配置
@@ -280,7 +307,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			desktop: 1280,
 		},
 		// 不同设备的布局模式
-		//hidden:不显示侧边栏 sidebar:显示侧边栏
+		//hidden:不显示侧边栏(桌面端)   drawer:抽屉模式(移动端不显示)   sidebar:显示侧边栏
 		layout: {
 			// 移动端：抽屉模式
 			mobile: "sidebar",
