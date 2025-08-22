@@ -44,6 +44,7 @@ export const zh_CN: Translation = {
 	[Key.anime]: "追番",
 	[Key.diary]: "日记",
 
+
 	// 追番统计
 	[Key.animeTotal]: "总数",
 	[Key.animeWatching]: "追番中",

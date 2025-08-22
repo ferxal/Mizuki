@@ -39,10 +39,10 @@ export const siteConfig: SiteConfig = {
 
 		src: {
 			desktop: [
-				"https://bili-proxy.api.chenhen.top/bfs/openplatform/575ce11089a773b84d904991f410b84f460d762f.png@1500w.webp",
-				"https://bili-proxy.api.chenhen.top/bfs/openplatform/af7e274ee118ee4e6b7b999d9e09429fe53f0825.png@1500w.webp",
-				"https://bili-proxy.api.chenhen.top/bfs/openplatform/1618858e6b9b28bb2f83dac7e040e639967aaafb.png@1500w.webp",
-				"https://bili-proxy.api.chenhen.top/bfs/openplatform/ed8eaa7cbb9576d4807dd1d46a9086ac0ae7b171.png@1500w.webp",
+				"https://bili-proxy.api.chenhen.top/bfs/openplatform/575ce11089a773b84d904991f410b84f460d762f.png@1800w.webp",
+				"https://bili-proxy.api.chenhen.top/bfs/openplatform/af7e274ee118ee4e6b7b999d9e09429fe53f0825.png@1800w.webp",
+				"https://bili-proxy.api.chenhen.top/bfs/openplatform/1618858e6b9b28bb2f83dac7e040e639967aaafb.png@1800w.webp",
+				"https://bili-proxy.api.chenhen.top/bfs/openplatform/ed8eaa7cbb9576d4807dd1d46a9086ac0ae7b171.png@1800w.webp",
 			],
 			mobile: [
 				"https://bili-proxy.api.chenhen.top/bfs/openplatform/4d2a047d5bdd5425ea474a3cc8d457757b0bf3fc.png@1400w.webp",
@@ -117,6 +117,11 @@ export const navBarConfig: NavBarConfig = {
 			url: "/content/",
 			children: [LinkPreset.About, LinkPreset.Friends],
 		},
+		{
+			name: "群组",
+			url: "/chat/",
+			external: false,
+		}
 	],
 };
 
