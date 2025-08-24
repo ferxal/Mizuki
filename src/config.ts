@@ -7,6 +7,7 @@ import type {
 	MusicPlayerConfig,
 	NavBarConfig,
 	ProfileConfig,
+	SakuraConfig,
 	SidebarLayoutConfig,
 	SiteConfig,
 } from "./types/config";
@@ -61,7 +62,7 @@ export const siteConfig: SiteConfig = {
 		carousel: {
 			enable: true, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
 
-			interval: 1, // 轮播间隔时间（秒）
+			interval: 2, // 轮播间隔时间（秒）- 减慢轮播速度
 		},
 
 		homeText: {
@@ -88,6 +89,10 @@ export const siteConfig: SiteConfig = {
 
 			text: "关于背景图", // Source text to display
 			url: "", // (Optional) URL link to original artwork or artist page
+		},
+
+		navbar: {
+			transparentMode: "full", // 导航栏透明模式："semi" 半透明加圆角，"full" 完全透明
 		},
 	},
 	toc: {
@@ -223,7 +228,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			position: "top",
 			// CSS 类名，用于应用样式和动画
 			class: "onload-animation",
-			// 动画延迟时间（毫秒），用于错开动画效果
+			// 动画延迟时间（毫秒），用于错开动画效果 - 优化为0延迟
 			animationDelay: 0,
 		},
 		{
@@ -237,8 +242,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			position: "top",
 			// CSS 类名
 			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 50,
+			// 动画延迟时间 - 优化为0延迟
+			animationDelay: 0,
 		},
 		{
 			// 组件类型：分类组件
@@ -251,8 +256,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			position: "sticky",
 			// CSS 类名
 			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 150,
+			// 动画延迟时间 - 优化为最小延迟
+			animationDelay: 30,
 			// 响应式配置
 			responsive: {
 				// 折叠阈值：当分类数量超过5个时自动折叠
@@ -270,8 +275,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			position: "sticky",
 			// CSS 类名
 			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 200,
+			// 动画延迟时间 - 优化为最小延迟
+			animationDelay: 60,
 			// 响应式配置
 			responsive: {
 				// 折叠阈值：当标签数量超过20个时自动折叠
@@ -280,14 +285,14 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		},
 	],
 
-	// 默认动画配置
+	// 优化的默认动画配置
 	defaultAnimation: {
 		// 是否启用默认动画
 		enable: true,
-		// 基础延迟时间（毫秒）
+		// 基础延迟时间（毫秒）- 优化为0
 		baseDelay: 0,
-		// 递增延迟时间（毫秒），每个组件依次增加的延迟
-		increment: 50,
+		// 递增延迟时间（毫秒）- 优化为更小的值
+		increment: 20,
 	},
 
 	// 响应式布局配置
@@ -314,10 +319,32 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 	},
 };
 
+export const sakuraConfig: SakuraConfig = {
+	enable: true, // 默认关闭樱花特效
+	sakuraNum: 21, // 樱花数量
+	limitTimes: -1, // 樱花越界限制次数，-1为无限循环
+	size: {
+		min: 0.5, // 樱花最小尺寸倍数
+		max: 1.1, // 樱花最大尺寸倍数
+	},
+	speed: {
+		horizontal: {
+			min: -0.8, // 水平移动速度最小值 - 减慢速度
+			max: -0.5, // 水平移动速度最大值 - 减慢速度
+		},
+		vertical: {
+			min: 0.6, // 垂直移动速度最小值 - 减慢速度
+			max: 1.0, // 垂直移动速度最大值 - 减慢速度
+		},
+		rotation: 0.015, // 旋转速度 - 减慢一半
+	},
+	zIndex: 100, // 层级，确保樱花在合适的层级显示
+};
 // 导出所有配置的统一接口
 export const widgetConfigs = {
 	profile: profileConfig,
 	announcement: announcementConfig,
 	music: musicPlayerConfig,
 	layout: sidebarLayoutConfig,
+	sakura: sakuraConfig,
 } as const;
