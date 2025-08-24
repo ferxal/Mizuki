@@ -174,12 +174,12 @@ function processImageUrl(url: string): string {
 
 												return (
 													<div class="card-base overflow-hidden hover:shadow-lg transition-transform hover:scale-[1.02] dark:bg-[var(--card-bg)] animate-fade-in">
-														<div class="aspect-[3/4] overflow-hidden">
+														<div class="aspect-[3/4] overflow-hidden rounded-lg">
 															<a href={`https://bgm.tv/subject/${s.id}`} target="_blank" rel="noopener noreferrer" class="block w-full h-full hover:opacity-80 transition-opacity cursor-pointer">
 																<ImageWrapper 
 																	src={img}
 																	alt={s.name_cn || s.name || '未知'}
-																	class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 rounded-lg"
+																	class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
 																	data-src-fallback="/default-image.png"
 																	id={`anime-img-${s.id}`}
 																/>
@@ -232,7 +232,7 @@ function processImageUrl(url: string): string {
     const sections = document.querySelectorAll('.bangumi-section');
 
     function switchTab(tab) {
-      // 添加过渡动画
+      // 移除所有过渡动画以提升性能
       document.querySelectorAll('.bangumi-section').forEach(sec => {
         sec.style.transition = 'none';
         sec.classList.add('hidden');
@@ -248,7 +248,7 @@ function processImageUrl(url: string): string {
         t.setAttribute('aria-selected', selected);
       });
 
-      // 启用过渡动画并显示目标section
+      // 使用requestAnimationFrame确保动画流畅执行
       requestAnimationFrame(() => {
         const targetSection = document.getElementById(tab.dataset.target);
         if (targetSection) {
@@ -404,9 +404,16 @@ function processImageUrl(url: string): string {
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('#bangumi-tabs .tab-button');
-    const sections = document.querySelectorAll('.bangumi-section');
 
+    // 状态切换函数优化
     function switchTab(tab) {
+      // 移除所有过渡动画以提升性能
+      document.querySelectorAll('.bangumi-section').forEach(sec => {
+        sec.style.transition = 'none';
+        sec.classList.add('hidden');
+        sec.setAttribute('aria-hidden', 'true');
+      });
+      
       tabs.forEach(t => {
         const selected = t === tab;
         t.classList.toggle('border-b-2', selected);
@@ -415,9 +422,15 @@ function processImageUrl(url: string): string {
         t.classList.toggle('dark:text-[var(--primary)]', selected);
         t.setAttribute('aria-selected', selected);
       });
-      sections.forEach(sec => {
-        sec.classList.toggle('hidden', sec.id !== tab.dataset.target);
-        sec.setAttribute('aria-hidden', sec.id !== tab.dataset.target);
+
+      // 使用requestAnimationFrame确保动画流畅执行
+      requestAnimationFrame(() => {
+        const targetSection = document.getElementById(tab.dataset.target);
+        if (targetSection) {
+          targetSection.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
+          targetSection.classList.remove('hidden');
+          targetSection.setAttribute('aria-hidden', 'false');
+        }
       });
     }
 
