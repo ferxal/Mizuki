@@ -4,87 +4,83 @@ import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
+// --- Bangumi API 配置 ---
+const uid = "ferxal987";
+const token = 'dDnvFD0jVmqWgaemFAlwedPOiKKBCezTJLv0FGIB';
+const base = 'https://api.bgm.tv/v0';
 
-// 追番数据  completed 看完   watching 在追
-const animeList = [
-	{
-		title: "沉默魔女的秘密",
-		status: "watching",
-		rating: 4,
-		cover:
-			"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/e32ed446c1f02f7e6c2c9600ca4b6eb561e898bf.png@384w_512h.webp",
-		description:
-			"人类必须通过咏唱，才能使用魔法。但有一个少女，却打破了这个定律。“七贤人”，是里迪尔王国的七位最强魔法师，其中之一是……",
-		episodes: "13 episodes",
-		year: "2025-2026",
-		link: "https://www.bilibili.com/bangumi/media/md26625039",
-		review: "魔法波奇，可爱",
-	},
-	{
-		title: "夏日口袋",
-		status: "watching",
-		rating: 5,
-		cover:
-			"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/e549a7f75f3bcab529fdce4014a28c3279aeffa4.png@384w_512h.webp",
-		description:
-			"主人公鹰原羽依里为了整理已故祖母的遗物，利用暑假时间独自来到了鸟白岛。当他走下一天只有几班的渡轮时，遇见了……",
-		episodes: "30 episodes",
-		year: "2025-2026",
-		link: "https://www.bilibili.com/bangumi/media/md25572685",
-		review: "有点烧脑，对上电波于是满分",
-	},
-	{
-		title: "总之就是非常可爱 第二季",
-		status: "watching",
-		rating: 3,
-		cover:
-			"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/bcb277f6787ea2216752a25f245488976b874752.png@384w_512h.webp",
-		description:
-			"[-人では形をなさぬ 二人の愛を誓い合うんだ」運命の出会いからのプロポ-ズ、ボロア八-トの新婚生活、結婚指輪に両親への挨拶からのアパ-ト全焼にもめげす",
-		episodes: "16 episodes",
-		year: "2023-2024",
-		link: "https://www.bilibili.com/bangumi/media/md20266559",
-		review: "甜过头了......超容易看厌的番",
-	},
-	{
-		title: "怪兽8号",
-		status: "watching",
-		rating: 4,
-		cover:
-			"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/119f272b7c3d7a59046aa988296d50de8fbd7f79.png@384w_512h.webp",
-		description:
-			"这是一个怪兽如日常般威胁人类的世界。日比野卡夫卡原本立志加入“日本防卫队”，却放弃梦想，在怪兽清扫公司工作……",
-		episodes: "16 episodes",
-		year: "2024-2025",
-		link: "https://www.bilibili.com/bangumi/media/md21231256",
-		review: "没看完",
-	},
-	{
-		title: "与游戏中心的少女异文化交流的故事",
-		status: "watching",
-		rating: 999,
-		cover:
-			"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/45a1da7c7aca4f4d771689ddbfe50e1ec7fea1c2.png@362w_512h.webp",
-		description: "ゲ-ムセンタ-でアルバイト中の青年・草壁蓮司が目にしたのは……",
-		episodes: "16 episodes",
-		year: "2025-2026",
-		link: "https://bgm.tv/subject/510256",
-		review: "かわいい，无需多言",
-	},
-	{
-		title: "9-nine- 支配者的王冠",
-		status: "watching",
-		rating: 4,
-		cover:
-			"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/f6e8d88cde62bac6db0ba4f3ce4853c4206b1661.png@362w_512h.webp",
-		description:
-			"白巳津川市。学園都市であること以外になんの特色もない街。観光客を……",
-		episodes: "16 episodes",
-		year: "2025-2026",
-		link: "https://bgm.tv/subject/496973",
-		review: "感觉剧情有点莫名其妙，能看下去",
-	},
+// --- 类型定义 ---
+type Cat = 'watching' | 'wish' | 'collect';
+type CatNum = 3 | 1 | 2;
+
+interface Image {
+  large?: string;
+  common?: string;
+  medium?: string;
+  small?: string;
+  grid?: string;
+}
+
+interface Subject {
+  id: number;
+  type: number;
+  name: string;
+  name_cn: string;
+  eps?: number;
+  images?: Image;
+}
+
+interface CollectionItem {
+  subject_id: number;
+  subject: Subject;
+  ep_status: number;
+  type: CatNum;
+}
+
+interface CollectionResponse {
+  data: CollectionItem[];
+  limit: number;
+  offset: number;
+  total: number;
+}
+
+const cats = [
+  { key: 'watching', name: '在看', type: 3 },
+  { key: 'wish',     name: '想看', type: 1 },
+  { key: 'collect',  name: '看完', type: 2 },
 ];
+
+// --- 数据获取 ---
+async function fetchOnce(type: CatNum): Promise<CollectionItem[]> {
+  try {
+    const res = await fetch(
+      `${base}/users/${uid}/collections?subject_type=2&type=${type}&limit=50`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (!res.ok) {
+      console.error(`API Error (${type}):`, res.status, await res.text());
+      return [];
+    }
+
+    const json: CollectionResponse = await res.json();
+    return Array.isArray(json.data) ? json.data : [];
+  } catch (err) {
+    console.error('Fetch error:', err);
+    return [];
+  }
+}
+
+let allDataFetched = true;
+const data: Record<Cat, CollectionItem[]> = { watching: [], wish: [], collect: [] };
+
+try {
+  const results = await Promise.all(cats.map(({ type }) => fetchOnce(type)));
+  cats.forEach(({ key }, i) => { data[key] = results[i]; });
+} catch (err) {
+  console.error("Fetch failed:", err);
+  allDataFetched = false;
+}
 
 // 获取状态的翻译文本
 function getStatusText(status: string): string {
@@ -97,101 +93,368 @@ function getStatusText(status: string): string {
 			return status;
 	}
 }
+
+// 图片处理函数 - 转换为webp并调整尺寸
+function processImageUrl(url: string): string {
+  if (!url || url.includes('/default-image.png')) return url;
+  
+  // 这里可以添加图片处理逻辑，比如使用图片CDN服务
+  // 示例：return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&w=300&h=400&output=webp`;
+  return url;
+}
 ---
 
 <MainGridLayout title={i18n(I18nKey.anime)} description="我的追番记录">
 	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-		<div class="card-base z-10 px-4 md:px-9 py-4 md:py-6 relative w-full">
+		<div class="card-base z-10 px-9 py-6 relative w-full">
 			<div class="relative">
-				<div class="flex flex-row items-center text-lg font-bold mb-4 md:mb-6 text-90">
+				<div class="flex flex-row items-center text-lg font-bold mb-6 text-90">
 					<div class="flex flex-row items-center">
-						<svg class="w-5 h-5 md:w-6 md:h-6 mr-2 text-90" fill="currentColor" viewBox="0 0 24 24">
+						<svg class="w-6 h-6 mr-2 text-90" fill="currentColor" viewBox="0 0 24 24">
 							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
 						</svg>
 						<span>{i18n(I18nKey.anime)}</span>
-					</div>
 				</div>
+			</div>
 
 				<!-- 统计信息 -->
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
-					<div class="card-base p-3 md:p-4 text-center">
-						<div class="text-xl md:text-2xl font-bold text-[var(--primary)]">{animeList.length}</div>
-						<div class="text-xs md:text-sm text-75">{i18n(I18nKey.animeTotal)}</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+					<div class="card-base p-4 text-center">
+						<div class="text-2xl font-bold text-[var(--primary)]">{data.watching.length + data.wish.length + data.collect.length}</div>
+						<div class="text-sm text-75">{i18n(I18nKey.animeTotal)}</div>
 					</div>
-					<div class="card-base p-3 md:p-4 text-center">
-						<div class="text-xl md:text-2xl font-bold text-[oklch(0.65_0.15_140)] dark:text-[oklch(0.75_0.15_140)]">{animeList.filter(anime => anime.status === 'watching').length}</div>
-						<div class="text-xs md:text-sm text-75">{i18n(I18nKey.animeWatching)}</div>
+					<div class="card-base p-4 text-center">
+						<div class="text-2xl font-bold text-[oklch(0.65_0.15_140)] dark:text-[oklch(0.75_0.15_140)]">{data.watching.length}</div>
+						<div class="text-sm text-75">{i18n(I18nKey.animeWatching)}</div>
 					</div>
-					<div class="card-base p-3 md:p-4 text-center">
-						<div class="text-xl md:text-2xl font-bold text-[oklch(0.65_0.15_240)] dark:text-[oklch(0.75_0.15_240)]">{animeList.filter(anime => anime.status === 'completed').length}</div>
-						<div class="text-xs md:text-sm text-75">{i18n(I18nKey.animeCompleted)}</div>
+					<div class="card-base p-4 text-center">
+						<div class="text-2xl font-bold text-[oklch(0.65_0.15_240)] dark:text-[oklch(0.75_0.15_240)]">{data.collect.length}</div>
+						<div class="text-sm text-75">{i18n(I18nKey.animeCompleted)}</div>
 					</div>
 				</div>
 
-				<!-- 番剧列表 -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-					{animeList.map(anime => (
-						<div class="card-base p-4 md:p-6 flex flex-col min-w-0">
-							<a href={anime.link} target="_blank" rel="noopener noreferrer" class="flex flex-1 block">
-								<!-- 封面 -->
-								<div class="ImageWrapper w-12 md:w-16 h-16 md:h-20 rounded-[var(--radius-medium)] overflow-hidden relative mr-4 md:mr-6 flex-shrink-0">
-									<ImageWrapper 
-										src={anime.cover} 
-										alt={anime.title}
-										class="w-full h-full object-cover"
-									/>
-								</div>
-
-								<!-- 内容 -->
-								<div class="flex-1 min-w-0">
-									<h3 class="text-base md:text-lg font-bold mb-2 truncate text-90">{anime.title}</h3>
-									<p class="text-xs md:text-sm text-75 mb-3 md:mb-4 line-clamp-2">{anime.description}</p>
-
-									<!-- 评分和状态标签 -->
-									<div class="flex items-center justify-between mb-3 md:mb-4">
-										<div class="flex items-center">
-											<div class="flex mr-2">
-												{Array.from({length: 5}, (_, i) => (
-													<svg class={`w-3 h-3 md:w-4 md:h-4 ${i < anime.rating ? 'text-[oklch(0.75_0.15_80)] dark:text-[oklch(0.85_0.15_80)]' : 'text-30'}`} fill="currentColor" viewBox="0 0 20 20">
-														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-													</svg>
-											))}
-											</div>
-											<span class="text-xs md:text-sm text-75">{anime.rating}/5</span>
-										</div>
-
-											<!-- 状态标签 -->
-											<div class="flex items-center">
-												<span class={`px-2 py-1 rounded-full text-xs font-medium ${
-													anime.status === 'watching' ? 'bg-[oklch(0.85_0.1_140)] text-[oklch(0.35_0.15_140)] dark:bg-[oklch(0.25_0.1_140)] dark:text-[oklch(0.75_0.15_140)]' :
-													anime.status === 'completed' ? 'bg-[oklch(0.85_0.1_240)] text-[oklch(0.35_0.15_240)] dark:bg-[oklch(0.25_0.1_240)] dark:text-[oklch(0.75_0.15_240)]' :
-													'bg-[var(--btn-regular-bg)] text-75'
-												}`}>{getStatusText(anime.status)}</span>
-											</div>
-										</div>
-								</div>
-							</a>
-
-							<!-- 评价 -->
-							<div class="group">
-								<div class="border-t border-[var(--line-divider)] pt-3 md:pt-4 transition-all duration-300 group-hover:border-[var(--primary)] group-hover:pt-4 rounded-b-[var(--radius-medium)] bg-[var(--card-bg)] -mx-4 md:-mx-6 px-4 md:px-6 pb-2 md:pb-3">
-									<h4 class="text-xs md:text-sm font-semibold mb-2 text-90 transition-colors duration-300 group-hover:text-[var(--primary)]">{i18n(I18nKey.animeReview)}</h4>
-									<p class="text-xs md:text-sm text-75 line-clamp-2 transition-all duration-300 group-hover:text-90">{anime.review}</p>
-								</div>
-							</div>
+				{allDataFetched ? (
+					<>
+						<!-- 标签页 -->
+						<div class="flex border-b border-gray-200 dark:border-gray-700 mb-6" role="tablist" id="bangumi-tabs">
+							{cats.map(({ key, name }, i) => (
+								<button
+									id={`tab-${key}`}
+									class={`tab-button px-4 py-2 font-medium text-sm transition-colors ${
+										i === 0
+											? 'border-b-2 border-primary text-primary dark:text-[var(--primary)]'
+											: 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+									}`}
+									data-target={key}
+									role="tab"
+									aria-selected={i === 0}
+								>
+									{name}（{data[key].length}）
+								</button>
+							))}
 						</div>
-					))}
+
+						<!-- 内容区 -->
+						<div class="mt-4 bangumi-content-container">
+							{cats.map(({ key, name }, i) => (
+								<section
+									id={key}
+									role="tabpanel"
+									class={`bangumi-section ${i !== 0 ? 'hidden' : ''}`}
+									aria-hidden={i !== 0}
+								>
+									{data[key].length ? (
+										<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+											{data[key].map(item => {
+												const s = item.subject;
+												const total = s.eps || 0;
+												const watched = item.ep_status || 0;
+												const percent = total ? Math.min(100, Math.round((watched / total) * 100)) : 0;
+												const img = processImageUrl(s.images?.large || s.images?.common || '/default-image.png');
+
+												return (
+													<div class="card-base overflow-hidden hover:shadow-lg transition-transform hover:scale-[1.02] dark:bg-[var(--card-bg)] animate-fade-in">
+														<div class="aspect-[3/4] overflow-hidden rounded-lg">
+															<a href={`https://bgm.tv/subject/${s.id}`} target="_blank" rel="noopener noreferrer" class="block w-full h-full hover:opacity-80 transition-opacity cursor-pointer">
+																<ImageWrapper 
+																	src={img}
+																	alt={s.name_cn || s.name || '未知'}
+																	class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+																	data-src-fallback="/default-image.png"
+																	id={`anime-img-${s.id}`}
+																/>
+															</a>
+														</div>
+														<div class="p-3">
+															<h2 class="font-medium text-sm line-clamp-2 mb-2 min-h-[2.5rem] text-90 dark:text-white">
+																{s.name_cn || s.name}
+															</h2>
+													<div class="text-xs">
+														<div class="flex justify-between mb-1">
+																	<span class="text-50 dark:text-gray-300">{watched}/{total}</span>
+												<span class="text-50 dark:text-gray-300">{percent}%</span>
+																</div>
+																<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+																	<div
+																		class="h-1.5 rounded-full transition-all duration-300"
+																		style={`width: ${percent}%; background-color: var(--primary)`}
+																	></div>
+													</div>
+														</div>
+													</div>
+												</div>
+											);
+										})}
+									</div>
+								) : (
+									<div class="text-center py-12 text-50 dark:text-gray-400">
+										暂无 {name} 的记录
+									</div>
+								)}
+							</section>
+						))}
+					</div>
+				</>
+			) : (
+				<div class="text-center py-12 text-red-500 dark:text-red-400">
+					数据加载失败，请检查网络或稍后重试。
 				</div>
-
-
-			</div>
+			)}
 		</div>
 	</div>
+</div>
 </MainGridLayout>
+
+<!-- 客户端交互 -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('#bangumi-tabs .tab-button');
+    const sections = document.querySelectorAll('.bangumi-section');
+
+    function switchTab(tab) {
+      // 移除所有过渡动画以提升性能
+      document.querySelectorAll('.bangumi-section').forEach(sec => {
+        sec.style.transition = 'none';
+        sec.classList.add('hidden');
+        sec.setAttribute('aria-hidden', 'true');
+      });
+      
+      tabs.forEach(t => {
+        const selected = t === tab;
+        t.classList.toggle('border-b-2', selected);
+        t.classList.toggle('border-primary', selected);
+        t.classList.toggle('text-primary', selected);
+        t.classList.toggle('dark:text-[var(--primary)]', selected);
+        t.setAttribute('aria-selected', selected);
+      });
+
+      // 使用requestAnimationFrame确保动画流畅执行
+      requestAnimationFrame(() => {
+        const targetSection = document.getElementById(tab.dataset.target);
+        if (targetSection) {
+          targetSection.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
+          targetSection.classList.remove('hidden');
+          targetSection.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab)));
+
+    // 图片加载完成处理
+    document.querySelectorAll('.bangumi-img').forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', function() {
+          this.classList.add('loaded');
+        });
+      }
+    });
+
+    // 图片错误处理
+    document.querySelectorAll('img[data-src-fallback]').forEach(img => {
+      img.addEventListener('error', function () {
+        if (this.src !== this.dataset.srcFallback) {
+          this.src = this.dataset.srcFallback;
+          this.alt = '图片加载失败';
+        }
+      });
+    });
+  });
+</script>
 
 <style>
 	.card-base {
 		background: var(--card-bg);
 		border: 1px solid var(--line-divider);
 	}
+	
+	.line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	
+	.animate-fade-in {
+		animation: fadeIn 0.5s ease-in-out;
+	}
+	
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	/* 页面切换动画优化 */
+	.bangumi-section {
+		transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+	}
+	
+	.bangumi-section:not(.hidden) {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	
+	.bangumi-section.hidden {
+		opacity: 0;
+		transform: translateY(10px);
+		pointer-events: none;
+		position: absolute;
+		width: 100%;
+	}
+	
+	.bangumi-content-container {
+		position: relative;
+		min-height: 300px;
+	}
+
+	/* 图片加载动画优化 */
+	.image-loading {
+		position: relative;
+		overflow: hidden;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+		background-size: 200% 100%;
+		animation: loadingShimmer 1.5s infinite;
+		border-radius: 0.5rem;
+	}
+
+	@keyframes loadingShimmer {
+		0% { background-position: -200% 0; }
+		100% { background-position: 200% 0; }
+	}
+
+	/* 图片渐显效果 */
+	.bangumi-img {
+		transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+		opacity: 0;
+		transform: scale(0.95);
+	}
+
+	.bangumi-img.loaded {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	/* 选项栏样式优化 */
+	.tab-button {
+		position: relative;
+		border: none;
+		background: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		margin-bottom: -1px;
+	}
+
+	.tab-button:hover {
+		color: var(--primary);
+	}
+
+	.tab-button[aria-selected="true"] {
+		color: var(--primary);
+		border-bottom: 2px solid var(--primary);
+		font-weight: 600;
+		background: linear-gradient(135deg, var(--primary) 0%, color-mix(in oklch, var(--primary), white 20%) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		text-shadow: 0 2px 4px color-mix(in oklch, var(--primary), transparent 80%);
+	}
+
+	.tab-button[aria-selected="true"]::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 20px;
+		height: 3px;
+		background: linear-gradient(90deg, var(--primary), color-mix(in oklch, var(--primary), white 30%));
+		border-radius: 2px;
+		box-shadow: 0 2px 8px color-mix(in oklch, var(--primary), transparent 70%);
+	}
+
+	/* 进度条样式优化 */
+	.progress-bar {
+		transition: width 0.5s ease-in-out;
+	}
 </style>
+
+<!-- 客户端交互 -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('#bangumi-tabs .tab-button');
+
+    // 状态切换函数优化
+    function switchTab(tab) {
+      // 移除所有过渡动画以提升性能
+      document.querySelectorAll('.bangumi-section').forEach(sec => {
+        sec.style.transition = 'none';
+        sec.classList.add('hidden');
+        sec.setAttribute('aria-hidden', 'true');
+      });
+      
+      tabs.forEach(t => {
+        const selected = t === tab;
+        t.classList.toggle('border-b-2', selected);
+        t.classList.toggle('border-primary', selected);
+        t.classList.toggle('text-primary', selected);
+        t.classList.toggle('dark:text-[var(--primary)]', selected);
+        t.setAttribute('aria-selected', selected);
+      });
+
+      // 使用requestAnimationFrame确保动画流畅执行
+      requestAnimationFrame(() => {
+        const targetSection = document.getElementById(tab.dataset.target);
+        if (targetSection) {
+          targetSection.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
+          targetSection.classList.remove('hidden');
+          targetSection.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab)));
+
+    // 图片加载完成处理
+    document.querySelectorAll('.bangumi-img').forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', function() {
+          this.classList.add('loaded');
+        });
+      }
+    });
+
+    // 图片错误处理
+    document.querySelectorAll('img[data-src-fallback]').forEach(img => {
+      img.addEventListener('error', function () {
+        if (this.src !== this.dataset.srcFallback) {
+          this.src = this.dataset.srcFallback;
+          this.alt = '图片加载失败';
+        }
+      });
+    });
+  });
+</script>
