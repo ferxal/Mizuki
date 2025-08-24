@@ -5,7 +5,7 @@ description: 搞了老半天终于把博客配置好了......
 tags: []
 draft: false
 pinned: false
-image: "https://bili-proxy.api.chenhen.top/bfs/openplatform/c7931ac8694708bc171b746e937fcc0cccd610c8.png@.webp"
+image: "https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/c7931ac8694708bc171b746e937fcc0cccd610c8.png@.webp"
 ---
 
 <LittleXR size="300" character="takina" autoFit={true} />
