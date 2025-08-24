@@ -98,9 +98,8 @@ function getStatusText(status: string): string {
 function processImageUrl(url: string): string {
   if (!url || url.includes('/default-image.png')) return url;
   
-  // 这里可以添加图片处理逻辑，比如使用图片CDN服务
-  // 示例：return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&w=300&h=400&output=webp`;
-  return url;
+  // 使用图片CDN服务转换为WebP格式并调整尺寸
+  return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&w=300&h=400&output=webp`;
 }
 ---
 
@@ -237,6 +236,8 @@ function processImageUrl(url: string): string {
         sec.style.transition = 'none';
         sec.classList.add('hidden');
         sec.setAttribute('aria-hidden', 'true');
+        // 移除绝对定位以避免布局问题
+        sec.style.position = '';
       });
       
       tabs.forEach(t => {
@@ -255,6 +256,11 @@ function processImageUrl(url: string): string {
           targetSection.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
           targetSection.classList.remove('hidden');
           targetSection.setAttribute('aria-hidden', 'false');
+          // 恢复正确的高度和溢出设置
+          targetSection.style.height = '';
+          targetSection.style.overflow = '';
+          // 确保激活的标签页有正确的定位
+          targetSection.style.position = '';
         }
       });
     }
@@ -320,12 +326,11 @@ function processImageUrl(url: string): string {
 		opacity: 0;
 		transform: translateY(10px);
 		pointer-events: none;
-		position: absolute;
-		width: 100%;
+		height: 0;
+		overflow: hidden;
 	}
 	
 	.bangumi-content-container {
-		position: relative;
 		min-height: 300px;
 	}
 
@@ -399,62 +404,3 @@ function processImageUrl(url: string): string {
 		transition: width 0.5s ease-in-out;
 	}
 </style>
-
-<!-- 客户端交互 -->
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const tabs = document.querySelectorAll('#bangumi-tabs .tab-button');
-
-    // 状态切换函数优化
-    function switchTab(tab) {
-      // 移除所有过渡动画以提升性能
-      document.querySelectorAll('.bangumi-section').forEach(sec => {
-        sec.style.transition = 'none';
-        sec.classList.add('hidden');
-        sec.setAttribute('aria-hidden', 'true');
-      });
-      
-      tabs.forEach(t => {
-        const selected = t === tab;
-        t.classList.toggle('border-b-2', selected);
-        t.classList.toggle('border-primary', selected);
-        t.classList.toggle('text-primary', selected);
-        t.classList.toggle('dark:text-[var(--primary)]', selected);
-        t.setAttribute('aria-selected', selected);
-      });
-
-      // 使用requestAnimationFrame确保动画流畅执行
-      requestAnimationFrame(() => {
-        const targetSection = document.getElementById(tab.dataset.target);
-        if (targetSection) {
-          targetSection.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
-          targetSection.classList.remove('hidden');
-          targetSection.setAttribute('aria-hidden', 'false');
-        }
-      });
-    }
-
-    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab)));
-
-    // 图片加载完成处理
-    document.querySelectorAll('.bangumi-img').forEach(img => {
-      if (img.complete) {
-        img.classList.add('loaded');
-      } else {
-        img.addEventListener('load', function() {
-          this.classList.add('loaded');
-        });
-      }
-    });
-
-    // 图片错误处理
-    document.querySelectorAll('img[data-src-fallback]').forEach(img => {
-      img.addEventListener('error', function () {
-        if (this.src !== this.dataset.srcFallback) {
-          this.src = this.dataset.srcFallback;
-          this.alt = '图片加载失败';
-        }
-      });
-    });
-  });
-</script>
