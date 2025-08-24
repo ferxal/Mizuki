@@ -226,7 +226,7 @@ function processImageUrl(url: string): string {
 
 <!-- 客户端交互 -->
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initBangumiTabs() {
     const tabs = document.querySelectorAll('#bangumi-tabs .tab-button');
     const sections = document.querySelectorAll('.bangumi-section');
 
@@ -266,6 +266,11 @@ function processImageUrl(url: string): string {
     }
 
     tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab)));
+    
+    // 立即初始化标签页状态，确保页面加载时按钮可点击
+    if (tabs.length > 0) {
+      switchTab(tabs[0]);
+    }
 
     // 图片加载完成处理
     document.querySelectorAll('.bangumi-img').forEach(img => {
@@ -287,7 +292,10 @@ function processImageUrl(url: string): string {
         }
       });
     });
-  });
+  }
+  
+  // 页面加载完成后初始化标签页
+  document.addEventListener('DOMContentLoaded', initBangumiTabs);
 </script>
 
 <style>
@@ -369,6 +377,17 @@ function processImageUrl(url: string): string {
 		cursor: pointer;
 		transition: all 0.3s ease;
 		margin-bottom: -1px;
+		color: #666;
+	}
+
+	.tab-button:not([aria-selected="true"]) {
+		color: #666;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.tab-button:not([aria-selected="true"]) {
+			color: #ccc;
+		}
 	}
 
 	.tab-button:hover {
@@ -397,6 +416,7 @@ function processImageUrl(url: string): string {
 		background: linear-gradient(90deg, var(--primary), color-mix(in oklch, var(--primary), white 30%));
 		border-radius: 2px;
 		box-shadow: 0 2px 8px color-mix(in oklch, var(--primary), transparent 70%);
+		z-index: 1;
 	}
 
 	/* 进度条样式优化 */
