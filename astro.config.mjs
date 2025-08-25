@@ -42,7 +42,7 @@ export default defineConfig({
 			// when the Tailwind class `transition-all` is used
 			containers: ["main"],
 			smoothScrolling: true, // 禁用平滑滚动以提升性能
-			cache: true,
+			cache: false,
 			preload: true, // 禁用预加载以减少网络请求
 			accessibility: true,
 			updateHead: true,
