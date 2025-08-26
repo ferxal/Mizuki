@@ -27,7 +27,7 @@ import { remarkMermaid } from "./src/plugins/remark-mermaid.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 // https://astro.build/config
 export default defineConfig({
-	site: "https://mizuki.mysqil.com/",
+	site: "https://b.chenhen.top/",
 
 	base: "/",
 	trailingSlash: "always",
@@ -36,7 +36,7 @@ export default defineConfig({
 			nesting: true,
 		}),
 		swup({
-			theme: false,
+			theme: true,
 			animationClass: "transition-swup-", // see https://swup.js.org/options/#animationselector
 			// the default value `transition-` cause transition delay
 			// when the Tailwind class `transition-all` is used

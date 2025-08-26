@@ -1071,6 +1071,14 @@ const setup = () => {
 			}, 100);
 		}
 		
+		// 重新初始化番剧页面标签页
+		if (typeof window.initBangumiTabs === 'function') {
+			setTimeout(() => {
+				console.log('Swup content:replace - 初始化番剧标签页');
+				window.initBangumiTabs();
+			}, 300); // 增加延迟确保DOM完全加载
+		}
+		
 		// 页面内容替换后重新执行翻译（仅在翻译已加载时）
 		setTimeout(() => {
 			if (siteConfig.translate?.enable && typeof window.translate !== 'undefined') {

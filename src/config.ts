@@ -179,7 +179,7 @@ export const profileConfig: ProfileConfig = {
 	],
 	// Umami统计部份，记得在layout插入Umami的head标签
 	umami: {
-		enable: true, // 是否显示umami统计
+		enable: false, // 是否显示umami统计
 		shareId: "yk2SS7hzu2isHg8F", //填入共享URL最后面那一串  比如：https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr 你就填入2dKQ5T0WrUn6AYtr
 		region: "eu", //Umami有两个区域，按需选择即可  比如：https://eu.umami.is 你就填入eu
 	},
@@ -235,7 +235,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 	enable: true,
 
 	// 侧边栏位置：左侧或右侧
-	position: "left",
+	position: "left",  //right or left
 
 	// 侧边栏组件配置列表
 	components: [
