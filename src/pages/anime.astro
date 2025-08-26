@@ -278,7 +278,13 @@ function processImageUrl(url: string): string {
       });
     }
 
-    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab)));
+    // 使用事件委托模式，避免重复绑定问题
+    document.getElementById('bangumi-tabs').addEventListener('click', (event) => {
+      const button = event.target.closest('button');
+      if (button) {
+        switchTab(button);
+      }
+    });
     
     // 立即初始化标签页状态，确保页面加载时按钮可点击
     if (tabs.length > 0) {
@@ -319,12 +325,12 @@ function processImageUrl(url: string): string {
   document.addEventListener('astro:after-swap', () => {
     // 重置初始化状态以允许重新初始化
     isInitialized = false;
-    // 移除所有现有的事件监听器，防止重复绑定
-    const tabs = document.querySelectorAll('#bangumi-tabs button');
-    tabs.forEach(tab => {
-      const newTab = tab.cloneNode(true);
-      tab.replaceWith(newTab);
-    });
+    // 移除旧的事件监听器，防止重复绑定
+    const tabsContainer = document.getElementById('bangumi-tabs');
+    if (tabsContainer) {
+      const newTabsContainer = tabsContainer.cloneNode(true);
+      tabsContainer.replaceWith(newTabsContainer);
+    }
     // 添加延迟确保DOM完全更新后再初始化，与Swup的300ms延迟保持一致
     setTimeout(initBangumiTabs, 350);
   });
