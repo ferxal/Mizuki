@@ -116,10 +116,7 @@ export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1800w.webp",
 			],
 			mobile: [
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/4d2a047d5bdd5425ea474a3cc8d457757b0bf3fc.png@1400w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/6f2ff5dafc9a3d3c7a4a02f0605b0f2be6eaad14.png@1400w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/84521ffeb80a00fb30cdf4a9e491c7ae05b0a78a.png@1400w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/e4049615f3c5eeb6d0706edad06c2ed01ed32485.png@1400w.webp",
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1400w.webp",
 			],
 	}, // 使用本地横幅图片
 	position: "center", // 壁纸位置，等同于 object-position
@@ -149,42 +146,42 @@ export const navBarConfig: NavBarConfig = {
 			icon: "material-symbols:person",
 			children: [
 				LinkPreset.Anime,
-				LinkPreset.Diary,
-				{
-					name: "相册",
-					url: "/albums/",
-					icon: "material-symbols:photo-library",
-				},
+				//LinkPreset.Diary,
+				//{
+				//	name: "相册",
+				//	url: "/albums/",
+				//	icon: "material-symbols:photo-library",
+				//},
 			],
 		},
-		{
-			name: "关于",
-			url: "/content/",
-			icon: "material-symbols:info",
-			children: [LinkPreset.About, LinkPreset.Friends],
-		},
-		{
-			name: "其他",
-			url: "#",
-			icon: "material-symbols:more-horiz",
-			children: [
-				{
-					name: "项目展示",
-					url: "/projects/",
-					icon: "material-symbols:work",
-				},
-				{
-					name: "技能展示",
-					url: "/skills/",
-					icon: "material-symbols:psychology",
-				},
-				{
-					name: "时间线",
-					url: "/timeline/",
-					icon: "material-symbols:timeline",
-				},
-			],
-		},
+//		{
+//			name: "关于",
+//			url: "/content/",
+//			icon: "material-symbols:info",
+//			children: [LinkPreset.About, LinkPreset.Friends],
+//		},
+//		{
+//			name: "其他",
+//			url: "#",
+//			icon: "material-symbols:more-horiz",
+//			children: [
+//				{
+//					name: "项目展示",
+//					url: "/projects/",
+//					icon: "material-symbols:work",
+//				},
+//				{
+//					name: "技能展示",
+//					url: "/skills/",
+//					icon: "material-symbols:psychology",
+//				},
+//				{
+//					name: "时间线",
+//					url: "/timeline/",
+//					icon: "material-symbols:timeline",
+//				},
+//			],
+//		},
 	],
 };
 
