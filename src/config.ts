@@ -45,10 +45,7 @@ export const siteConfig: SiteConfig = {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
 			desktop: [
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/575ce11089a773b84d904991f410b84f460d762f.png@1800w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/af7e274ee118ee4e6b7b999d9e09429fe53f0825.png@1800w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/1618858e6b9b28bb2f83dac7e040e639967aaafb.png@1800w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/ed8eaa7cbb9576d4807dd1d46a9086ac0ae7b171.png@1800w.webp",
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1800w.webp",
 			],
 			mobile: [
 				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/4d2a047d5bdd5425ea474a3cc8d457757b0bf3fc.png@1400w.webp",
@@ -115,22 +112,15 @@ export const siteConfig: SiteConfig = {
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	enable: true, // 启用全屏壁纸功能,非Banner模式下生效
 	src: {
-		desktop: [
-			"/assets/desktop-banner/1.webp",
-			"/assets/desktop-banner/2.webp",
-			"/assets/desktop-banner/3.webp",
-			"/assets/desktop-banner/4.webp",
-			"/assets/desktop-banner/5.webp",
-			"/assets/desktop-banner/6.webp",
-		], // 桌面横幅图片
-		mobile: [
-			"/assets/mobile-banner/1.webp",
-			"/assets/mobile-banner/2.webp",
-			"/assets/mobile-banner/3.webp",
-			"/assets/mobile-banner/4.webp",
-			"/assets/mobile-banner/5.webp",
-			"/assets/mobile-banner/6.webp",
-		], // 移动横幅图片
+			desktop: [
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1800w.webp",
+			],
+			mobile: [
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/4d2a047d5bdd5425ea474a3cc8d457757b0bf3fc.png@1400w.webp",
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/6f2ff5dafc9a3d3c7a4a02f0605b0f2be6eaad14.png@1400w.webp",
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/84521ffeb80a00fb30cdf4a9e491c7ae05b0a78a.png@1400w.webp",
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/e4049615f3c5eeb6d0706edad06c2ed01ed32485.png@1400w.webp",
+			],
 	}, // 使用本地横幅图片
 	position: "center", // 壁纸位置，等同于 object-position
 	carousel: {

@@ -48,7 +48,7 @@ export const zh_TW: Translation = {
 
 	// 番劇頁面
 	[Key.animeTitle]: "我的追番記錄",
-	[Key.animeSubtitle]: "記錄我的二次元之旅",
+	[Key.animeSubtitle]: "記錄私の二次元之旅",
 	[Key.animeList]: "追番列表",
 	[Key.animeTotal]: "總數",
 	[Key.animeWatching]: "追番中",
