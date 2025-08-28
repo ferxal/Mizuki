@@ -48,10 +48,7 @@ export const siteConfig: SiteConfig = {
 				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1800w.webp",
 			],
 			mobile: [
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/4d2a047d5bdd5425ea474a3cc8d457757b0bf3fc.png@1400w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/6f2ff5dafc9a3d3c7a4a02f0605b0f2be6eaad14.png@1400w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/84521ffeb80a00fb30cdf4a9e491c7ae05b0a78a.png@1400w.webp",
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/e4049615f3c5eeb6d0706edad06c2ed01ed32485.png@1400w.webp",
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1400w.webp",
 			],
 		},
 
