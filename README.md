@@ -6,6 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Mizuki 预览](./README.webp)
+![Mizuki 预览](./README2.webp)
 
 一个现代化、功能丰富的静态博客模板，基于 [Astro](https://astro.build) 构建，具有先进的功能和精美的设计。
 
@@ -16,12 +17,9 @@
 [**中文**](./README.md) /
 [**English**](./README.en.md) /
 [**日本語**](./docs/README.ja.md) /
-[**한국어**](./docs/README.ko.md) /
-[**Français**](./docs/README.fr.md) /
-[**Deutsch**](./docs/README.de.md) /
-[**Español**](./docs/README.es.md) /
-[**Русский**](./docs/README.ru.md)
+[**中文繁体**](./docs/README.tw.md) /
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -60,6 +58,11 @@
 - **手机端Banner优化：** 支持调用外部链接
 
 ![Mizuki v4.0 功能展示](./README2.webp)
+=======
+## 🆕 v4.3 版本更新
+- **番剧页面：** 重构了更可爱好看的番剧页面，包括番剧列表、番剧详情和番剧时间轴。
+- **相册页面：** 重构了相册页面,使用分页+文件夹数据索引方案
+>>>>>>> upstream/master
 
 >>>>>>> upstream/master
 ## 🆕 v3.4 版本更新
