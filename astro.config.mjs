@@ -43,7 +43,7 @@ export default defineConfig({
 			containers: ["main"],
 			smoothScrolling: true, // 禁用平滑滚动以提升性能，避免与锚点导航冲突
 			cache: true,
-			preload: true, // 禁用预加载以减少网络请求
+			preload: false, // 禁用预加载以减少网络请求
 			accessibility: true,
 			updateHead: true,
 			updateBodyClass: false,
