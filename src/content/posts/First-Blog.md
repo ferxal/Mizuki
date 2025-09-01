@@ -1,5 +1,5 @@
 ---
-title: こんにちは、世界
+title: ハロー、世界
 published: 2025-08-18
 description: 搞了老半天终于把博客配置好了......
 tags: []
