@@ -9,6 +9,8 @@ const uid = "ferxal987";
 const token = 'xQdjiPq4RSSym22QI92MVECwBHSFm5VV4Vpr9kdA';
 const base = 'https://api.bgm.tv/v0';
 
+// 这个函数已被fetchLatestEpisode替代
+
 // --- 类型定义 ---
 type Cat = 'watching' | 'wish' | 'collect';
 type CatNum = 3 | 1 | 2;
@@ -91,6 +93,50 @@ async function fetchSubjectDetails(id: number): Promise<any> {
   }
 }
 
+// 获取番剧的最新更新集数和更新时间
+async function fetchLatestEpisode(id: number, watched: number): Promise<{latestEp: number, updateTime: string}> {
+  try {
+    // 根据已看集数计算offset，但确保不超过API限制
+    // API错误显示offset不能超过10，所以我们限制最大值为10
+    const offset = Math.min(10, Math.max(0, watched - 1));
+    const res = await fetch(
+      `${base}/episodes?subject_id=${id}&type=0&limit=50&offset=${offset}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (!res.ok) {
+      console.error(`Episodes API Error (${id}):`, res.status, await res.text());
+      return { latestEp: 0, updateTime: '' };
+    }
+
+    const data = await res.json();
+    if (!data.data || !Array.isArray(data.data) || data.data.length === 0) {
+      return { latestEp: 0, updateTime: '' };
+    }
+
+    // 查找有airdate且日期最新的一集
+    const now = new Date();
+    let latestEpisode = 0;
+    let latestUpdateTime = '';
+    
+    for (const episode of data.data) {
+      if (episode.airdate) {
+        const airDate = new Date(episode.airdate);
+        // 只计算已经播出的集数
+        if (airDate <= now && episode.ep > latestEpisode) {
+          latestEpisode = episode.ep;
+          latestUpdateTime = episode.airdate; // 保存最新更新时间
+        }
+      }
+    }
+    
+    return { latestEp: latestEpisode, updateTime: latestUpdateTime };
+  } catch (err) {
+    console.error('Episodes fetch error:', err);
+    return { latestEp: 0, updateTime: '' };
+  }
+}
+
 let allDataFetched = true;
 const data: Record<Cat, CollectionItem[]> = { watching: [], wish: [], collect: [] };
 
@@ -106,13 +152,26 @@ try {
       const detailedItems = await Promise.all(
         allItems.map(async ({ item, category }) => {
           const details = await fetchSubjectDetails(item.subject.id);
+          let latestEpisode = 0;
+          let updateTime = '';
+          
+          // 获取所有番剧的最新更新集数和更新时间
+          const { latestEp, updateTime: latestUpdateTime } = await fetchLatestEpisode(item.subject.id, item.ep_status || 0);
+          latestEpisode = latestEp;
+          updateTime = latestUpdateTime;
+          
           if (details) {
             // 保留原始的 type 字段（收藏状态），只合并其他详细信息
             const { type, ...restDetails } = details;
             return { 
               category,
               index: data[category].indexOf(item),
-              updatedItem: { ...item, ...restDetails }
+              updatedItem: { 
+                ...item, 
+                ...restDetails,
+                latest_episode: latestEpisode, // 添加最新更新集数信息
+                update_time: updateTime // 添加最新更新时间
+              }
             };
           }
           return null;
@@ -163,27 +222,31 @@ function getStatusInfo(type: number) {
 			return {
 				text: i18n(I18nKey.animeStatusWatching),
 				class:
-					"bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+					"bg-green-100/[var(--status-watching-opacity)] text-green-700 dark:bg-green-900/[var(--status-watching-opacity)] dark:text-green-300 border border-green-700/[var(--status-border-opacity)] dark:border-green-300/[var(--status-border-opacity)]",
+
 				icon: "▶",
 			};
 		case 2: // collect
 			return {
 				text: i18n(I18nKey.animeStatusCompleted),
 				class:
-					"bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+					"bg-blue-100/[var(--status-completed-opacity)] text-blue-700 dark:bg-blue-900/[var(--status-completed-opacity)] dark:text-blue-300 border border-blue-700/[var(--status-border-opacity)] dark:border-blue-300/[var(--status-border-opacity)]",
+
 				icon: "✓",
 			};
 		case 1: // wish
 			return {
 				text: i18n(I18nKey.animeStatusPlanned),
 				class:
-					"bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+					"bg-amber-100/[var(--status-planned-opacity)] text-amber-700 dark:bg-amber-900/[var(--status-planned-opacity)] dark:text-amber-300 border border-amber-700/[var(--status-border-opacity)] dark:border-amber-300/[var(--status-border-opacity)]",
+
 				icon: "⏰",
 			};
 		default:
 			return {
 				text: "Unknown",
-				class: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
+				class: "bg-gray-100/[var(--status-planned-opacity)] text-gray-700 dark:bg-gray-800/[var(--status-planned-opacity)] dark:text-gray-300 border border-gray-700/[var(--status-border-opacity)] dark:border-gray-300/[var(--status-border-opacity)]",
+
 				icon: "?",
 			};
 	}
@@ -198,6 +261,14 @@ const stats = {
 ---
 
 <MainGridLayout title={i18n(I18nKey.anime)} description={i18n(I18nKey.animeSubtitle)}>
+	<style is:global>
+		:root {
+			--status-planned-opacity: 0.3;
+			--status-completed-opacity: 0.3;
+			--status-watching-opacity: 0.3;
+			--status-border-opacity: 0.15;
+		}
+	</style>
 	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
 		<div class="card-base z-10 px-9 py-6 relative w-full">
 			<!-- 页面标题 -->
@@ -287,35 +358,67 @@ const stats = {
 										<!-- 进度条 - 在封面底部 -->
 										{item.type === 3 && (
 											<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-												<div class="w-full bg-white/20 rounded-full h-1.5 mb-1">
-													<div class="bg-gradient-to-r from-emerald-400 to-teal-400 h-1.5 rounded-full transition-all duration-300" style={`width: ${percent}%`}></div>
+												<div class="w-full bg-white/20 rounded-full h-1.5 mb-1 relative">
+													{/* 已更新进度条 */}
+													{item.latest_episode > 0 && (
+														<div class="bg-gradient-to-r from-amber-400 to-orange-400 h-1.5 rounded-full absolute top-0 left-0 transition-all duration-300" 
+															style={`width: ${Math.min(100, Math.round((item.latest_episode / total) * 100))}%`}>
+														</div>
+													)}
+													{/* 已看进度条 */}
+													<div class="bg-gradient-to-r from-emerald-400 to-teal-400 h-1.5 rounded-full transition-all duration-300 relative z-10" 
+														style={`width: ${percent}%`}>
+													</div>
 												</div>
-												<div class="text-white text-xs font-medium">
-													{watched}/{total} ({Math.round(percent)}%)
+												<div class="text-white text-xs font-medium flex justify-between">
+													<span>{watched}/{total} ({Math.round(percent)}%)</span>
+													{item.latest_episode > watched && (
+														<span class="text-amber-300">已更新至: 第{item.latest_episode}集</span>
+													)}
 												</div>
 											</div>
 										)}
 									</div>
 									
 									<!-- 内容区域 - 紧凑设计 -->
-										<div class="p-3">
-											<h3 class="text-sm font-bold text-black/90 dark:text-white/90 mb-1 line-clamp-2 leading-tight">{s.name_cn || s.name}</h3>
-											<p class="text-black/60 dark:text-white/60 text-xs mb-2 line-clamp-2">{subtitles[index % subtitles.length]}</p>
+									<div class="p-3">
+										<h3 class="text-sm font-bold text-black/90 dark:text-white/90 mb-1 line-clamp-2 leading-tight">{s.name_cn || s.name}</h3>
 										
-										<!-- 详细信息 - 更紧凑 -->
-										<div class="space-y-1 text-xs">
-											<div class="flex justify-between">
-												<span class="text-black/50 dark:text-white/50">{i18n(I18nKey.animeYear)}</span>
-												<span class="text-black/70 dark:text-white/70">{s.date}</span>
-											</div>
-											
-											<div class="flex flex-wrap gap-1 mt-2">
-												{item.tags?.slice(0, 3).map(tag => (
-													<span class="px-1.5 py-0.5 bg-[var(--btn-regular-bg)] text-black/70 dark:text-white/70 rounded text-xs">{tag.name}</span>
-												))}
-											</div>
+										{/* 更新状态信息 */}
+										{item.type === 3 && item.latest_episode > 0 && (
+											<p class="text-xs mb-2">
+												{item.latest_episode > item.ep_status ? (
+													<span class="text-amber-500 dark:text-amber-400 font-medium">🔔 未看 {item.latest_episode - item.ep_status} 集</span>
+												) : (
+													<span class="text-green-500 dark:text-green-400 font-medium">✓ 已看最新</span>
+												)}
+											</p>
+										)}
+										
+										<p class="text-black/60 dark:text-white/60 text-xs mb-2 line-clamp-2">{subtitles[index % subtitles.length]}</p>
+									
+									<!-- 详细信息 - 更紧凑 -->
+									<div class="space-y-1 text-xs">
+										<div class="flex justify-between">
+											<span class="text-black/50 dark:text-white/50">{i18n(I18nKey.animeYear)}</span>
+											<span class="text-black/70 dark:text-white/70">{s.date}</span>
+										</div>
+										
+										{/* 最近更新时间 */}
+									{item.update_time && (
+										<div class="flex justify-between">
+											<span class="text-black/50 dark:text-white/50">最近更新</span>
+											<span class="text-black/70 dark:text-white/70" data-update-time={item.update_time}></span>
+										</div>
+									)}
+										
+										<div class="flex flex-wrap gap-1 mt-2">
+											{item.tags?.slice(0, 3).map(tag => (
+												<span class="px-1.5 py-0.5 bg-[var(--btn-regular-bg)] text-black/70 dark:text-white/70 rounded text-xs">{tag.name}</span>
+											))}
 										</div>
 									</div>
+								</div>
 								</div>
 							);
 						})}
@@ -333,9 +436,58 @@ const stats = {
 
 <!-- 客户端交互 -->
 <script is:inline>
-  // 初始化函数（如果需要）
+  // 计算相对时间的函数
+  function getRelativeTimeString(dateString) {
+    if (!dateString) return '';
+    
+    const date = new Date(dateString);
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+    
+    // 检查日期是否有效
+    if (isNaN(date.getTime())) return '';
+    
+    // 根据时间差计算相对时间
+    if (seconds < 60) {
+      return `${seconds}秒前`;
+    }
+    
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) {
+      return `${minutes}分钟前`;
+    }
+    
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) {
+      return `${hours}小时前`;
+    }
+    
+    const days = Math.floor(hours / 24);
+    if (days < 7) {
+      return `${days}天前`;
+    }
+    
+    const months = Math.floor(days / 30);
+    if (months < 12) {
+      return `${months}个月前`;
+    }
+    
+    const years = Math.floor(days / 365);
+    return `${years}年前`;
+  }
+  
+  // 更新所有相对时间显示
+  function updateRelativeTimes() {
+    document.querySelectorAll('[data-update-time]').forEach(el => {
+      const timestamp = el.getAttribute('data-update-time');
+      if (timestamp) {
+        el.textContent = getRelativeTimeString(timestamp);
+      }
+    });
+  }
+  
+  // 初始化函数
   function initPage() {
-    // 可以在这里添加任何需要的初始化逻辑
     // 图片加载完成处理
     document.querySelectorAll('.bangumi-img').forEach(img => {
       if (img.complete) {
@@ -356,6 +508,12 @@ const stats = {
         }
       });
     });
+    
+    // 初始化相对时间显示
+    updateRelativeTimes();
+    
+    // 每分钟更新一次相对时间
+    setInterval(updateRelativeTimes, 60000);
   }
 
   // 页面加载完成后初始化
