@@ -120,7 +120,9 @@ const bannerOffset =
 	  data-overlayscrollbars-initialize
 >
 	<head>
+
 		<title>{pageTitle}</title>
+
 		<meta charset="UTF-8" />
 		<meta name="description" content={description || pageTitle}>
 		<meta name="author" content={profileConfig.name}>
@@ -178,7 +180,6 @@ const bannerOffset =
 			offset = offset - offset % 4;
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
 		</script>
-
 		<style define:vars={{
 			configHue,
 			'page-width': `${PAGE_WIDTH}rem`,
@@ -199,7 +200,6 @@ const bannerOffset =
 		<!-- 页面顶部渐变高光效果 - 只在full和semifull模式下显示 -->
 		{shouldShowTopHighlight && <div class="top-gradient-highlight"></div>}
 		<ConfigCarrier></ConfigCarrier>
-		<MusicPlayer client:only="svelte" />
 		<slot />
 		
 		<!-- Music Player -->

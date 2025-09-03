@@ -19,60 +19,12 @@
 [**日本語**](./docs/README.ja.md) /
 [**中文繁体**](./docs/README.tw.md) /
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-## 🆕 What's New in v3.0
-
-![Configuration](configuration.svg)
-
-### 🔧 Component Configuration System Refactor
-- **Unified Configuration Architecture:** Brand new modular component configuration system with dynamic component management and order configuration
-- **Configuration-Driven Component Loading:** Refactored SideBar component to implement fully configuration-based component loading mechanism
-- **Unified Control Switches:** Removed independent enable switches for music player and announcement components, unified control through sidebarLayoutConfig
-- **Responsive Layout Adaptation:** Components support responsive layout, automatically adjusting display based on device type
-
-### 📐 Layout System Optimization
-- **Dynamic Sidebar Position Adjustment:** Support for left/right sidebar switching with automatic layout adaptation
-- **Smart Article Navigation Positioning:** When sidebar is on the right, article navigation automatically moves to the left for better reading experience
-- **Grid Layout Improvements:** Optimized CSS Grid layout, resolved container width anomaly issues
-
-### 🎛️ Configuration File Format Standards
-- **Standardized Configuration Format:** Created unified component configuration file format specifications
-- **Type Safety:** Comprehensive TypeScript type definitions ensuring configuration type safety
-- **Extensibility:** Support for custom component types and configuration options
-
-### 🧹 Code Optimization
-- **Test File Cleanup:** Removed unused test configurations and dependencies, reducing project size
-- **Code Structure Optimization:** Improved component architecture, enhanced code maintainability
-- **Performance Improvements:** Optimized component loading logic, improved page rendering performance
-=======
-## 🆕 v3.0 版本更新
-=======
-=======
-## 🆕 v4.0 版本更新
-- **全屏背景图片功能：** 新增非Banner模式下的全屏背景图片支持，提供沉浸式的视觉体验。支持轮播切换、透明度调节和模糊效果配置。
-- **资源路径优化：** 修复了Banner模式和全屏壁纸模式下的图片资源调用问题，确保能正确从public目录获取资源。
-- **导航栏透明效果：** 优化了全屏壁纸模式下导航栏的半透明圆角效果，提升视觉一致性。
-- **手机端Banner优化：** 支持调用外部链接
-
-![Mizuki v4.0 功能展示](./README2.webp)
-=======
-## 🆕 v4.3 版本更新
-- **番剧页面：** 重构了更可爱好看的番剧页面，包括番剧列表、番剧详情和番剧时间轴。
-- **相册页面：** 重构了相册页面,使用分页+文件夹数据索引方案
->>>>>>> upstream/master
-=======
 ## 🆕 v4.6 版本更新
 - **番剧页面：** 重构了更可爱好看的番剧页面，包括番剧列表、番剧详情和番剧时间轴。
 - **相册页面：** 重构了相册页面,使用分页+文件夹数据索引方案
 - **全新的动画：** 使用了全新的动画组件，使页面更加流畅和美观
 - **图片API的支持** 支持图片API，可以快速获取图片信息,使用(PicFlow API项目)[https://github.com/matsuzaka-yuki/PicFlow-API]
->>>>>>> upstream/master
 
->>>>>>> upstream/master
 ## 🆕 v3.4 版本更新
 - **新增页面：** 添加了项目展示、技能展示和时间线专属页面，用于展示您的工作、专业技能和成长历程。
 - **下拉菜单修复：** 解决了下拉菜单点击时出现边框轮廓的问题，提升了界面一致性。
@@ -83,7 +35,6 @@
 ## 🆕 v3.3 版本更新
 - **Mermaid 语法支持：** 添加了对 Mermaid 图表语法的支持，现在可以在 Markdown 中直接嵌入流程图、序列图、甘特图等。
 - **Umami 访问统计：** 添加了对 Umami 访问统计的支持，可以轻松集成网站访问数据分析。
->>>>>>> upstream/master
 
 ![Configuration](configuration.svg)
 
@@ -107,7 +58,6 @@
 - **测试文件清理：** 移除未使用的测试配置和依赖，减少项目体积
 - **代码结构优化：** 改进组件架构，提升代码可维护性
 - **性能提升：** 优化组件加载逻辑，提升页面渲染性能
->>>>>>> upstream/master
 
 ---
 
