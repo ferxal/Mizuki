@@ -46,10 +46,10 @@ export const siteConfig: SiteConfig = {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
 			desktop: [
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1800w.webp",
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/e0e22c3682994de6474f793bc963e42579c0fc53.jpg@1800w.webp",
 			],
 			mobile: [
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1400w.webp",
+				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/e0e22c3682994de6474f793bc963e42579c0fc53.jpg@1400w.webp",
 			],
 		},
 
