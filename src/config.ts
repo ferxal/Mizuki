@@ -194,7 +194,7 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
 	avatar:
-		"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/bb351e248043609ff987ef526cdf71f1911b2eab.png@400w_400h.webp",
+		"https://proxy.chenhen.top/https://i1.hdslb.com/bfs/face/bef090121de5e2aad3848a2db22e916a6898f7dc.jpg@400w_400h.webp",
 	name: "Ferxa1", // 修改为指定昵称
 	bio: "净整没用的", // 修改为指定简介
 	links: [
