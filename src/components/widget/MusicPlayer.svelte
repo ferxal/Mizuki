@@ -71,7 +71,7 @@ const localPlaylist = [
 		title: "心予報",
 		artist: "Eve",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/心予報.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/心予報.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/心予報.opus",
 		duration: 200,
 	},
 	{
@@ -79,7 +79,7 @@ const localPlaylist = [
 		title: "踊っチャイナ",
 		artist: "Atena/初音ミク/重音テト",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/踊っチャイナ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/踊っチャイナ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/踊っチャイナ.opus",
 		duration: 156,
 	},
 	{
@@ -87,7 +87,7 @@ const localPlaylist = [
 		title: "蝶に結いた赤い糸",
 		artist: "《哭泣少女乐队》歌曲",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/蝶に結いた赤い糸.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/蝶に結いた赤い糸.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/蝶に結いた赤い糸.opus",
 		duration: 209,
 	},
 	{
@@ -95,7 +95,7 @@ const localPlaylist = [
 		title: "美少女無罪♡パイレーツ",
 		artist: "宝鐘マリン",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/美少女無罪♡パイレーツ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/美少女無罪♡パイレーツ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/美少女無罪♡パイレーツ.opus",
 		duration: 219,
 	},
 	{
@@ -103,7 +103,7 @@ const localPlaylist = [
 		title: "置き論破",
 		artist: "ぱりぱりさらうどん/重音テト/音街ウナ",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/置き論破.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/置き論破.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/置き論破.opus",
 		duration: 182,
 	},
 	{
@@ -111,7 +111,7 @@ const localPlaylist = [
 		title: "爆ぜて咲く",
 		artist: "《哭泣少女乐队》歌曲",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/爆ぜて咲く.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/爆ぜて咲く.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/爆ぜて咲く.opus",
 		duration: 221,
 	},
 	{
@@ -119,7 +119,7 @@ const localPlaylist = [
 		title: "温柔的回忆",
 		artist: "《蔚蓝档案》最终章ED",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/温柔的回忆.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/温柔的回忆.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/温柔的回忆.opus",
 		duration: 220,
 	},
 	{
@@ -127,7 +127,7 @@ const localPlaylist = [
 		title: "武装乙女",
 		artist: "星尘infinity cover",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/武装乙女.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/武装乙女.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/武装乙女.opus",
 		duration: 182,
 	},
 	{
@@ -135,7 +135,7 @@ const localPlaylist = [
 		title: "星球卑",
 		artist: "闹闹丶/洛天依",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/星球卑.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/星球卑.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/星球卑.opus",
 		duration: 197,
 	},
 	{
@@ -143,7 +143,7 @@ const localPlaylist = [
 		title: "愛♡スクリ～ム！",
 		artist: "AiScReam",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/愛♡スクリ～ム！.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/愛♡スクリ～ム！.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/愛♡スクリ～ム！.opus",
 		duration: 262,
 	},
 	{
@@ -151,7 +151,7 @@ const localPlaylist = [
 		title: "恋のうた",
 		artist: "《总之就是非常可爱》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/恋のうた.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/恋のうた.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/恋のうた.opus",
 		duration: 91,
 	},
 	{
@@ -159,7 +159,7 @@ const localPlaylist = [
 		title: "怪獣",
 		artist: "《怪兽8号》歌曲",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/怪獣.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/怪獣.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/怪獣.opus",
 		duration: 182,
 	},
 	{
@@ -167,7 +167,7 @@ const localPlaylist = [
 		title: "難聴系男子が倒せない",
 		artist: "ラマーズP/鏡音リン",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/難聴系男子が倒せない.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/難聴系男子が倒せない.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/難聴系男子が倒せない.opus",
 		duration: 264,
 	},
 	{
@@ -175,7 +175,7 @@ const localPlaylist = [
 		title: "彼女は旅に出る",
 		artist: "鎖那",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/彼女は旅に出る.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/彼女は旅に出る.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/彼女は旅に出る.opus",
 		duration: 220,
 	},
 	{
@@ -183,7 +183,7 @@ const localPlaylist = [
 		title: "影色舞",
 		artist: "《MyGO》歌曲",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/影色舞.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/影色舞.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/影色舞.opus",
 		duration: 209,
 	},
 	{
@@ -191,7 +191,7 @@ const localPlaylist = [
 		title: "形",
 		artist: "ずっと真夜中でいいのに。",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/形.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/形.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/形.opus",
 		duration: 200,
 	},
 	{
@@ -199,7 +199,7 @@ const localPlaylist = [
 		title: "女の子になりたい",
 		artist: "まふまふ",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/女の子になりたい.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/女の子になりたい.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/女の子になりたい.opus",
 		duration: 238,
 	},
 	{
@@ -207,7 +207,7 @@ const localPlaylist = [
 		title: "味噌汁とバター",
 		artist: "《时光流逝 饭菜已经美味》ED",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/味噌汁とバター.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/味噌汁とバター.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/味噌汁とバター.opus",
 		duration: 232,
 	},
 	{
@@ -215,7 +215,7 @@ const localPlaylist = [
 		title: "勘冴えて悔しいわ",
 		artist: "ずっと真夜中でいいのに。",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/勘冴えて悔しいわ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/勘冴えて悔しいわ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/勘冴えて悔しいわ.opus",
 		duration: 238,
 	},
 	{
@@ -223,7 +223,7 @@ const localPlaylist = [
 		title: "勘ぐれい",
 		artist: "ずっと真夜中でいいのに。",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/勘ぐれい.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/勘ぐれい.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/勘ぐれい.opus",
 		duration: 249,
 	},
 	{
@@ -231,7 +231,7 @@ const localPlaylist = [
 		title: "刹那の誓い",
 		artist: "《总之就是非常可爱 第二季》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/刹那の誓い.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/刹那の誓い.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/刹那の誓い.opus",
 		duration: 220,
 	},
 	{
@@ -239,7 +239,7 @@ const localPlaylist = [
 		title: "全部壊しちゃえ！",
 		artist: "柏木カレキ",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/全部壊しちゃえ！.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/全部壊しちゃえ！.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/全部壊しちゃえ！.opus",
 		duration: 162,
 	},
 	{
@@ -247,7 +247,7 @@ const localPlaylist = [
 		title: "克隆克隆",
 		artist: "Atena/GUMI/鏡音リン",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/克隆克隆.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/克隆克隆.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/克隆克隆.opus",
 		duration: 145,
 	},
 	{
@@ -255,7 +255,7 @@ const localPlaylist = [
 		title: "乙女はサイコパス",
 		artist: "P丸様。/コレサワ",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/乙女はサイコパス.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/乙女はサイコパス.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/乙女はサイコパス.opus",
 		duration: 246,
 	},
 	{
@@ -263,7 +263,7 @@ const localPlaylist = [
 		title: "ワンルームシュガーライフ",
 		artist: "《砂糖的幸福生活》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ワンルームシュガーライフ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ワンルームシュガーライフ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ワンルームシュガーライフ.opus",
 		duration: 166,
 	},
 	{
@@ -271,7 +271,7 @@ const localPlaylist = [
 		title: "レインコート",
 		artist: "柏木カレキ/雨衣",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/レインコート.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/レインコート.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/レインコート.opus",
 		duration: 239,
 	},
 	{
@@ -279,7 +279,7 @@ const localPlaylist = [
 		title: "「リテラチュア」魔女之旅op",
 		artist: "《魔女之旅》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/「リテラチュア」魔女之旅op.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/「リテラチュア」魔女之旅op.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/「リテラチュア」魔女之旅op.opus",
 		duration: 90,
 	},
 	{
@@ -287,7 +287,7 @@ const localPlaylist = [
 		title: "ライアーメイデン",
 		artist: "ヤバス/りぃふ",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ライアーメイデン.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ライアーメイデン.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ライアーメイデン.opus",
 		duration: 150,
 	},
 	{
@@ -295,7 +295,7 @@ const localPlaylist = [
 		title: "モニタリング",
 		artist: "DECO*27/初音ミク",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/モニタリング.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/モニタリング.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/モニタリング.opus",
 		duration: 176,
 	},
 	{
@@ -303,7 +303,7 @@ const localPlaylist = [
 		title: "ムリムリ進化論",
 		artist: "《我怎么可能成为你的恋人，不行不行！》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ムリムリ進化論.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ムリムリ進化論.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ムリムリ進化論.opus",
 		duration: 195,
 	},
 	{
@@ -311,7 +311,7 @@ const localPlaylist = [
 		title: "ミィハー",
 		artist: "Chinozo/重音テト",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ミィハー.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ミィハー.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ミィハー.opus",
 		duration: 179,
 	},
 	{
@@ -319,7 +319,7 @@ const localPlaylist = [
 		title: "ミィハー (self cover)",
 		artist: "Chinozo",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ミィハー (self cover).webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ミィハー (self cover).opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ミィハー (self cover).opus",
 		duration: 179,
 	},
 	{
@@ -327,7 +327,7 @@ const localPlaylist = [
 		title: "ブランディングができない",
 		artist: "Chinozo",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ブランディングができない.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ブランディングができない.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ブランディングができない.opus",
 		duration: 151,
 	},
 	{
@@ -335,7 +335,7 @@ const localPlaylist = [
 		title: "ビビデバ",
 		artist: "星街すいせい",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ビビデバ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ビビデバ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ビビデバ.opus",
 		duration: 165,
 	},
 	{
@@ -343,7 +343,7 @@ const localPlaylist = [
 		title: "ハローセカイ",
 		artist: "初音ミク/DECO*27",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ハローセカイ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ハローセカイ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ハローセカイ.opus",
 		duration: 162,
 	},
 	{
@@ -351,7 +351,7 @@ const localPlaylist = [
 		title: "デビルじゃないもん",
 		artist: "DECO*27/ピノキオピー/初音ミク",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/デビルじゃないもん.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/デビルじゃないもん.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/デビルじゃないもん.opus",
 		duration: 163,
 	},
 	{
@@ -359,7 +359,7 @@ const localPlaylist = [
 		title: "テレパシ",
 		artist: "DECO*27/初音ミク",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/テレパシ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/テレパシ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/テレパシ.opus",
 		duration: 137,
 	},
 	{
@@ -367,7 +367,7 @@ const localPlaylist = [
 		title: "テトリス",
 		artist: "柊マグネタイト/重音テト",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/テトリス.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/テトリス.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/テトリス.opus",
 		duration: 142,
 	},
 	{
@@ -375,7 +375,7 @@ const localPlaylist = [
 		title: "チェリーポップ",
 		artist: "DECO*27",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/チェリーポップ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/チェリーポップ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/チェリーポップ.opus",
 		duration: 138,
 	},
 	{
@@ -383,7 +383,7 @@ const localPlaylist = [
 		title: "ステレオフォニック",
 		artist: "鹿乃",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ステレオフォニック.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ステレオフォニック.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ステレオフォニック.opus",
 		duration: 237,
 	},
 	{
@@ -391,7 +391,7 @@ const localPlaylist = [
 		title: "シル・ヴ・プレジデント",
 		artist: "P丸様。/ナナホシ管弦楽団",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/シル・ヴ・プレジデント.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/シル・ヴ・プレジデント.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/シル・ヴ・プレジデント.opus",
 		duration: 190,
 	},
 	{
@@ -399,7 +399,7 @@ const localPlaylist = [
 		title: "エリート (self cover)",
 		artist: "Chinozo",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/エリート (self cover).webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/エリート (self cover).opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/エリート (self cover).opus",
 		duration: 168,
 	},
 	{
@@ -407,7 +407,7 @@ const localPlaylist = [
 		title: "インドア系ならトラックメイカー",
 		artist: "Yunomi/nicamoq",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/インドア系ならトラックメイカー.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/インドア系ならトラックメイカー.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/インドア系ならトラックメイカー.opus",
 		duration: 197,
 	},
 	{
@@ -415,7 +415,7 @@ const localPlaylist = [
 		title: "アンチユー",
 		artist: "Chinozo",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アンチユー.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アンチユー.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アンチユー.opus",
 		duration: 206,
 	},
 	{
@@ -423,7 +423,7 @@ const localPlaylist = [
 		title: "アリア",
 		artist: "ナナツカゼ",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アリア.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アリア.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アリア.opus",
 		duration: 226,
 	},
 	{
@@ -431,7 +431,7 @@ const localPlaylist = [
 		title: "アイドル",
 		artist: "《我推的孩子》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アイドル.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アイドル.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アイドル.opus",
 		duration: 213,
 	},
 	{
@@ -439,7 +439,7 @@ const localPlaylist = [
 		title: "アイデン貞貞メルトダウン",
 		artist: "《别当欧尼酱了》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アイデン貞貞メルトダウン.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アイデン貞貞メルトダウン.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/アイデン貞貞メルトダウン.opus",
 		duration: 243,
 	},
 	{
@@ -447,7 +447,7 @@ const localPlaylist = [
 		title: "ふわふわ♪",
 		artist: "牧野由依",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふわふわ♪.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふわふわ♪.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふわふわ♪.opus",
 		duration: 286,
 	},
 	{
@@ -455,7 +455,7 @@ const localPlaylist = [
 		title: "ふわふわ",
 		artist: "HELLO OSAKA/ウメ CV 羊宮 妃那/羊宮妃那",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふわふわ.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふわふわ.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふわふわ.opus",
 		duration: 203,
 	},
 	{
@@ -463,7 +463,7 @@ const localPlaylist = [
 		title: "ふたりのスタートボタン",
 		artist: "《与游戏中心的少女异文化交流的故事》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふたりのスタートボタン.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふたりのスタートボタン.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ふたりのスタートボタン.opus",
 		duration: 225,
 	},
 	{
@@ -471,7 +471,7 @@ const localPlaylist = [
 		title: "ひっひっふー",
 		artist: "时雨羽衣",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ひっひっふー.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ひっひっふー.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ひっひっふー.opus",
 		duration: 164,
 	},
 	{
@@ -479,7 +479,7 @@ const localPlaylist = [
 		title: "ときめきブローカー",
 		artist: "P丸様。",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ときめきブローカー.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ときめきブローカー.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ときめきブローカー.opus",
 		duration: 204,
 	},
 	{
@@ -487,7 +487,7 @@ const localPlaylist = [
 		title: "ちっちゃな私",
 		artist: "重音テト/マサラダ",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ちっちゃな私.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ちっちゃな私.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ちっちゃな私.opus",
 		duration: 231,
 	},
 	{
@@ -495,7 +495,7 @@ const localPlaylist = [
 		title: "ちきゅう大爆発",
 		artist: "P丸様。",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ちきゅう大爆発.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ちきゅう大爆発.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/ちきゅう大爆発.opus",
 		duration: 193,
 	},
 	{
@@ -503,7 +503,7 @@ const localPlaylist = [
 		title: "だまってちゃん",
 		artist: "Chinozo",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/だまってちゃん.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/だまってちゃん.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/だまってちゃん.opus",
 		duration: 141,
 	},
 	{
@@ -511,7 +511,7 @@ const localPlaylist = [
 		title: "所以我放弃了音乐",
 		artist: "ヨルシカ",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/だから僕は音楽を辞めた.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/だから僕は音楽を辞めた.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/だから僕は音楽を辞めた.opus",
 		duration: 242,
 	},
 	{
@@ -520,7 +520,7 @@ const localPlaylist = [
 		artist: "《时光流逝 饭菜已经美味》OP",
 
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/そんなもんね.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/そんなもんね.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/そんなもんね.opus",
 		duration: 180,
 	},
 	{
@@ -528,7 +528,7 @@ const localPlaylist = [
 		title: "お返事まだカナ？おじさん構文！",
 		artist: "吉本おじさん/时雨羽衣",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/お返事まだカナ？おじさん構文！.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/お返事まだカナ？おじさん構文！.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/お返事まだカナ？おじさん構文！.opus",
 		duration: 184,
 	},
 	{
@@ -536,7 +536,7 @@ const localPlaylist = [
 		title: "あいつら全員同窓会",
 		artist: "ずっと真夜中でいいのに。",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/あいつら全員同窓会.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/あいつら全員同窓会.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/あいつら全員同窓会.opus",
 		duration: 254,
 	},
 	{
@@ -544,7 +544,7 @@ const localPlaylist = [
 		title: "Utopia or Dystopia",
 		artist: "《拔作岛》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Utopia or Dystopia.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Utopia or Dystopia.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Utopia or Dystopia.opus",
 		duration: 191,
 	},
 	{
@@ -552,7 +552,7 @@ const localPlaylist = [
 		title: "万众瞩目",
 		artist: "CS2 音乐盒",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Under Bright Lights.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Under Bright Lights.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Under Bright Lights.opus",
 		duration: 228,
 	},
 	{
@@ -560,7 +560,7 @@ const localPlaylist = [
 		title: "T氏の話を信じるな",
 		artist: "ピノキオピー/初音ミク/重音テト",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/T氏の話を信じるな.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/T氏の話を信じるな.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/T氏の話を信じるな.opus",
 		duration: 163,
 	},
 	{
@@ -568,7 +568,7 @@ const localPlaylist = [
 		title: "SWEET HURT",
 		artist: "《砂糖的幸福生活》ED",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/SWEET HURT.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/SWEET HURT.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/SWEET HURT.opus",
 		duration: 277,
 	},
 	{
@@ -576,7 +576,7 @@ const localPlaylist = [
 		title: "Please,Take On Me",
 		artist: "《中二病也要谈恋爱 剧场版》插曲",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Please Take On Me.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Please Take On Me.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Please Take On Me.opus",
 		duration: 270,
 	},
 	{
@@ -584,7 +584,7 @@ const localPlaylist = [
 		title: "Nobody",
 		artist: "《怪兽8号》ED",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Nobody.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Nobody.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Nobody.opus",
 		duration: 153,
 	},
 	{
@@ -592,7 +592,7 @@ const localPlaylist = [
 		title: "MOTTAI",
 		artist: "P丸様。",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/MOTTAI.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/MOTTAI.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/MOTTAI.opus",
 		duration: 160,
 	},
 	{
@@ -600,7 +600,7 @@ const localPlaylist = [
 		title: "Misty Memory (Night Version)",
 		artist: "《明日方舟》歌曲",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Misty Memory (Night Version).webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Misty Memory (Night Version).opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Misty Memory (Night Version).opus",
 		duration: 242,
 	},
 	{
@@ -608,7 +608,7 @@ const localPlaylist = [
 		title: "Misty Memory (Day Version)",
 		artist: "《明日方舟》歌曲",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Misty Memory (Day Version).webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Misty Memory (Day Version).opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Misty Memory (Day Version).opus",
 		duration: 283,
 	},
 	{
@@ -616,7 +616,7 @@ const localPlaylist = [
 		title: "MAO",
 		artist: "洛天依/神山羊",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/MAO.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/MAO.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/MAO.opus",
 		duration: 195,
 	},
 	{
@@ -624,7 +624,7 @@ const localPlaylist = [
 		title: "Lockdown",
 		artist: "PIKASONIC/Tatsunoshin/Neona",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Lockdown.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Lockdown.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Lockdown.opus",
 		duration: 209,
 	},
 	{
@@ -632,7 +632,7 @@ const localPlaylist = [
 		title: "LEveL",
 		artist: "《我独自升级》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/LEveL.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/LEveL.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/LEveL.opus",
 		duration: 180,
 	},
 	{
@@ -640,7 +640,7 @@ const localPlaylist = [
 		title: "INTERNET OVERDOSE",
 		artist: "NEEDY GIRL OVERDOSE/KOTOKO/Aiobahn",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/INTERNET OVERDOSE.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/INTERNET OVERDOSE.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/INTERNET OVERDOSE.opus",
 		duration: 220,
 	},
 	{
@@ -648,7 +648,7 @@ const localPlaylist = [
 		title: "BOW AND ARROW",
 		artist: "《金牌得主》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/BOW AND ARROW.webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/BOW AND ARROW.opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/BOW AND ARROW.opus",
 		duration: 175,
 	},
 	{
@@ -656,7 +656,7 @@ const localPlaylist = [
 		title: "Abyss",
 		artist: "《怪兽8号》OP",
 		cover: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Abyss (from Kaiju No. 8).webp&w=64&h=64",
-		url: "https://wsrv.nl/?url=https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Abyss (from Kaiju No. 8).opus",
+		url: "https://proxy.chenhen.top/https://raw.githubusercontent.com/ferxal/cdn/refs/heads/main/音乐/Abyss (from Kaiju No. 8).opus",
 		duration: 123,
 	},
 ];
