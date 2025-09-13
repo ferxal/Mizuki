@@ -212,7 +212,7 @@ function processImageUrl(url: string): string {
   const modifiedUrl = url.replace('https://lain.bgm.tv/', 'https://lain.bgm.tv/r/400/');
   
   // 使用图片CDN服务转换为WebP格式并调整尺寸
-  return `https://images.weserv.nl/?url=${encodeURIComponent(modifiedUrl)}&w=300&h=400&output=webp`;
+  return `https://proxy.chenhen.top/https://images.weserv.nl/?url=${encodeURIComponent(modifiedUrl)}&w=300&h=400&output=webp`;
 }
 
 // 获取状态的翻译文本和样式
