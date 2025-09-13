@@ -102,6 +102,7 @@ export const siteConfig: SiteConfig = {
 		enable: true, // 启用目录功能
 		depth: 3, // 目录深度，1-6，1 表示只显示 h1 标题，2 表示显示 h1 和 h2 标题，依此类推
 	},
+	generateOgImages: true, // 启用生成OpenGraph图片功能
 	favicon: [
 		// 留空则使用默认favicon
 		{

@@ -922,7 +922,6 @@ onMount(() => {
 	}
 });
 
-
 onDestroy(() => {
 	if (audio) {
 		audio.pause();

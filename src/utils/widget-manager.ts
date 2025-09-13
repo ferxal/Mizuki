@@ -1,4 +1,8 @@
-import type { WidgetComponentConfig, WidgetComponentType, SidebarLayoutConfig } from "../types/config";
+import type {
+	WidgetComponentConfig,
+	WidgetComponentType,
+	SidebarLayoutConfig,
+} from "../types/config";
 import { sidebarLayoutConfig } from "../config";
 
 /**
@@ -240,8 +244,10 @@ export const widgetManager = new WidgetManager();
  * 工具函数：根据组件类型获取组件配置
  * @param componentType 组件类型
  */
-export function getComponentConfig(componentType: WidgetComponentType): WidgetComponentConfig | undefined {
-	return widgetManager.config.components.find(c => c.type === componentType);
+export function getComponentConfig(
+	componentType: WidgetComponentType,
+): WidgetComponentConfig | undefined {
+	return widgetManager.config.components.find((c) => c.type === componentType);
 }
 
 /**
@@ -259,5 +265,5 @@ export function isComponentEnabled(
  * 工具函数：获取所有启用的组件类型
  */
 export function getEnabledComponentTypes(): WidgetComponentType[] {
-	return widgetManager.enabledComponents.map(c => c.type);
+	return widgetManager.enabledComponents.map((c) => c.type);
 }
