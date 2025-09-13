@@ -260,7 +260,8 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 export const commentConfig: CommentConfig = {
 	enable: true, // 启用评论功能
 	twikoo: {
-		envId: "https://twikoo.api.chenhen.top", // 指定Twikoo环境ID
+		envId: "https://twikoo.api.chenhen.top",
+		lang: "zh", // 设置 Twikoo 评论系统语言为英文
 	},
 };
 
