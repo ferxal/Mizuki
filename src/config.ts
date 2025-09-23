@@ -1,4 +1,3 @@
-import { factory } from "typescript";
 import type {
 	AnnouncementConfig,
 	CommentConfig,
@@ -31,6 +30,7 @@ export const siteConfig: SiteConfig = {
 		hue: 240, // 修改为指定色调值
 		fixed: true, // 对访客隐藏主题颜色选择器
 	},
+
 	translate: {
 		enable: false, // 启用翻译功能
 		service: "client.edge", // 使用 Edge 浏览器翻译服务
@@ -102,7 +102,7 @@ export const siteConfig: SiteConfig = {
 		enable: true, // 启用目录功能
 		depth: 3, // 目录深度，1-6，1 表示只显示 h1 标题，2 表示显示 h1 和 h2 标题，依此类推
 	},
-	generateOgImages: true, // 启用生成OpenGraph图片功能
+	generateOgImages: false, // 启用生成OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	favicon: [
 		// 留空则使用默认favicon
 		{
@@ -116,6 +116,16 @@ export const siteConfig: SiteConfig = {
 			sizes: "32x32", // 可选，图标尺寸
 		},
 	],
+
+	// 字体配置
+	font: {
+		zenMaruGothic: {
+			enable: true, // 启用全局圆体适合日语和英语，对中文适配一般
+		},
+		hanalei: {
+			enable: false, // 启用 Hanalei 字体作为全局字体，适合中文去使用
+		},
+	},
 };
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	enable: true, // 启用全屏壁纸功能,非Banner模式下生效
@@ -238,12 +248,6 @@ export const profileConfig: ProfileConfig = {
 			url: "https://github.com/ferxal", // 修改为指定链接
 		},
 	],
-	// Umami统计部份，记得在layout插入Umami的head标签
-	umami: {
-		enable: false, // 是否显示umami统计
-		shareId: "yk2SS7hzu2isHg8F", //填入共享URL最后面那一串  比如：https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr 你就填入2dKQ5T0WrUn6AYtr
-		region: "eu", //Umami有两个区域，按需选择即可  比如：https://eu.umami.is 你就填入eu
-	},
 };
 
 export const licenseConfig: LicenseConfig = {
@@ -458,4 +462,12 @@ export const widgetConfigs = {
 	sakura: sakuraConfig,
 	fullscreenWallpaper: fullscreenWallpaperConfig,
 	pio: pioConfig, // 添加 pio 配置
+} as const;
+
+export const umamiConfig = {
+  enabled: false, // 是否显示Umami统计
+  shareURL: "https://us.umami.is/api/share/ABCD1234", //你的分享API,支持自建服务
+  scripts: `
+<script defer src="XXXX.XXX" data-website-id="ABCD1234"></script>
+  `.trim() //上面填你要插入的Script,不用再去Layout中插入
 } as const;
