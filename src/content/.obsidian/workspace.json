@@ -163,7 +163,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 281.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -177,7 +177,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0e3fed41d70a020c",
+  "active": "27d00e3198a9f42b",
   "lastOpenFiles": [
     "未命名.canvas"
   ]
