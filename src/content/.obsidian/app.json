@@ -3,5 +3,6 @@
   "newFileLocation": "current",
   "newLinkFormat": "relative",
   "useMarkdownLinks": true,
-  "attachmentFolderPath": "assets/images"
+  "attachmentFolderPath": "assets/images",
+  "promptDelete": false
 }

@@ -1,3 +1,4 @@
 {
-  "interfaceFontFamily": "HarmonyOS Sans SC"
+  "interfaceFontFamily": "HarmonyOS Sans SC",
+  "cssTheme": "Things"
 }

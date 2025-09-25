@@ -50,5 +50,3 @@ This website is built with the **Astro** framework using the [Mizuki](https://gi
 - **Copy Code Buttons** - Easy code copying functionality
 
 ---
-
-*Built with ❤️ using Astro and inspired by modern web design principles.*
