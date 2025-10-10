@@ -13,7 +13,7 @@ import type {
 	SiteConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
-import { getTranslateLanguageFromConfig } from "./utils/language-utils";
+
 
 // 移除i18n导入以避免循环依赖
 
@@ -23,10 +23,6 @@ const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 export const siteConfig: SiteConfig = {
 	title: "风萧のBlog",
 	subtitle: "净整没用的",
-	keywords: [
-		"技术博客",
-		"二次元",
-	],
 
 	lang: SITE_LANG,
 
@@ -35,19 +31,11 @@ export const siteConfig: SiteConfig = {
 		fixed: true, // 对访客隐藏主题颜色选择器
 	},
 
-	translate: {
-		enable: false, // 启用翻译功能
-		service: "client.edge", // 使用 Edge 浏览器翻译服务
-		defaultLanguage: getTranslateLanguageFromConfig(SITE_LANG), // 根据站点语言自动设置默认翻译语言
-		showSelectTag: false, // 不显示默认语言选择下拉菜单，使用自定义按钮
-		autoDiscriminate: true, // 自动检测用户语言
-		ignoreClasses: ["ignore", "banner-title", "banner-subtitle"], // 翻译时忽略的 CSS 类名
-		ignoreTags: ["script", "style", "code", "pre"], // 翻译时忽略的 HTML 标签
-	},
+	
 	bangumi: {
 		userId: "???", // 在此处设置你的Bangumi用户ID，可以设置为 "sai" 测试
 	},
-  
+
 	anime: {
 		mode: "local", // 番剧页面模式："bangumi" 使用Bangumi API，"local" 使用本地配置
 	},
@@ -371,13 +359,13 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否启用该组件
 			enable: true,
 			// 组件显示顺序
-			order: 4,
+			order: 5,
 			// 组件位置："sticky" 表示粘性定位
 			position: "sticky",
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 200,
+			animationDelay: 250,
 			// 响应式配置
 			responsive: {
 				// 折叠阈值：当标签数量超过20个时自动折叠
@@ -444,7 +432,7 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: false, // 启用看板娘
+	enable: true, // 启用看板娘
 	models: ["/pio/models/pio/model.json"], // 默认模型路径
 	position: "left", // 默认位置在右侧
 	width: 280, // 默认宽度
@@ -479,8 +467,9 @@ export const widgetConfigs = {
 
 export const umamiConfig = {
 	enabled: false, // 是否显示Umami统计
-	shareURL: "https://us.umami.is/api/share/ABCD1234", //你的分享API,支持自建服务
+	apiKey: "api_XXXXXXXXXX", // 你的API密钥
+	baseUrl: "https://api.umami.is", // Umami Cloud API地址
 	scripts: `
 <script defer src="XXXX.XXX" data-website-id="ABCD1234"></script>
-  `.trim(), //上面填你要插入的Script,不用再去Layout中插入
+  `.trim(), // 上面填你要插入的Script,不用再去Layout中插入
 } as const;

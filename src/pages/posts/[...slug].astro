@@ -10,16 +10,15 @@ import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
+import bcryptjs from "bcryptjs";
+import CryptoJS from "crypto-js";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { licenseConfig } from "src/config";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
-import CryptoJS from "crypto-js";
-import bcryptjs from "bcryptjs";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import Series from "../../components/widget/Series.astro";
 export async function getStaticPaths() {
 	const blogEntries = await getSortedPosts();
 	return blogEntries.map((entry) => ({
@@ -54,7 +53,6 @@ if (isEncrypted) {
 	passwordHash = bcryptjs.hashSync(entry.data.password, saltRounds);
 }
 
-
 dayjs.extend(utc);
 const lastModified = dayjs(entry.data.updated || entry.data.published)
 	.utc()
@@ -87,7 +85,6 @@ const jsonLd = {
     setOGTypeArticle={true}
     postSlug={entry.slug}
     headings={headings}
-    series={entry.data.series}
 >
     <script
         is:inline
@@ -264,24 +261,24 @@ const jsonLd = {
                         let runtimeString = prefix + ' ';
                         
                         if (years > 0) {
-                            runtimeString += `${years}${yearKey}`;
+                            runtimeString += `${years} ${yearKey} `;
                         }
                         if (months > 0) {
-                            runtimeString += `${months}${monthKey}`;
+                            runtimeString += `${months} ${monthKey} `;
                         }
                         if (remainingDays > 0) {
-                            runtimeString += `${remainingDays}${dayKey}`;
+                            runtimeString += `${remainingDays} ${dayKey} `;
                         }
-                        runtimeString += `${hours}${hourKey}`;
+                        runtimeString += `${hours} ${hourKey} `;
                         if (minutes < 10) {
-                            runtimeString += `0${minutes}${minuteKey}`;
+                            runtimeString += `0${minutes} ${minuteKey} `;
                         } else {
-                            runtimeString += `${minutes}${minuteKey}`;
+                            runtimeString += `${minutes} ${minuteKey} `;
                         }
                         if (secs < 10) {
-                            runtimeString += `0${secs}${secondKey}`;
+                            runtimeString += `0${secs} ${secondKey}`;
                         } else {
-                            runtimeString += `${secs}${secondKey}`;
+                            runtimeString += `${secs} ${secondKey}`;
                         }
 
                         document.getElementById("modifiedtime").innerHTML = runtimeString;
@@ -307,12 +304,6 @@ const jsonLd = {
                 </div>
             </div>
         </>
-    )}
-    
-    {entry.data.series && (
-        <div class="card-base p-6 mb-4 flex flex-col w-full gap-4">
-            <Series series={entry.data.series} />
-        </div>
     )}
 
     <div
