@@ -48,14 +48,12 @@ export const ja: Translation = {
 	// アニメページ
 	[Key.animeTitle]: "私のアニメリスト",
 	[Key.animeSubtitle]: "私の二次元の旅を記録する",
-	[Key.animeList]: "アニメリスト",
-	[Key.animeTotal]: "合計",
-	[Key.animeWatching]: "視聴中",
-	[Key.animeCompleted]: "完了",
-	[Key.animeAvgRating]: "平均評価",
 	[Key.animeStatusWatching]: "視聴中",
 	[Key.animeStatusCompleted]: "完了",
 	[Key.animeStatusPlanned]: "予定",
+	[Key.animeStatusOnHold]: "一時停止",
+	[Key.animeStatusDropped]: "中断",
+	[Key.animeFilterAll]: "すべて",
 	[Key.animeYear]: "年",
 	[Key.animeStudio]: "スタジオ",
 	[Key.animeEmpty]: "アニメデータなし",
@@ -118,6 +116,9 @@ export const ja: Translation = {
 	[Key.projectsPlanned]: "予定",
 	[Key.projectsDemo]: "ライブデモ",
 	[Key.projectsSource]: "ソースコード",
+	[Key.projectsVisit]: "プロジェクトへ",
+	[Key.projectsGitHub]: "GitHub",
+	// [Key.projectsGitee]: "Gitee",  // Giteeサポートを削除
 
 	// RSSページ
 	[Key.rss]: "RSSフィード",
@@ -139,6 +140,27 @@ export const ja: Translation = {
 		"Feedly、Inoreaderまたは他のRSSリーダーを使用してこのサイトを購読することを推奨します。",
 	[Key.rssCopied]: "RSSリンクがクリップボードにコピーされました！",
 	[Key.rssCopyFailed]: "コピーに失敗しました。手動でリンクをコピーしてください",
+
+	// Atomページ
+	[Key.atom]: "Atomフィード",
+	[Key.atomDescription]: "最新の更新を購読する",
+	[Key.atomSubtitle]: "Atomで購読して、最新の記事と更新を第一时间で取得する",
+	[Key.atomLink]: "Atomリンク",
+	[Key.atomCopyToReader]: "Atomリンクをリーダーにコピー",
+	[Key.atomCopyLink]: "リンクをコピー",
+	[Key.atomLatestPosts]: "最新の投稿",
+	[Key.atomWhatIsAtom]: "Atomとは？",
+	[Key.atomWhatIsAtomDescription]:
+		"Atom連合フォーマット（Atom Syndication Format）は、フィードとそのアイテムを記述するためのXMLベースの標準です。Atomを使用すると：",
+	[Key.atomBenefit1]:
+		"手動で訪問することなく、最新のウェブサイトコンテンツを及时に取得",
+	[Key.atomBenefit2]: "1か所で複数のウェブサイトの購読を管理",
+	[Key.atomBenefit3]: "重要な更新や記事を見逃すことを回避",
+	[Key.atomBenefit4]: "広告なしのクリーンな読書体験を楽しむ",
+	[Key.atomHowToUse]:
+		"Feedly、Inoreaderまたは他のAtomリーダーを使用してこのサイトを購読することを推奨します。",
+	[Key.atomCopied]: "Atomリンクがクリップボードにコピーされました！",
+	[Key.atomCopyFailed]: "コピーに失敗しました。手動でリンクをコピーしてください",
 
 	// スキルページ
 	[Key.skills]: "スキル",
@@ -185,14 +207,16 @@ export const ja: Translation = {
 	[Key.timelineCurrent]: "現在の状態",
 	[Key.timelineHistory]: "履歴",
 	[Key.timelineAchievements]: "実績",
-	[Key.timelineStatistics]: "統計",
-	[Key.timelineByType]: "タイプ別グループ化",
-	[Key.timelineWorkExperience]: "職歴",
-	[Key.timelineTotalExperience]: "総職歴",
-	[Key.timelineWorkPositions]: "職位数",
-	[Key.timelineCurrentRole]: "現在の状態",
-	[Key.timelineEmployed]: "在職中",
-	[Key.timelineAvailable]: "入社可能",
+	[Key.timelineStartDate]: "開始日",
+	[Key.timelineDuration]: "期間",
+
+	// プロジェクト展示ページ
+	[Key.projectsVisit]: "プロジェクトへ",
+	[Key.projectsGitHub]: "GitHub",
+	[Key.projectsGitee]: "Gitee",
+	
+	// その他
+	[Key.noData]: "データなし",
 
 	// パスワード保護
 	[Key.passwordProtected]: "パスワード保護",
