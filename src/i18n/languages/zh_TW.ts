@@ -72,6 +72,7 @@ export const zh_TW: Translation = {
 	[Key.animeWatching]: "追番中",
 	[Key.animeCompleted]: "已追完",
 	[Key.animeAvgRating]: "平均評分",
+	[Key.animeFilterAll]: "全部",
 	[Key.animeStatusWatching]: "追番中",
 	[Key.animeStatusCompleted]: "已追完",
 	[Key.animeStatusPlanned]: "計劃中",
