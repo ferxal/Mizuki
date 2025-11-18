@@ -144,7 +144,7 @@ async function processBangumiData(data: any, status: string) {
 
 // 根据模式获取番剧列表
 let animeList: typeof localAnimeList = [];
-if (ANIME_MODE === "bangumi") {
+if (ANIME_MODE === "local") {
 	// 使用本地配置
 	animeList = localAnimeList;
 } else {
