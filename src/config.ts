@@ -49,13 +49,13 @@ export const siteConfig: SiteConfig = {
 	// 顶栏标题配置
 	navbarTitle: {
 		// 顶栏标题文本
-		text: "MizukiUI",
+		text: "Ferxa1",
 		// 顶栏标题图标路径，默认使用 public/assets/home/home.png
 		icon: "assets/home/home.png",
 	},
 
 	bangumi: {
-		userId: "???", // 在此处设置你的Bangumi用户ID，可以设置为 "sai" 测试
+		userId: "ferxal987", // 在此处设置你的Bangumi用户ID，可以设置为 "sai" 测试
 	},
 
 	anime: {
@@ -74,7 +74,7 @@ export const siteConfig: SiteConfig = {
 	// 标签样式配置
 	tagStyle: {
 		// 是否使用新样式（悬停高亮样式）还是旧样式（外框常亮样式）
-		useNewStyle: false,
+		useNewStyle: true,
 	},
 
 	// 壁纸模式配置
@@ -232,16 +232,16 @@ export const navBarConfig: NavBarConfig = {
 					url: "/anime/",
 					icon: "material-symbols:movie",
 				},
-				{
-					name: "Diary",
-					url: "/diary/",
-					icon: "material-symbols:book",
-				},
-				{
-					name: "Gallery",
-					url: "/albums/",
-					icon: "material-symbols:photo-library",
-				},
+				// {
+				// 	name: "Diary",
+				// 	url: "/diary/",
+				// 	icon: "material-symbols:book",
+				// },
+				// {
+				// 	name: "Gallery",
+				// 	url: "/albums/",
+				// 	icon: "material-symbols:photo-library",
+				// },
 				{
 					name: "Devices",
 					url: "devices/",
@@ -272,11 +272,11 @@ export const navBarConfig: NavBarConfig = {
 			url: "#",
 			icon: "material-symbols:more-horiz",
 			children: [
-				{
-					name: "Projects",
-					url: "/projects/",
-					icon: "material-symbols:work",
-				},
+				// {
+				// 	name: "Projects",
+				// 	url: "/projects/",
+				// 	icon: "material-symbols:work",
+				// },
 				{
 					name: "Skills",
 					url: "/skills/",
@@ -289,62 +289,6 @@ export const navBarConfig: NavBarConfig = {
 				},
 			],
 		},
-		// {
-		// 	name: "关于",
-		// 	url: "/content/",
-		// 	icon: "material-symbols:info",
-		// 	children: [LinkPreset.About, LinkPreset.Friends],
-		// },
-		// {
-		// 	name: "其他",
-		// 	url: "#",
-		// 	icon: "material-symbols:more-horiz",
-		// 	children: [
-		// 		{
-		// 			name: "项目",
-		// 			url: "/projects/",
-		// 			icon: "material-symbols:work",
-		// 		},
-		// 		{
-		// 			name: "技能",
-		// 			url: "/skills/",
-		// 			icon: "material-symbols:psychology",
-		// 		},
-		// 		{
-		// 			name: "时间线",
-		// 			url: "/timeline/",
-		// 			icon: "material-symbols:timeline",
-		// 		},
-		// 	],
-		// },
-//		{
-//			name: "关于",
-//			url: "/content/",
-//			icon: "material-symbols:info",
-//			children: [LinkPreset.About, LinkPreset.Friends],
-//		},
-//		{
-//			name: "其他",
-//			url: "#",
-//			icon: "material-symbols:more-horiz",
-//			children: [
-//				{
-//					name: "项目展示",
-//					url: "/projects/",
-//					icon: "material-symbols:work",
-//				},
-//				{
-//					name: "技能展示",
-//					url: "/skills/",
-//					icon: "material-symbols:psychology",
-//				},
-//				{
-//					name: "时间线",
-//					url: "/timeline/",
-//					icon: "material-symbols:timeline",
-//				},
-//			],
-//		},
 	],
 };
 
@@ -604,7 +548,7 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: true, // 启用看板娘
+	enable: false, // 启用看板娘
 	models: ["/pio/models/pio/model.json"], // 默认模型路径
 	position: "left", // 默认位置在右侧
 	width: 280, // 默认宽度
@@ -612,16 +556,15 @@ export const pioConfig: import("./types/config").PioConfig = {
 	mode: "draggable", // 默认为可拖拽模式
 	hiddenOnMobile: true, // 默认在移动设备上隐藏
 	dialog: {
-		welcome: "Welcome to Mizuki Website!", // 欢迎词
+		welcome: "欢迎来到Ferxal的博客！", // 欢迎词
 		touch: [
-			"What are you doing?",
-			"Stop touching me!",
-			"HENTAI!",
-			"Don't bully me like that!",
+			"你干嘛？！",
+			"别碰我！",
+			"止めてください！",
 		], // 触摸提示
-		home: "Click here to go back to homepage!", // 首页提示
-		skin: ["Want to see my new outfit?", "The new outfit looks great~"], // 换装提示
-		close: "QWQ See you next time~", // 关闭提示
+		home: "点击这里返回首页！", // 首页提示
+		skin: ["想看看我的新衣服吗？", "新衣服 looks great~"], // 换装提示
+		close: "QwQ 下次再见！", // 关闭提示
 		link: "https://github.com/matsuzaka-yuki/Mizuki", // 关于链接
 	},
 };
