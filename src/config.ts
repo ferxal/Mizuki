@@ -272,28 +272,28 @@ export const navBarConfig: NavBarConfig = {
 					url: "/friends/",
 					icon: "material-symbols:group",
 		},
-		{
-			name: "Others",
-			url: "#",
-			icon: "material-symbols:more-horiz",
-			children: [
-				// {
-				// 	name: "Projects",
-				// 	url: "/projects/",
-				// 	icon: "material-symbols:work",
-				// },
-				{
-					name: "Skills",
-					url: "/skills/",
-					icon: "material-symbols:psychology",
-				},
-				{
-					name: "Timeline",
-					url: "/timeline/",
-					icon: "material-symbols:timeline",
-				},
-			],
-		},
+		// {
+		// 	name: "Others",
+		// 	url: "#",
+		// 	icon: "material-symbols:more-horiz",
+		// 	children: [
+		// 		// {
+		// 		// 	name: "Projects",
+		// 		// 	url: "/projects/",
+		// 		// 	icon: "material-symbols:work",
+		// 		// },
+		// 		// {
+		// 		// 	name: "Skills",
+		// 		// 	url: "/skills/",
+		// 		// 	icon: "material-symbols:psychology",
+		// 		// },
+		// 		// {
+		// 		// 	name: "Timeline",
+		// 		// 	url: "/timeline/",
+		// 		// 	icon: "material-symbols:timeline",
+		// 		// },
+		// 	],
+		// },
 	],
 };
 
@@ -343,10 +343,10 @@ export const commentConfig: CommentConfig = {
 
 export const announcementConfig: AnnouncementConfig = {
 	title: "公告", // Announcement title
-	content: "欢迎来到我的博客", // Announcement content
+	content: "欢迎来到我的博客🤓不过我的技术含量不高，仅供参考~", // Announcement content
 	closable: false, // Allow users to close the announcement
 	link: {
-		enable: true, // 启用链接
+		enable: false, // 启用链接
 		text: "Learn More", // 链接文本
 		url: "/about/", // 链接 URL
 		external: false, // 内部链接
