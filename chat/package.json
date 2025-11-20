@@ -12,10 +12,13 @@
     "dev": "node --watch server-optimized.js",
     "test": "node --test",
     "check-version": "node check-node-version.js",
-    "pm2:start": "pm2 start server-optimized.js --name chat-server",
+    "pm2:start": "pm2 start ecosystem.config.cjs",
     "pm2:stop": "pm2 stop chat-server",
     "pm2:restart": "pm2 restart chat-server",
-    "pm2:logs": "pm2 logs chat-server"
+    "pm2:reload": "pm2 reload chat-server",
+    "pm2:logs": "pm2 logs chat-server",
+    "pm2:delete": "pm2 delete chat-server",
+    "pm2:status": "pm2 status"
   },
   "keywords": [
     "websocket",
@@ -29,6 +32,9 @@
   "dependencies": {
     "dotenv": "^16.6.1",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.48.0"
+  },
+  "devDependencies": {
+    "pm2": "^5.4.2"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x"

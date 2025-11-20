@@ -319,7 +319,9 @@
     // 连接WebSocket
     function connect() {
       const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-      const wsUrl = `${protocol}://${window.location.hostname}:11451`;
+      // 使用当前页面的端口（Nginx 代理端口）
+      const port = window.location.port || (protocol === 'wss' ? '443' : '80');
+      const wsUrl = `${protocol}://${window.location.hostname}:${port}`;
       
       ws = new WebSocket(wsUrl);
       

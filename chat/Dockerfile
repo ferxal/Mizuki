@@ -9,14 +9,17 @@ WORKDIR /app
 # 复制package文件
 COPY package.json pnpm-lock.yaml ./
 
-# 安装pnpm
-RUN npm install -g pnpm
+# 安装pnpm和pm2
+RUN npm install -g pnpm pm2
 
 # 安装依赖
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --prod
 
 # 生产阶段
 FROM node:20-alpine
+
+# 安装 PM2
+RUN npm install -g pm2
 
 WORKDIR /app
 
@@ -44,4 +47,8 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD node -e "require('http').get('http://localhost:11451/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
 # 启动应用
-CMD ["node", "server-optimized.js"]
+# 可选择使用 PM2 或直接启动
+# PM2 启动（推荐生产环境）
+CMD ["pm2-runtime", "start", "ecosystem.config.cjs"]
+# 或直接启动
+# CMD ["node", "server-optimized.js"]

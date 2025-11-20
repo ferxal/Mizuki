@@ -49,7 +49,7 @@ export const siteConfig: SiteConfig = {
 
 	// 聊天室配置
 	chat: {
-		serverUrl: "ws://localhost:11451", // WebSocket服务器地址，部署时需修改为实际地址
+		serverUrl: "ws://[2408:8256:8e80:ad8e:1e86:bff:fe37:f628]:11431", // WebSocket服务器地址（通过Nginx代理）
 		maxMessageLength: 1000, // 最大消息长度
 		maxNicknameLength: 20, // 最大昵称长度
 		enableStats: true, // 是否显示统计信息
