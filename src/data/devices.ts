@@ -59,7 +59,7 @@ export const devicesData: DeviceCategory = {
 		},
 		{
 			name: "高漫M6数位板",
-			image: "https://www.gaomon.cn/uploads/allimg/190611/1-1Z611162222.png",
+			image: "https://proxy.chenhen.top/https://www.gaomon.cn/uploads/allimg/190611/1-1Z611162222.png",
 			specs: "16384级压感",
 			description:
 				"触控环 + 12个硬快捷键+1个功能切换键+16个软快捷键",
