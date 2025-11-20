@@ -297,4 +297,8 @@ export const en: Translation = {
 	[Key.calendarOctober]: "Oct",
 	[Key.calendarNovember]: "Nov",
 	[Key.calendarDecember]: "Dec",
+
+	// Chat Room
+	[Key.chat]: "Chat Room",
+	[Key.chatSubtitle]: "Real-time chat, instant communication",
 };

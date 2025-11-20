@@ -44,6 +44,15 @@ export const siteConfig: SiteConfig = {
 		timeline: true, // 时间线页面开关
 		albums: true, // 相册页面开关
 		devices: true, // 设备页面开关
+		chat: true, // 聊天室页面开关
+	},
+
+	// 聊天室配置
+	chat: {
+		serverUrl: "ws://localhost:11451", // WebSocket服务器地址，部署时需修改为实际地址
+		maxMessageLength: 1000, // 最大消息长度
+		maxNicknameLength: 20, // 最大昵称长度
+		enableStats: true, // 是否显示统计信息
 	},
 
 	// 顶栏标题配置
@@ -268,9 +277,14 @@ export const navBarConfig: NavBarConfig = {
 		// 	],
 		// },
 		{
-					name: "友链",
-					url: "/friends/",
-					icon: "material-symbols:group",
+			name: "友链",
+			url: "/friends/",
+			icon: "material-symbols:group",
+		},
+		{
+			name: "聊天室",
+			url: "/chat/",
+			icon: "material-symbols:chat",
 		},
 		// {
 		// 	name: "Others",

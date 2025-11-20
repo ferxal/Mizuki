@@ -289,4 +289,8 @@ export const zh_CN: Translation = {
 	[Key.calendarOctober]: "10月",
 	[Key.calendarNovember]: "11月",
 	[Key.calendarDecember]: "12月",
+
+	// 聊天室
+	[Key.chat]: "聊天室",
+	[Key.chatSubtitle]: "实时聊天，即时交流",
 };

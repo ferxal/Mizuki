@@ -36,6 +36,15 @@ export type SiteConfig = {
 		timeline: boolean; // 时间线页面开关
 		albums: boolean; // 相册页面开关
 		devices: boolean; // 设备页面开关
+		chat: boolean; // 聊天室页面开关
+	};
+
+	// 聊天室配置
+	chat?: {
+		serverUrl: string; // WebSocket服务器地址
+		maxMessageLength?: number; // 最大消息长度
+		maxNicknameLength?: number; // 最大昵称长度
+		enableStats?: boolean; // 是否显示统计信息
 	};
 
 	// 文章列表布局配置

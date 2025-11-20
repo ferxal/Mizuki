@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket聊天室</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 900px;
+      height: 600px;
+      display: flex;
+      overflow: hidden;
+    }
+    .sidebar {
+      width: 200px;
+      background: #f7f7f7;
+      border-right: 1px solid #e0e0e0;
+      padding: 20px;
+    }
+    .sidebar h3 {
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .user-list {
+      list-style: none;
+    }
+    .user-item {
+      padding: 8px 12px;
+      margin-bottom: 5px;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 14px;
+    }
+    .user-item:hover {
+      background: #e3f2fd;
+    }
+    .user-item.selected {
+      background: #667eea;
+      color: white;
+    }
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-header {
+      padding: 20px;
+      border-bottom: 1px solid #e0e0e0;
+      background: #fafafa;
+    }
+    .chat-header h2 {
+      font-size: 18px;
+      color: #333;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+    .status.connected { background: #4caf50; color: white; }
+    .status.disconnected { background: #f44336; color: white; }
+    .messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #fafafa;
+    }
+    .message {
+      margin-bottom: 15px;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .message.system {
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+      font-style: italic;
+    }
+    .message.private {
+      background: #fff3e0;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .message .nickname {
+      font-weight: bold;
+      color: #667eea;
+      margin-right: 8px;
+    }
+    .message .time {
+      color: #999;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+    .message .content {
+      color: #333;
+      word-wrap: break-word;
+    }
+    .input-area {
+      padding: 20px;
+      border-top: 1px solid #e0e0e0;
+      background: white;
+    }
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus {
+      border-color: #667eea;
+    }
+    button {
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #5a67d8;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .nickname-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .nickname-modal.hidden {
+      display: none;
+    }
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+    }
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .modal-content input {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .container { height: 100vh; max-width: 100%; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nickname-modal" id="nicknameModal">
+    <div class="modal-content">
+      <h2>输入昵称加入聊天室</h2>
+      <input type="text" id="nicknameInput" placeholder="请输入2-20个字符的昵称" maxlength="20">
+      <button id="joinBtn">加入聊天</button>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="sidebar">
+      <h3>在线用户 (<span id="userCount">0</span>)</h3>
+      <ul class="user-list" id="userList"></ul>
+    </div>
+    
+    <div class="chat-area">
+      <div class="chat-header">
+        <h2>
+          聊天室
+          <span class="status disconnected" id="status">未连接</span>
+        </h2>
+      </div>
+      
+      <div class="messages" id="messages"></div>
+      
+      <div class="input-area">
+        <div class="input-group">
+          <input type="text" id="messageInput" placeholder="输入消息..." disabled>
+          <button id="sendBtn" disabled>发送</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    let ws = null;
+    let connected = false;
+    let nickname = null;
+    let selectedUser = null;
+    
+    const $ = id => document.getElementById(id);
+    const nicknameModal = $('nicknameModal');
+    const nicknameInput = $('nicknameInput');
+    const joinBtn = $('joinBtn');
+    const messageInput = $('messageInput');
+    const sendBtn = $('sendBtn');
+    const messages = $('messages');
+    const userList = $('userList');
+    const userCount = $('userCount');
+    const status = $('status');
+    
+    // 格式化时间
+    function formatTime(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    // 添加消息到聊天区
+    function addMessage(type, content, from = null, to = null, timestamp = Date.now()) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${type}`;
+      
+      if (type === 'system' || type === 'join' || type === 'leave') {
+        messageDiv.innerHTML = `${content} <span class="time">${formatTime(timestamp)}</span>`;
+      } else if (type === 'public') {
+        messageDiv.innerHTML = `
+          <span class="nickname">${from}:</span>
+          <span class="content">${content}</span>
+          <span class="time">${formatTime(timestamp)}</span>
+        `;
+      } else if (type === 'private') {
+        const label = to ? `你 → ${to}` : `${from} → 你`;
+        messageDiv.innerHTML = `
+          <span class="nickname">[私聊] ${label}:</span>
+          <span class="content">${content}</span>
+          <span class="time">${formatTime(timestamp)}</span>
+        `;
+      }
+      
+      messages.appendChild(messageDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+    
+    // 更新用户列表
+    function updateUserList(users) {
+      userList.innerHTML = '';
+      userCount.textContent = users.length;
+      
+      // 添加"所有人"选项
+      const allItem = document.createElement('li');
+      allItem.className = 'user-item';
+      allItem.textContent = '🌍 所有人';
+      allItem.onclick = () => {
+        selectedUser = null;
+        document.querySelectorAll('.user-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+        allItem.classList.add('selected');
+        messageInput.placeholder = '输入消息...';
+      };
+      if (!selectedUser) allItem.classList.add('selected');
+      userList.appendChild(allItem);
+      
+      users.forEach(user => {
+        if (user.nickname === nickname) return; // 不显示自己
+        
+        const li = document.createElement('li');
+        li.className = 'user-item';
+        li.textContent = `👤 ${user.nickname}`;
+        li.onclick = () => {
+          selectedUser = user.nickname;
+          document.querySelectorAll('.user-item').forEach(item => {
+            item.classList.remove('selected');
+          });
+          li.classList.add('selected');
+          messageInput.placeholder = `发送私聊给 ${user.nickname}...`;
+        };
+        if (selectedUser === user.nickname) li.classList.add('selected');
+        userList.appendChild(li);
+      });
+    }
+    
+    // 连接WebSocket
+    function connect() {
+      const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+      const wsUrl = `${protocol}://${window.location.hostname}:11451`;
+      
+      ws = new WebSocket(wsUrl);
+      
+      ws.onopen = () => {
+        console.log('WebSocket连接成功');
+        connected = true;
+        status.textContent = '已连接';
+        status.className = 'status connected';
+      };
+      
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          
+          switch(data.type) {
+            case 'system':
+              addMessage('system', data.message, null, null, data.timestamp);
+              break;
+              
+            case 'nickname_set':
+              nickname = data.nickname;
+              nicknameModal.classList.add('hidden');
+              messageInput.disabled = false;
+              sendBtn.disabled = false;
+              addMessage('system', `你已加入聊天室，昵称: ${nickname}`, null, null, data.timestamp);
+              break;
+              
+            case 'join':
+              addMessage('join', `${data.nickname} 加入了聊天室`, null, null, data.timestamp);
+              break;
+              
+            case 'leave':
+              addMessage('leave', `${data.nickname} 离开了聊天室`, null, null, data.timestamp);
+              if (selectedUser === data.nickname) {
+                selectedUser = null;
+                messageInput.placeholder = '输入消息...';
+              }
+              break;
+              
+            case 'public':
+              addMessage('public', data.content, data.nickname, null, data.timestamp);
+              break;
+              
+            case 'private':
+              addMessage('private', data.content, data.from, data.to, data.timestamp);
+              break;
+              
+            case 'user_list':
+              updateUserList(data.users);
+              break;
+              
+            case 'error':
+              alert(data.message);
+              break;
+              
+            case 'heartbeat':
+              // 心跳响应
+              break;
+          }
+        } catch (err) {
+          console.error('处理消息错误:', err);
+        }
+      };
+      
+      ws.onerror = (error) => {
+        console.error('WebSocket错误:', error);
+        addMessage('system', '连接错误，请刷新页面重试');
+      };
+      
+      ws.onclose = () => {
+        connected = false;
+        status.textContent = '未连接';
+        status.className = 'status disconnected';
+        messageInput.disabled = true;
+        sendBtn.disabled = true;
+        addMessage('system', '连接已断开');
+        
+        // 5秒后尝试重连
+        setTimeout(() => {
+          if (!connected) {
+            addMessage('system', '尝试重新连接...');
+            connect();
+          }
+        }, 5000);
+      };
+      
+      // 定期发送心跳
+      setInterval(() => {
+        if (connected && ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: 'heartbeat' }));
+        }
+      }, 30000);
+    }
+    
+    // 发送消息
+    function sendMessage() {
+      const content = messageInput.value.trim();
+      if (!content || !connected) return;
+      
+      const message = {
+        type: selectedUser ? 'private' : 'public',
+        content
+      };
+      
+      if (selectedUser) {
+        message.target = selectedUser;
+      }
+      
+      ws.send(JSON.stringify(message));
+      messageInput.value = '';
+    }
+    
+    // 设置昵称
+    joinBtn.onclick = () => {
+      const name = nicknameInput.value.trim();
+      if (name.length < 2 || name.length > 20) {
+        alert('昵称长度必须在2-20个字符之间');
+        return;
+      }
+      
+      ws.send(JSON.stringify({
+        type: 'set_nickname',
+        nickname: name
+      }));
+    };
+    
+    // 发送按钮
+    sendBtn.onclick = sendMessage;
+    
+    // 回车发送
+    messageInput.onkeypress = (e) => {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    };
+    
+    nicknameInput.onkeypress = (e) => {
+      if (e.key === 'Enter') {
+        joinBtn.click();
+      }
+    };
+    
+    // 初始化连接
+    connect();
+  </script>
+</body>
+</html>
