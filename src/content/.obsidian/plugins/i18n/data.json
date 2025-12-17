@@ -22,11 +22,11 @@
   "I18N_NAME_TRANSLATION_SUFFIX": "]",
   "I18N_STYLE_SETTINGS": "obsidian-style-settings",
   "I18N_MODE_NDT": true,
-  "I18N_IGNORE": false,
-  "I18N_NDT_URL": "gitee",
+  "I18N_IGNORE": true,
+  "I18N_NDT_URL": "github",
   "I18N_MODE_NIT": true,
   "I18N_NIT_API": "OPENAI",
-  "I18N_NIT_API_INTERVAL": 400,
+  "I18N_NIT_API_INTERVAL": 50,
   "I18N_NIT_APIS": {
     "BAIDU": {
       "FROM": "auto",
@@ -35,9 +35,9 @@
       "KEY": ""
     }
   },
-  "I18N_NIT_OPENAI_URL": "https://api.suanli.cn",
-  "I18N_NIT_OPENAI_KEY": "sk-9Tehie0CporQ8Lm0IExJeBkcAZl1FXNAm3ks1SCnQfC9C5JA",
-  "I18N_NIT_OPENAI_MODEL": "deepseek-r1:7b",
+  "I18N_NIT_OPENAI_URL": "https://open.bigmodel.cn/api/paas/v4",
+  "I18N_NIT_OPENAI_KEY": "6ee5e14f560a75f19bc0a35afcb3482a.ABMH6LZGqqcRYJEs",
+  "I18N_NIT_OPENAI_MODEL": "glm-4.6v-flash",
   "I18N_NIT_OPENAI_TIPS": "你是一名专业的界面翻译员，现在要为 Obsidian 的插件 ${plugin} 翻译界面文本。\n请严格遵守以下规则：\n\n翻译范围：只翻译插件的界面文本，不要翻译笔记内容。\n\n翻译风格：\n\n主基调：清晰、直观、简洁，符合简体中文用户习惯。\n\n轻度娱乐：在不影响理解的前提下，可以偶尔加上轻松、可爱的语气（娱乐比例约 10%）。\n\n适度调皮：可以用一些小词修饰（如“~”“啦”“呢”），或用“の”代替部分“的”，但要保持可读性和专业感。\n\n翻译准则：\n\n短文本可加入轻度拟人化或拟声化，让用户觉得亲切，比如：\n\nSave → “保存！”\n\nAuto Backup → “自动存个档”\n\nLoading... → “拼命加载中......”\n\nSuccess → “完成啦！”\n\n长文本要保持说明性，但语气可以稍微软化：\n\nShow All Numbers: Turn on this option if you want to see note counts after expanding folders\n→ “显示全部数字：要是你想在展开文件夹后还能看到笔记数量，就打开这个吧~”\n\n避免翻译得过头导致语义模糊，比如：\n\n“配置”不能翻成“调教”，因为用户可能不明白其功能。\n\n输出格式：只返回翻译后的简体中文文本，不要带多余解释。",
   "I18N_MODE_IMT": false,
   "I18N_IMT_CONFIG": {

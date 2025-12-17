@@ -11,14 +11,10 @@
             "id": "7c8112d6257b93fa",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "templater/blog-post.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "blog-post"
+              "title": "新标签页"
             }
           }
         ]
@@ -140,12 +136,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "templater/记Windows修复.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "记Windows修复 的大纲"
             }
           },
           {
@@ -155,7 +152,7 @@
               "type": "git-view",
               "state": {},
               "icon": "git-pull-request",
-              "title": "源代码管理"
+              "title": "Source Control"
             }
           }
         ],
@@ -174,18 +171,20 @@
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
       "bases:创建新数据库": false,
-      "obsidian-git:Open Git source control": false,
       "templater-obsidian:Templater": false,
       "i18n:I18N": false,
-      "obsidian-git:打开Git源代码管理": false
+      "obsidian-git:打开Git源代码管理": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7c8112d6257b93fa",
+  "active": "e2130f4828b759c1",
   "lastOpenFiles": [
+    "未命名.base",
+    "posts/guide/cover.png",
+    "templater/记Windows修复.md",
+    "templater/blog-post.md",
     "templater/搭建.md",
     "templater/blog-post.md.md",
-    "templater/blog-post.md",
-    "templater/未命名.md",
     "templater/123132.md",
     "posts/大号.md",
     "posts/First-Blog.md",

@@ -533,7 +533,7 @@ function getFrontmatterPosition(plugin, file) {
 async function postValues(plugin, payload, fileOrFilePath, lineNumber, asList = false, asBlockquote = false) {
   var _a;
   if (payload.some((_p) => !_p.indexedPath)) {
-    console.error("一个有效负载的字段缺少索引路径");
+    console.error("One payload's field is missing an indexed path");
     return;
   }
   const file = getFileFromFileOrPath(plugin, fileOrFilePath);
@@ -638,7 +638,7 @@ var MultiTargetModificationConfirmModal = class extends import_obsidian3.Modal {
     var _a, _b;
     this.titleEl.innerHTML = `Change <span class="field-name">${this.managedField.name}</span> current values`;
     this.contentEl.createEl("hr");
-    this.contentEl.createEl("span", { text: "新值：" });
+    this.contentEl.createEl("span", { text: "New value: " });
     this.contentEl.createEl("span", { cls: "field-value", text: `${this.managedField.value}` });
     this.contentEl.createEl("hr");
     this.contentEl.createDiv({ text: `Target file(s) (${this.managedField.target.length}):` });
@@ -674,7 +674,7 @@ var MultiTargetModificationConfirmModal = class extends import_obsidian3.Modal {
         currentValueContainer.addClass("empty-or-missing");
     }
     const footer = this.contentEl.createDiv({ cls: "footer-container" });
-    new import_obsidian3.ButtonComponent(footer).setButtonText("确认").setWarning().onClick(() => {
+    new import_obsidian3.ButtonComponent(footer).setButtonText("Confirm").setWarning().onClick(() => {
       for (const target of targets) {
         postValues(
           this.managedField.plugin,
@@ -715,7 +715,7 @@ function settingsModal(Base25) {
       this.createSettingContainer = () => {
         const container = this.optionsContainer;
         this.field.options.template;
-        container.createEl("span", { text: "模板", cls: "label" });
+        container.createEl("span", { text: "Template", cls: "label" });
         const templateContainer = container.createDiv({ cls: "field-container" });
         this.templateValue = new import_obsidian4.TextAreaComponent(templateContainer);
         const templateValue = this.templateValue;
@@ -771,7 +771,7 @@ in <${this.managedField.name}> ${this.managedField.fileClassName ? this.managedF
           }
           next = tF.next();
         }
-        this.contentEl.createDiv({ text: "结果预览" });
+        this.contentEl.createDiv({ text: "Result preview" });
         this.buildResultPreview(this.contentEl.createDiv({ cls: "field-container" }));
       } else {
         this.buildInputEl(this.contentEl.createDiv({ cls: "field-container" }));
@@ -818,7 +818,7 @@ in <${this.managedField.name}> ${this.managedField.fileClassName ? this.managedF
       if (isSingleTargeted(this.managedField)) {
         this.renderedValue.setValue(this.managedField.value);
       } else {
-        this.renderedValue.setPlaceholder("多个值");
+        this.renderedValue.setPlaceholder("Multiple values");
       }
       this.renderedValue.setValue(this.managedField.value);
       this.renderedValue.onChange((value) => this.managedField.value = `${value}`);
@@ -831,7 +831,7 @@ in <${this.managedField.name}> ${this.managedField.fileClassName ? this.managedF
       if (isSingleTargeted(this.managedField)) {
         inputEl.setValue(`${this.managedField.value || ""}`);
       } else {
-        inputEl.setPlaceholder("多个值");
+        inputEl.setPlaceholder("Multiple values");
       }
       inputEl.onChange((value) => this.managedField.value = `${value}`);
     }
@@ -926,9 +926,9 @@ async function enterFieldSetting(settingModal, field2, speed = 100) {
     settingModal.plugin.testRunner.insertInTextComponent(settingModal.templateValue, field2.options.template);
     const input = settingModal.containerEl.querySelector("#template-input");
     if (!input)
-      return runner.log("错误", "找不到模板输入");
+      return runner.log("ERROR", "Template input not found");
     if (!(input.value === settingModal.templateValue.getValue()))
-      return runner.log("ERROR", "模板输入错误");
+      return runner.log("ERROR", "Template input error");
   }
 }
 
@@ -951,19 +951,19 @@ function settingsModal2(Base25) {
       this.createSettingContainer = () => {
         const container = this.optionsContainer;
         const numberStepValueContainer = container.createDiv({ cls: "field-container" });
-        numberStepValueContainer.createEl("span", { text: "步骤（可选）", cls: "label" });
+        numberStepValueContainer.createEl("span", { text: "Step (optional)", cls: "label" });
         numberStepValueContainer.createDiv({ cls: "spacer" });
         this.numberStepValue = new import_obsidian5.TextComponent(numberStepValueContainer);
         this.numberStepValue.inputEl.addClass("with-label");
         this.numberStepValue.setValue(`${this.field.options.step || ""}`);
         const numberMinValueContainer = container.createDiv({ cls: "field-container" });
-        numberMinValueContainer.createEl("span", { text: "最小值（可选）", cls: "label" });
+        numberMinValueContainer.createEl("span", { text: "Min value (optional)", cls: "label" });
         this.numberMinValue = new import_obsidian5.TextComponent(numberMinValueContainer);
         this.numberMinValue.inputEl.addClass("full-width");
         this.numberMinValue.inputEl.addClass("with-label");
         this.numberMinValue.setValue(`${this.field.options.min || ""}`);
         const numberMaxValueContainer = container.createDiv({ cls: "field-container" });
-        numberMaxValueContainer.createEl("span", { text: "最大值（可选）", cls: "label" });
+        numberMaxValueContainer.createEl("span", { text: "Max value (optional)", cls: "label" });
         this.numberMaxValue = new import_obsidian5.TextComponent(numberMaxValueContainer);
         this.numberMaxValue.inputEl.addClass("full-width");
         this.numberMaxValue.inputEl.addClass("with-label");
@@ -1108,16 +1108,16 @@ function displayValue2(managedField, container, onClicked = () => {
   return baseDisplayValue(managedField, container, onClicked);
 }
 function createDvField2(managedField, dv, p, fieldContainer, attrs = {}) {
-  var _a, _b;
+  var _a, _b, _c;
   attrs.cls = "value-container";
   const editBtn = fieldContainer.createEl("button");
-  const fieldValue = dv.el("span", managedField.value || "", attrs);
+  const fieldValue = dv.el("span", (_a = managedField.value) != null ? _a : "", attrs);
   fieldContainer.appendChild(fieldValue);
   const spacer = fieldContainer.createDiv({ cls: "spacer-1" });
-  if ((_a = attrs.options) == null ? void 0 : _a.alwaysOn)
+  if ((_b = attrs.options) == null ? void 0 : _b.alwaysOn)
     spacer.hide();
   (0, import_obsidian5.setIcon)(editBtn, getIcon("Number"));
-  if (!((_b = attrs == null ? void 0 : attrs.options) == null ? void 0 : _b.alwaysOn)) {
+  if (!((_c = attrs == null ? void 0 : attrs.options) == null ? void 0 : _c.alwaysOn)) {
     editBtn.hide();
     spacer.show();
     fieldContainer.onmouseover = () => {
@@ -1363,7 +1363,7 @@ function effect(_ref2) {
   };
 }
 var applyStyles_default = {
-  name: "应用程序样式",
+  name: "applyStyles",
   enabled: true,
   phase: "write",
   fn: applyStyles,
@@ -1623,7 +1623,7 @@ function effect2(_ref2) {
   state.elements.arrow = arrowElement;
 }
 var arrow_default = {
-  name: "箭头",
+  name: "arrow",
   enabled: true,
   phase: "main",
   fn: arrow,
@@ -1760,7 +1760,7 @@ function computeStyles(_ref5) {
   });
 }
 var computeStyles_default = {
-  name: "计算机样式",
+  name: "computeStyles",
   enabled: true,
   phase: "beforeWrite",
   fn: computeStyles,
@@ -1796,7 +1796,7 @@ function effect3(_ref) {
   };
 }
 var eventListeners_default = {
-  name: "事件监听器",
+  name: "eventListeners",
   enabled: true,
   phase: "write",
   fn: function fn() {
@@ -2203,7 +2203,7 @@ function flip(_ref) {
   }
 }
 var flip_default = {
-  name: "翻转",
+  name: "flip",
   enabled: true,
   phase: "main",
   fn: flip,
@@ -2239,7 +2239,7 @@ function hide(_ref) {
   var popperRect = state.rects.popper;
   var preventedOffsets = state.modifiersData.preventOverflow;
   var referenceOverflow = detectOverflow(state, {
-    elementContext: "参考"
+    elementContext: "reference"
   });
   var popperAltOverflow = detectOverflow(state, {
     altBoundary: true
@@ -2260,7 +2260,7 @@ function hide(_ref) {
   });
 }
 var hide_default = {
-  name: "隐藏",
+  name: "hide",
   enabled: true,
   phase: "main",
   requiresIfExists: ["preventOverflow"],
@@ -2299,7 +2299,7 @@ function offset(_ref2) {
   state.modifiersData[name] = data;
 }
 var offset_default = {
-  name: "抵消",
+  name: "offset",
   enabled: true,
   phase: "main",
   requires: ["popperOffsets"],
@@ -2317,7 +2317,7 @@ function popperOffsets(_ref) {
   });
 }
 var popperOffsets_default = {
-  name: "弹出器补偿值",
+  name: "popperOffsets",
   enabled: true,
   phase: "read",
   fn: popperOffsets,
@@ -2415,7 +2415,7 @@ function preventOverflow(_ref) {
   state.modifiersData[name] = data;
 }
 var preventOverflow_default = {
-  name: "防止溢出",
+  name: "preventOverflow",
   enabled: true,
   phase: "main",
   fn: preventOverflow,
@@ -2941,7 +2941,7 @@ var TextInputSuggest = class {
       placement: "bottom-start",
       modifiers: [
         {
-          name: "相同宽度",
+          name: "sameWidth",
           enabled: true,
           fn: ({ state, instance }) => {
             const targetWidth = `${state.rects.reference.width}px`;
@@ -3026,7 +3026,7 @@ function settingsModal3(Base25) {
     createSettingContainer() {
       const container = this.optionsContainer;
       const sourceTypeContainer = container.createDiv({ cls: "field-container" });
-      sourceTypeContainer.createDiv({ text: "值源类型", cls: "label" });
+      sourceTypeContainer.createDiv({ text: "Values source type", cls: "label" });
       sourceTypeContainer.createDiv({ cls: "spacer" });
       this.sourceTypeSelector = new import_obsidian8.DropdownComponent(sourceTypeContainer);
       Object.keys(SourceType).forEach((option) => this.sourceTypeSelector.addOption(option, SourceTypeDisplay[option]));
@@ -3156,8 +3156,8 @@ function settingsModal3(Base25) {
     }
     createValuesFromDVQueryContainer(parentContainer) {
       const valuesFromDVQueryTopContainer = parentContainer.createDiv({ cls: "vstacked" });
-      valuesFromDVQueryTopContainer.createEl("span", { text: "数据查看功能" });
-      valuesFromDVQueryTopContainer.createEl("span", { text: "Dataview查询返回字符串列表（<dv>对象可用）", cls: "sub-text" });
+      valuesFromDVQueryTopContainer.createEl("span", { text: "Dataview function" });
+      valuesFromDVQueryTopContainer.createEl("span", { text: "Dataview query returning a list of string (<dv> object is available)", cls: "sub-text" });
       const valuesFromDVQueryContainer = valuesFromDVQueryTopContainer.createDiv({ cls: "field-container" });
       this.dvQueryInput = new import_obsidian8.TextAreaComponent(valuesFromDVQueryContainer);
       this.dvQueryInput.inputEl.addClass("full-width");
@@ -3285,7 +3285,7 @@ ${newValue}`);
       this.addButton.setIcon("plus");
       this.addButton.onClick(async () => await this.onAdd());
       this.addButton.setCta();
-      this.addButton.setTooltip("将此值添加到此字段设置中");
+      this.addButton.setTooltip("Add this value to this field settings");
       this.addButton.buttonEl.hide();
     }
     buildFooterActions(footerActionsContainer) {
@@ -3294,10 +3294,10 @@ ${newValue}`);
       const cancelButton = new import_obsidian8.ButtonComponent(footerActionsContainer);
       cancelButton.setIcon("cross");
       cancelButton.onClick(() => this.close());
-      cancelButton.setTooltip("取消");
+      cancelButton.setTooltip("Cancel");
       const clearButton = new import_obsidian8.ButtonComponent(footerActionsContainer);
       clearButton.setIcon("eraser");
-      clearButton.setTooltip("清除字段值");
+      clearButton.setTooltip("Clear field's value(s)");
       clearButton.onClick(async () => {
         await this.clearValues();
         this.close();
@@ -3538,7 +3538,7 @@ var displayLinksOrText = (value, file, container, plugin, onClicked) => {
         };
       }
       if (i < links.length - 1) {
-        container.createEl("span", { text: "|" });
+        container.createEl("span", { text: " | " });
       }
     });
   } else {
@@ -3557,7 +3557,7 @@ var displayLinksOrText = (value, file, container, plugin, onClicked) => {
           container.createEl("span", { text: value2 });
         }
         if (i < values.length - 1) {
-          container.createEl("span", { text: "|" });
+          container.createEl("span", { text: " | " });
         }
       }
     });
@@ -3588,7 +3588,7 @@ function settingsModal5(Base25) {
     }
     createQueryContainer(container) {
       const dvQueryStringTopContainer = container.createDiv({ cls: "vstacked" });
-      dvQueryStringTopContainer.createEl("span", { text: "数据视图查询（可选）", cls: "field-option" });
+      dvQueryStringTopContainer.createEl("span", { text: "Dataview Query (optional)", cls: "field-option" });
       const dvQueryStringContainer = dvQueryStringTopContainer.createDiv({ cls: "field-container" });
       const dvQueryString = new import_obsidian10.TextAreaComponent(dvQueryStringContainer);
       dvQueryString.inputEl.cols = 50;
@@ -3602,8 +3602,8 @@ function settingsModal5(Base25) {
     }
     createCustomRenderingContainer(container) {
       const customRenderingTopContainer = container.createDiv({ cls: "vstacked" });
-      customRenderingTopContainer.createEl("span", { text: "别名" });
-      customRenderingTopContainer.createEl("span", { text: "使用返回字符串的函数对链接别名的呈现进行个性化设置（<page>对象可用）", cls: "sub-text" });
+      customRenderingTopContainer.createEl("span", { text: "Alias" });
+      customRenderingTopContainer.createEl("span", { text: "Personalise the rendering of your links' aliases with a function returning a string (<page> object is available)", cls: "sub-text" });
       customRenderingTopContainer.createEl("code", {
         text: `function(page) { return <function using "page">; }`
       });
@@ -3621,8 +3621,8 @@ function settingsModal5(Base25) {
     }
     createCustomSortingContainer(container) {
       const customSortingTopContainer = container.createDiv({ cls: "vstacked" });
-      customSortingTopContainer.createEl("span", { text: "排序顺序" });
-      customSortingTopContainer.createEl("span", { text: "使用一条指令对链接的排序顺序进行个性化设置，即取2个文件（a、b）并返回-1、0或1", cls: "sub-text" });
+      customSortingTopContainer.createEl("span", { text: "Sorting order" });
+      customSortingTopContainer.createEl("span", { text: "Personalise the sorting order of your links with a instruction taking 2 files (a, b) and returning -1, 0 or 1", cls: "sub-text" });
       customSortingTopContainer.createEl("code", {
         text: `(a: TFile, b: TFile): number`
       });
@@ -4038,7 +4038,7 @@ function settingsModal7(Base25) {
     createSettingContainer() {
       const container = this.optionsContainer;
       const allowNullValueContainer = container.createDiv({ cls: "field-container" });
-      allowNullValueContainer.createDiv({ cls: "label", text: "循环以空值开始" });
+      allowNullValueContainer.createDiv({ cls: "label", text: "Cycle begins by a null value" });
       allowNullValueContainer.createDiv({ cls: "spacer" });
       this.allowNullToggler = new import_obsidian12.ToggleComponent(allowNullValueContainer).setValue(this.field.options.allowNull || false).onChange((value) => this.field.options.allowNull = value);
       super.createSettingContainer();
@@ -4284,7 +4284,7 @@ function settingsModal9(Base25) {
       if (!this.field.options.defaultInsertAsLink)
         this.field.options.defaultInsertAsLink = DefaultOptions9.defaultInsertAsLink;
       const dateFormatContainer = container.createDiv({ cls: "field-container" });
-      dateFormatContainer.createEl("span", { text: "日期格式", cls: "label" });
+      dateFormatContainer.createEl("span", { text: "Date format", cls: "label" });
       const dateExample = dateFormatContainer.createEl("span", { cls: "more-info" });
       this.dateFormatInput = new import_obsidian14.TextComponent(dateFormatContainer);
       const dateFormatInput = this.dateFormatInput;
@@ -4298,7 +4298,7 @@ function settingsModal9(Base25) {
       });
       if (this.field.type !== "Time") {
         const defaultInsertAsLinkContainer = container.createDiv({ cls: "field-container" });
-        defaultInsertAsLinkContainer.createEl("span", { text: "默认情况下插入为链接", cls: "label" });
+        defaultInsertAsLinkContainer.createEl("span", { text: "Insert as link by default", cls: "label" });
         defaultInsertAsLinkContainer.createDiv({ cls: "spacer" });
         this.defaultInsertAsLink = new import_obsidian14.ToggleComponent(defaultInsertAsLinkContainer);
         this.defaultInsertAsLink.setValue(this.field.options.defaultInsertAsLink);
@@ -4306,7 +4306,7 @@ function settingsModal9(Base25) {
           this.field.options.defaultInsertAsLink = value;
         });
         const dateLinkPathContainer = container.createDiv({ cls: "field-container" });
-        dateLinkPathContainer.createEl("span", { text: "链接路径（可选）", cls: "label" });
+        dateLinkPathContainer.createEl("span", { text: "Link path (optional)", cls: "label" });
         this.dateLinkPathInput = new import_obsidian14.TextComponent(dateLinkPathContainer);
         this.dateLinkPathInput.inputEl.addClass("with-label");
         this.dateLinkPathInput.inputEl.addClass("full-width");
@@ -4316,7 +4316,7 @@ function settingsModal9(Base25) {
         });
       }
       const dateShiftIntervalContainer = container.createDiv({ cls: "field-container" });
-      dateShiftIntervalContainer.createEl("span", { text: "定义一个移位间隔", cls: "label" });
+      dateShiftIntervalContainer.createEl("span", { text: "Define a shift interval", cls: "label" });
       dateShiftIntervalContainer.createDiv({ cls: "spacer" });
       this.dateShiftInterval = new import_obsidian14.TextComponent(dateShiftIntervalContainer);
       this.dateShiftInterval.setPlaceholder("ex: 1 month, 2 days");
@@ -4330,7 +4330,7 @@ function settingsModal9(Base25) {
       });
       const nextShiftIntervalFieldContainer = container.createDiv({ cls: "field-container" });
       nextShiftIntervalFieldContainer.createEl("span", {
-        text: "包含移位间隔的字段",
+        text: "Field containing shift intervals",
         cls: "label"
       });
       nextShiftIntervalFieldContainer.createDiv({ cls: "spacer" });
@@ -5353,8 +5353,8 @@ function settingsModal15(Base25) {
     }
     createCustomSortingContainer(container) {
       const customSortingTopContainer = container.createDiv({ cls: "vstacked" });
-      customSortingTopContainer.createEl("span", { text: "排序顺序" });
-      customSortingTopContainer.createEl("span", { text: "使用一条指令对链接的排序顺序进行个性化设置，即取2个文件（a、b）并返回-1、0或1", cls: "sub-text" });
+      customSortingTopContainer.createEl("span", { text: "Sorting order" });
+      customSortingTopContainer.createEl("span", { text: "Personalise the sorting order of your links with a instruction taking 2 files (a, b) and returning -1, 0 or 1", cls: "sub-text" });
       customSortingTopContainer.createEl("code", {
         text: `(a: TFile, b: TFile): number`
       });
@@ -5371,7 +5371,7 @@ function settingsModal15(Base25) {
       });
     }
     createAddButton(valuesListHeader, valuesListBody) {
-      valuesListHeader.createDiv({ cls: "label", text: "添加包含媒体文件的文件夹" });
+      valuesListHeader.createDiv({ cls: "label", text: "Add a folder containing media files" });
       valuesListHeader.createDiv({ cls: "spacer" });
       const addValue = valuesListHeader.createEl("button");
       addValue.type = "button";
@@ -5422,19 +5422,19 @@ function settingsModal15(Base25) {
     }
     createEmbedTogglerContainer(container) {
       const togglerContainer = container.createDiv({ cls: "field-container" });
-      togglerContainer.createDiv({ cls: "label", text: "内嵌缩略图" });
+      togglerContainer.createDiv({ cls: "label", text: "Inline thumbnail embedded" });
       togglerContainer.createDiv({ cls: "spacer" });
       new import_obsidian18.ToggleComponent(togglerContainer).setValue(this.field.options.embed).onChange((value) => this.field.options.embed = value);
     }
     createFilesDisplaySelectorContainer(container) {
       const filesDisplaySelectorContainer = container.createDiv({ cls: "field-container" });
-      filesDisplaySelectorContainer.createDiv({ cls: "label", text: "文件建议模式显示" });
+      filesDisplaySelectorContainer.createDiv({ cls: "label", text: "File suggest modal display" });
       filesDisplaySelectorContainer.createDiv({ cls: "spacer" });
       new import_obsidian18.DropdownComponent(filesDisplaySelectorContainer).addOptions(filesDisplay).setValue(this.field.options.display || "list").onChange((value) => this.field.options.display = value);
     }
     createThumbnailSizeInputContainer(container) {
       const thumbnailSizeInputContainer = container.createDiv({ cls: "field-container" });
-      thumbnailSizeInputContainer.createDiv({ cls: "label", text: "内嵌缩略图高度（px）：" });
+      thumbnailSizeInputContainer.createDiv({ cls: "label", text: "Inline embedded thumbnail height (px): " });
       thumbnailSizeInputContainer.createDiv({ cls: "spacer" });
       new import_obsidian18.TextComponent(thumbnailSizeInputContainer).setValue(this.field.options.thumbnailSize).onChange((value) => {
         if (!value)
@@ -5941,7 +5941,7 @@ function settingsModal18(Base25) {
       };
       this.createDvQueryContainer = (container, title) => {
         container.createEl("span", { text: title });
-        container.createEl("span", { text: "Dataview查询返回文件列表（<dv>对象可用）", cls: "sub-text" });
+        container.createEl("span", { text: "Dataview query returning a list of files (<dv> object is available)", cls: "sub-text" });
         const filesFromDVQueryContainer = container.createDiv({ cls: "field-container" });
         const filesFromDVQuery = new import_obsidian21.TextAreaComponent(filesFromDVQueryContainer);
         filesFromDVQuery.inputEl.addClass("full-width");
@@ -6007,7 +6007,7 @@ function displayValue18(managedField, container, onClicked) {
       container.createDiv({ text: value2 });
     }
     if (i < values.length - 1) {
-      container.createEl("span", { text: "|" });
+      container.createEl("span", { text: " | " });
     }
   });
   container.createDiv();
@@ -6051,9 +6051,9 @@ function settingsModal19(Base25) {
       const directionContainer = container.createDiv({ cls: "field-container" });
       const edgeColorsContainer = container.createDiv({ cls: "field-container colors" });
       const edgeFromSidesContainer = container.createDiv({ cls: "field-container edges" });
-      container.createDiv({ cls: "sub-text", text: "未选择边等同于选择了所有边" });
+      container.createDiv({ cls: "sub-text", text: "No edge selected is equivalent to all edges selected" });
       const edgeToSidesContainer = container.createDiv({ cls: "field-container egdes" });
-      container.createDiv({ cls: "sub-text", text: "未选择边等同于选择了所有边" });
+      container.createDiv({ cls: "sub-text", text: "No edge selected is equivalent to all edges selected" });
       const edgeLabelsContainer = container.createDiv({ cls: "field-container labels" });
       const newEdgeLabelContainer = container.createDiv({ cls: "field-container" });
       container.createEl("hr");
@@ -6173,9 +6173,9 @@ function settingsModal21(Base25) {
       const directionContainer = container.createDiv({ cls: "field-container" });
       const edgeColorsContainer = container.createDiv({ cls: "field-container colors" });
       const edgeFromSidesContainer = container.createDiv({ cls: "field-container edges" });
-      container.createDiv({ cls: "sub-text", text: "未选择边等同于选择了所有边" });
+      container.createDiv({ cls: "sub-text", text: "No edge selected is equivalent to all edges selected" });
       const edgeToSidesContainer = container.createDiv({ cls: "field-container egdes" });
-      container.createDiv({ cls: "sub-text", text: "未选择边等同于选择了所有边" });
+      container.createDiv({ cls: "sub-text", text: "No edge selected is equivalent to all edges selected" });
       const edgeLabelsContainer = container.createDiv({ cls: "field-container labels" });
       const newEdgeLabelContainer = container.createDiv({ cls: "field-container" });
       container.createEl("hr");
@@ -6386,7 +6386,7 @@ function cleanRemovedFormulasFromIndex(plugin) {
 async function updateFormulas(plugin, forceUpdateOne, forceUpdateAll = false) {
   var _a, _b;
   const start2 = Date.now();
-  MDM_DEBUG && console.log("开始更新公式", plugin.fieldIndex.lastRevision, "->", (_a = plugin.fieldIndex.dv) == null ? void 0 : _a.api.index.revision);
+  MDM_DEBUG && console.log("start update formulas", plugin.fieldIndex.lastRevision, "->", (_a = plugin.fieldIndex.dv) == null ? void 0 : _a.api.index.revision);
   const f = plugin.fieldIndex;
   const fileFormulasFields = /* @__PURE__ */ new Map();
   [...f.filesLookupAndFormulaFieldsExists].forEach(([filePath, fields]) => {
@@ -6424,7 +6424,7 @@ async function updateFormulas(plugin, forceUpdateOne, forceUpdateAll = false) {
       f.fileFormulaFieldsStatus.set(`${filePath}__${field2.name}`, "error" /* error */);
     }
   }));
-  MDM_DEBUG && console.log("已完成更新公式", plugin.fieldIndex.lastRevision, "->", (_b = plugin.fieldIndex.dv) == null ? void 0 : _b.api.index.revision, `${Date.now() - start2}ms`);
+  MDM_DEBUG && console.log("finished update formulas", plugin.fieldIndex.lastRevision, "->", (_b = plugin.fieldIndex.dv) == null ? void 0 : _b.api.index.revision, `${Date.now() - start2}ms`);
   cleanRemovedFormulasFromIndex(plugin);
 }
 
@@ -6447,10 +6447,10 @@ function settingsModal22(Base25) {
         const container = this.optionsContainer;
         const autoUpdateTopContainer = container.createDiv({ cls: "vstacked" });
         const autoUpdateContainer = autoUpdateTopContainer.createDiv({ cls: "field-container" });
-        autoUpdateContainer.createEl("span", { text: "自动更新此字段", cls: "label" });
+        autoUpdateContainer.createEl("span", { text: "Auto update this field ", cls: "label" });
         autoUpdateContainer.createDiv({ cls: "spacer" });
         const autoUpdate = new import_obsidian24.ToggleComponent(autoUpdateContainer);
-        autoUpdateTopContainer.createEl("span", { text: "这可能会导致延迟，具体取决于查询", cls: "sub-text warning" });
+        autoUpdateTopContainer.createEl("span", { text: "This could lead to latencies depending on the queries", cls: "sub-text warning" });
         if (this.field.options.autoUpdate === void 0)
           this.field.options.autoUpdate = false;
         autoUpdate.setValue(this.field.options.autoUpdate);
@@ -6458,8 +6458,8 @@ function settingsModal22(Base25) {
           this.field.options.autoUpdate = value;
         });
         const formulaTopContainer = container.createDiv({ cls: "vstacked" });
-        formulaTopContainer.createEl("span", { text: "javascript公式", cls: "label" });
-        formulaTopContainer.createEl("span", { text: "当前和dv变量可用", cls: "sub-text" });
+        formulaTopContainer.createEl("span", { text: "javascript formula", cls: "label" });
+        formulaTopContainer.createEl("span", { text: "current and dv variables are available", cls: "sub-text" });
         const formulaContainer = formulaTopContainer.createDiv({ cls: "field-container" });
         const formula = new import_obsidian24.TextAreaComponent(formulaContainer);
         formula.inputEl.addClass("full-width");
@@ -6599,10 +6599,10 @@ function settingsModal23(Base25) {
         const container = this.optionsContainer;
         const autoUpdateTopContainer = container.createDiv({ cls: "vstacked" });
         const autoUpdateContainer = autoUpdateTopContainer.createDiv({ cls: "field-container" });
-        autoUpdateContainer.createEl("span", { text: "自动更新此字段", cls: "label" });
+        autoUpdateContainer.createEl("span", { text: "Auto update this field ", cls: "label" });
         autoUpdateContainer.createDiv({ cls: "spacer" });
         const autoUpdate = new import_obsidian25.ToggleComponent(autoUpdateContainer);
-        autoUpdateTopContainer.createEl("span", { text: "这可能会导致延迟，具体取决于查询", cls: "sub-text warning" });
+        autoUpdateTopContainer.createEl("span", { text: "This could lead to latencies depending on the queries", cls: "sub-text warning" });
         if (this.field.options.autoUpdate === void 0)
           this.field.options.autoUpdate = false;
         autoUpdate.setValue(this.field.options.autoUpdate);
@@ -6610,7 +6610,7 @@ function settingsModal23(Base25) {
           this.field.options.autoUpdate = value;
         });
         const dvQueryStringTopContainer = container.createDiv({ cls: "vstacked" });
-        dvQueryStringTopContainer.createEl("span", { text: "要在vault中查找的页面（DataviewJS查询）", cls: "label" });
+        dvQueryStringTopContainer.createEl("span", { text: "Pages to look for in your vault (DataviewJS Query)", cls: "label" });
         dvQueryStringTopContainer.createEl("span", { text: "DataviewJS query of the form `dv.pages(...)`", cls: "sub-text" });
         const dvQueryStringContainer = dvQueryStringTopContainer.createDiv({ cls: "field-container" });
         const dvQueryString = new import_obsidian25.TextAreaComponent(dvQueryStringContainer);
@@ -6625,11 +6625,11 @@ function settingsModal23(Base25) {
         });
         const targetFieldTopContainer = container.createDiv({ cls: "vstacked" });
         const targetFieldContainer = targetFieldTopContainer.createDiv({ cls: "field-container" });
-        targetFieldContainer.createEl("span", { text: "相关字段的名称", cls: "label" });
+        targetFieldContainer.createEl("span", { text: "Name of the related field", cls: "label" });
         const targetFieldName = new import_obsidian25.TextComponent(targetFieldContainer);
         targetFieldName.inputEl.addClass("full-width");
         targetFieldName.inputEl.addClass("with-label");
-        targetFieldTopContainer.createEl("span", { text: "目标页面中的字段，其中包含指向此查找字段所在页面的链接", cls: "sub-text" });
+        targetFieldTopContainer.createEl("span", { text: "field in the target pages that contains a link to the page where this lookup field is", cls: "sub-text" });
         targetFieldName.setValue(this.field.options.targetFieldName || "");
         targetFieldName.onChange((value) => {
           this.field.options.targetFieldName = value;
@@ -6637,7 +6637,7 @@ function settingsModal23(Base25) {
         });
         const outputTypeContainer = container.createDiv({ cls: "field-container" });
         this.field.options.outputType = this.field.options.outputType || "LinksList" /* LinksList */;
-        outputTypeContainer.createEl("span", { text: "输出类型", cls: "label" });
+        outputTypeContainer.createEl("span", { text: "Type of output", cls: "label" });
         outputTypeContainer.createDiv({ cls: "spacer" });
         const outputTypeList = new import_obsidian25.DropdownComponent(outputTypeContainer);
         Object.keys(Type).forEach((outputType) => {
@@ -6646,7 +6646,7 @@ function settingsModal23(Base25) {
         outputTypeList.setValue(this.field.options.outputType);
         const outputWarningContainer = container.createDiv();
         outputWarningContainer.createEl("p", {
-          text: "警告：这可能会覆盖列表中的某些行。此字段自动呈现的列表中不应有额外的手动项：在每个字段索引后，它将被覆盖",
+          text: "Warning: this may override some lines under your list. There shouldn't be an extra manual item in the list that is automatically rendered by this field: it would be overriden after each field indexing",
           cls: "field-warning"
         });
         const builtinOptionsContainer = container.createDiv();
@@ -6670,11 +6670,11 @@ function settingsModal23(Base25) {
         const summarizedFieldNameTopContainer = builtinOptionsContainer.createDiv({ cls: "vstacked" });
         this.field.options.summarizedFieldName = this.field.options.summarizedFieldName;
         const summarizedFieldNameContainer = summarizedFieldNameTopContainer.createDiv({ cls: "field-container" });
-        summarizedFieldNameContainer.createEl("span", { text: "汇总字段名", cls: "label" });
+        summarizedFieldNameContainer.createEl("span", { text: "Summarized field name", cls: "label" });
         const summarizedFieldName = new import_obsidian25.TextComponent(summarizedFieldNameContainer);
         summarizedFieldName.inputEl.addClass("full-width");
         summarizedFieldName.inputEl.addClass("with-label");
-        summarizedFieldNameTopContainer.createEl("span", { text: "包含用于汇总功能的汇总值的字段名称", cls: "sub-text" });
+        summarizedFieldNameTopContainer.createEl("span", { text: "Name of the field containing summarized value used for the summarizing function", cls: "sub-text" });
         summarizedFieldName.setValue(this.field.options.summarizedFieldName);
         summarizedFieldName.onChange((value) => {
           this.field.options.summarizedFieldName = value;
@@ -13571,17 +13571,17 @@ var capitalize = (s) => {
 
 // src/fileClass/fileClass.ts
 var options = {
-  "limit": { name: "限制", toValue: (value) => value },
-  "mapWithTag": { name: "用标签进行映射", toValue: (value) => value },
+  "limit": { name: "limit", toValue: (value) => value },
+  "mapWithTag": { name: "mapWithTag", toValue: (value) => value },
   "icon": { name: "icon", toValue: (value) => `${value || "file-spreadsheet"}` },
-  "tagNames": { name: "标签名称", toValue: (values) => values.length ? values : null },
-  "filesPaths": { name: "文件路径", toValue: (values) => values.length ? values : null },
-  "bookmarksGroups": { name: "书签组", toValue: (values) => values.length ? values : null },
-  "excludes": { name: "排除", toValue: (values) => values.length ? values.map((attr) => attr.name) : null },
-  "parent": { name: "扩展", toValue: (value) => (value == null ? void 0 : value.name) || null },
-  "savedViews": { name: "已保存视图", toValue: (value) => value },
-  "favoriteView": { name: "字段顺序", toValue: (value) => value || null },
-  "fieldsOrder": { name: "字段排序", toValue: (value) => value || [] }
+  "tagNames": { name: "tagNames", toValue: (values) => values.length ? values : null },
+  "filesPaths": { name: "filesPaths", toValue: (values) => values.length ? values : null },
+  "bookmarksGroups": { name: "bookmarksGroups", toValue: (values) => values.length ? values : null },
+  "excludes": { name: "excludes", toValue: (values) => values.length ? values.map((attr) => attr.name) : null },
+  "parent": { name: "extends", toValue: (value) => (value == null ? void 0 : value.name) || null },
+  "savedViews": { name: "savedViews", toValue: (value) => value },
+  "favoriteView": { name: "favoriteView", toValue: (value) => value || null },
+  "fieldsOrder": { name: "fieldsOrder", toValue: (value) => value || [] }
 };
 var FileClassOptions = class {
   constructor(limit, icon, parent, excludes, tagNames, mapWithTag = false, filesPaths, bookmarksGroups, savedViews, favoriteView, fieldsOrder) {
@@ -13946,7 +13946,7 @@ function buildSortedAttributes(plugin, fileClass) {
     });
     if (_initial.length === sortedAttributes.length) {
       console.error("Impossible to restore field hierarchy, check you fileclass configuration");
-      new import_obsidian30.Notice("无法还原字段层次结构, 请检查您的文件类配置");
+      new import_obsidian30.Notice("Impossible to restore field hierarchy, check you fileclass configuration");
       hasError = true;
       return getFileClassAttributes(plugin, fileClass);
     }
@@ -14102,7 +14102,7 @@ var AddNewFileClassModal = class extends import_obsidian31.Modal {
     this.containerEl.setAttr("id", "add-new-fileclass-modal");
   }
   onOpen() {
-    this.titleEl.setText("添加新的fileClass");
+    this.titleEl.setText("Add a new fileClass");
     this.containerEl.onkeydown = async (e) => {
       if (e.key == "Enter" && e.altKey) {
         e.preventDefault();
@@ -14236,7 +14236,7 @@ var chooseSectionModal = class extends import_obsidian32.SuggestModal {
       }
     });
     addAsListItemBtn.setDisabled(this.addAtEndOfFrontMatter);
-    addAsListItemBtn.setTooltip("将此字段添加为列表项");
+    addAsListItemBtn.setTooltip("Add this field as a list item");
     const addAsCommentItemBtn = new import_obsidian32.ButtonComponent(inputContainer);
     addAsCommentItemBtn.setIcon("message-square");
     addAsCommentItemBtn.onClick(() => {
@@ -14249,14 +14249,14 @@ var chooseSectionModal = class extends import_obsidian32.SuggestModal {
       }
     });
     addAsCommentItemBtn.setDisabled(this.addAtEndOfFrontMatter);
-    addAsCommentItemBtn.setTooltip("将此字段添加为注释项");
+    addAsCommentItemBtn.setTooltip("Add this field as a comment item");
     const addAtEndOfFrontMatterBtn = new import_obsidian32.ButtonComponent(inputContainer);
     addAtEndOfFrontMatterBtn.setIcon("align-vertical-space-around");
     addAtEndOfFrontMatterBtn.onClick(() => {
       this.onSelect(-1, false, false);
       this.close();
     });
-    addAtEndOfFrontMatterBtn.setTooltip("在frontmatter的末尾添加此字段");
+    addAtEndOfFrontMatterBtn.setTooltip("Add this field at the end of the frontmatter");
   }
   async getSuggestions(query) {
     const content = await this.plugin.app.vault.read(this.file);
@@ -14350,14 +14350,14 @@ var FieldSetting = class extends import_obsidian33.Setting {
   }
   addEditButton() {
     this.addButton((b) => {
-      b.setIcon("pencil").setTooltip("编辑").onClick(() => {
+      b.setIcon("pencil").setTooltip("Edit").onClick(() => {
         openSettings(this.field.id, void 0, this.plugin, this, this.containerEl);
       });
     });
   }
   addDeleteButton() {
     this.addButton((b) => {
-      b.setIcon("trash").setTooltip("删除").onClick(() => {
+      b.setIcon("trash").setTooltip("Delete").onClick(() => {
         var _a;
         const currentExistingProperty = this.plugin.presetFields.filter((p) => p.id == this.field.id)[0];
         if (currentExistingProperty) {
@@ -14420,7 +14420,8 @@ var DEFAULT_SETTINGS = {
   chooseFileClassAtFileCreation: false,
   autoInsertFieldsAtFileClassInsertion: false,
   fileClassIcon: "package",
-  isAutoCalculationEnabled: true
+  isAutoCalculationEnabled: true,
+  disableDataviewPrompt: false
 };
 var incrementVersion = (plugin) => {
   const currentVersion = plugin.settings.settingsVersion;
@@ -14571,14 +14572,14 @@ function buildSettingsModal(fieldConstructor, plugin, parentSetting, parentSetti
     }
     createnameInputContainer() {
       const container = this.contentEl.createDiv({ cls: "field-container" });
-      container.createDiv({ cls: "label", text: "字段名称：" });
+      container.createDiv({ cls: "label", text: "Field Name: " });
       const input = new import_obsidian34.TextComponent(container);
       input.inputEl.addClass("with-label");
       input.inputEl.addClass("full-width");
       input.inputEl.focus();
       const name = this.field.name;
       input.setValue(name);
-      input.setPlaceholder("字段名称");
+      input.setPlaceholder("Name of the field");
       input.onChange((value) => {
         this.field.name = value;
         this.command.id = `insert__${this.field.fileClassName || "presetField"}__${value}`;
@@ -14627,7 +14628,7 @@ function buildSettingsModal(fieldConstructor, plugin, parentSetting, parentSetti
     }
     createFrontmatterListDisplayContainer() {
       this.frontmatterListDisplayContainer = this.contentEl.createDiv({ cls: "field-container" });
-      this.frontmatterListDisplayContainer.createDiv({ text: "Frontmatter列表显示类型", cls: "label" });
+      this.frontmatterListDisplayContainer.createDiv({ text: "Frontmatter list display type", cls: "label" });
       this.frontmatterListDisplayContainer.createDiv({ cls: "spacer" });
       const frontmatterListDisplay = new import_obsidian34.DropdownComponent(this.frontmatterListDisplayContainer);
       const options2 = {};
@@ -14667,13 +14668,13 @@ function buildSettingsModal(fieldConstructor, plugin, parentSetting, parentSetti
     createCommandContainer() {
       var _a, _b;
       const commandContainer = this.contentEl.createDiv({ cls: "field-container" });
-      commandContainer.createDiv({ text: "为此字段设置命令？", cls: "label" });
+      commandContainer.createDiv({ text: "set a command for this field?", cls: "label" });
       commandContainer.createDiv({ cls: "spacer" });
       const addCommandToggler = new import_obsidian34.ToggleComponent(commandContainer);
       addCommandToggler.setValue(this.addCommand);
       const iconContainer = this.contentEl.createDiv({ cls: "field-container" });
       this.addCommand ? iconContainer.show() : iconContainer.hide();
-      iconContainer.createDiv({ text: "移动工具栏的图标名称", cls: "label" });
+      iconContainer.createDiv({ text: "Icon name for mobile toolbar", cls: "label" });
       this.iconName = new import_obsidian34.TextComponent(iconContainer);
       this.iconName.inputEl.addClass("full-width");
       this.iconName.inputEl.addClass("with-label");
@@ -14757,7 +14758,7 @@ in the frontmatter section`);
 can't be modified once saved`);
       this.typeNameContainer = this.typeSelectContainer.createDiv({ cls: "field-type-label" }).createDiv({ cls: `chip ${getTagName(this.field.type)}` });
       if (!this.field.id || this.isNew) {
-        new import_obsidian34.ButtonComponent(this.typeSelectContainer).setButtonText("选择类型").onClick(() => {
+        new import_obsidian34.ButtonComponent(this.typeSelectContainer).setButtonText("Choose a type").onClick(() => {
           this.typeSelector = new TypeSelector(this.plugin, this, this.typeNameContainer);
           this.typeSelector.open();
         }).buttonEl.setAttr("id", "field-type-selector-btn");
@@ -14781,12 +14782,12 @@ can't be modified once saved`);
     }
     createSaveButton(container) {
       const saveButton = new import_obsidian34.ButtonComponent(container);
-      saveButton.setTooltip("保存");
+      saveButton.setTooltip("Save");
       saveButton.setIcon("checkmark");
       saveButton.onClick(async () => {
         let error = !this.validateFields();
         if (error) {
-          new import_obsidian34.Notice("保存前修复错误。");
+          new import_obsidian34.Notice("Fix errors before saving.");
           return;
         }
         ;
@@ -14845,7 +14846,7 @@ can't be modified once saved`);
       removeButton.onClick(() => {
         const confirmModal = new import_obsidian34.Modal(this.plugin.app);
         confirmModal.containerEl.addClass("metadata-menu");
-        confirmModal.titleEl.setText("请确认");
+        confirmModal.titleEl.setText("Please confirm");
         confirmModal.contentEl.createDiv().setText(`Do you really want to remove this field?`);
         const confirmFooter = confirmModal.contentEl.createDiv({ cls: "footer-actions" });
         confirmFooter.createDiv({ cls: "spacer" });
@@ -14880,7 +14881,7 @@ can't be modified once saved`);
     createCancelButton(container) {
       const cancelButton = new import_obsidian34.ButtonComponent(container);
       cancelButton.setIcon("cross");
-      cancelButton.setTooltip("取消");
+      cancelButton.setTooltip("Cancel");
       cancelButton.onClick(() => this.onCancel());
     }
     onClose() {
@@ -15005,7 +15006,7 @@ var FileClassQuerySetting = class extends import_obsidian36.Setting {
   }
   addEditButton() {
     this.addButton((b) => {
-      b.setIcon("pencil").setTooltip("编辑").onClick(() => {
+      b.setIcon("pencil").setTooltip("Edit").onClick(() => {
         let modal = new FileClassQuerySettingsModal(this.plugin, this.containerEl, this, this.fileClassQuery);
         modal.open();
       });
@@ -15013,7 +15014,7 @@ var FileClassQuerySetting = class extends import_obsidian36.Setting {
   }
   addDeleteButton() {
     this.addButton((b) => {
-      b.setIcon("trash").setTooltip("删除").onClick(() => {
+      b.setIcon("trash").setTooltip("Delete").onClick(() => {
         var _a;
         const currentExistingFileClassQuery = this.plugin.initialFileClassQueries.find((p) => p.id == this.fileClassQuery.id);
         if (currentExistingFileClassQuery) {
@@ -15027,7 +15028,7 @@ var FileClassQuerySetting = class extends import_obsidian36.Setting {
   }
   addMoveUpButton() {
     this.addButton((b) => {
-      b.setIcon("up-chevron-glyph").setTooltip("向上移动（优先级较低）").onClick(() => {
+      b.setIcon("up-chevron-glyph").setTooltip("Move up (lower priority)").onClick(() => {
         const currentFileClassQueryIndex = this.plugin.initialFileClassQueries.map((fcq) => fcq.id).indexOf(this.fileClassQuery.id);
         if (currentFileClassQueryIndex > 0) {
           this.containerEl.insertBefore(this.settingEl, this.settingEl.previousElementSibling);
@@ -15094,7 +15095,7 @@ var FileClassQuerySettingsModal = class extends import_obsidian37.Modal {
     input.inputEl.addClass("full-width");
     const name = this.fileClassQuery.name;
     input.setValue(name);
-    input.setPlaceholder("此文件的名称类查询");
+    input.setPlaceholder("Name of this fileClass query");
     input.onChange((value) => {
       this.fileClassQuery.name = value;
       this.titleEl.setText(`Manage options for ${this.fileClassQuery.name}`);
@@ -15125,7 +15126,7 @@ var FileClassQuerySettingsModal = class extends import_obsidian37.Modal {
     });
   }
   createQueryInputContainer(container) {
-    container.createDiv({ text: "dataviewJS查询：" });
+    container.createDiv({ text: "dataviewJS query:" });
     const queryStringInputContainer = container.createDiv({ cls: "field-container" });
     const queryStringInput = new import_obsidian37.TextAreaComponent(queryStringInputContainer);
     queryStringInput.inputEl.addClass("full-width");
@@ -15148,7 +15149,7 @@ var FileClassQuerySettingsModal = class extends import_obsidian37.Modal {
   }
   createSaveButton(container) {
     const b = new import_obsidian37.ButtonComponent(container);
-    b.setTooltip("保存");
+    b.setTooltip("Save");
     b.setIcon("checkmark");
     b.onClick(async () => {
       var _a;
@@ -15172,7 +15173,7 @@ var FileClassQuerySettingsModal = class extends import_obsidian37.Modal {
   }
   createCancelButton(container) {
     const b = new import_obsidian37.ButtonComponent(container);
-    b.setIcon("cross").setTooltip("取消").onClick(() => {
+    b.setIcon("cross").setTooltip("Cancel").onClick(() => {
       this.saved = false;
       if (this.initialFileClassQuery.name != "") {
         Object.assign(this.fileClassQuery, this.initialFileClassQuery);
@@ -15299,7 +15300,7 @@ var ButtonDisplaySetting = class extends import_obsidian38.Setting {
         this.plugin.settings[this.value] = value2;
         this.plugin.saveSettings();
         if (this.needsReload)
-          reloadInfo.textContent = "请重新加载元数据菜单以应用此更改";
+          reloadInfo.textContent = "Please reload metadata menu to apply this change";
       });
     }).settingEl.addClass("no-border");
   }
@@ -15322,22 +15323,22 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     const globalSettings = new SettingGroup(
       this,
       "global-settings",
-      "全局设置",
-      "应用于整个库的全局设置",
+      "Global settings",
+      "Global settings to apply to your whole vault",
       true
     );
     const scopeReloadInfo = globalSettings.containerEl.createDiv({ cls: "settings-info-warning" });
-    new import_obsidian38.Setting(globalSettings.containerEl).setName("范围").setDesc("仅在frontmatter或整个注释中索引字段（如果使用dataview内联字段）。对完整笔记进行索引可能会导致存储大型文件的保管库出现一些延迟").addDropdown((cb) => {
+    new import_obsidian38.Setting(globalSettings.containerEl).setName("Scope").setDesc("Index fields in frontmatter only or in the whole note (if you use dataview inline fields). Indexing full notes could cause some latencies in vaults with large files").addDropdown((cb) => {
       cb.addOption("frontmatterOnly", "Frontmatter only");
       cb.addOption("fullNote", "Full note");
       cb.setValue(this.plugin.settings.frontmatterOnly ? "frontmatterOnly" : "fullNote");
       cb.onChange(async (value) => {
         this.plugin.settings.frontmatterOnly = value === "frontmatterOnly" ? true : false;
         await this.plugin.saveSettings();
-        scopeReloadInfo.textContent = "请重新加载元数据菜单以应用此更改";
+        scopeReloadInfo.textContent = "Please reload metadata menu to apply this change";
       });
     }).settingEl.addClass("no-border");
-    new import_obsidian38.Setting(globalSettings.containerEl).setName("在上下文菜单中显示字段选项").setDesc("选择在链接或文件的上下文菜单中显示或隐藏字段选项").addToggle((toggle) => {
+    new import_obsidian38.Setting(globalSettings.containerEl).setName("Display field options in context menu").setDesc("Choose to show or hide fields options in the context menu of a link or a file").addToggle((toggle) => {
       toggle.setValue(this.plugin.settings.displayFieldsInContextMenu);
       toggle.onChange(async (value) => {
         this.plugin.settings.displayFieldsInContextMenu = value;
@@ -15347,8 +15348,8 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     new SettingTextWithButtonComponent(
       this.plugin,
       globalSettings.containerEl,
-      "排除的文件夹",
-      "不应用预设字段和fileClass选项的文件夹。适用于模板或设置文件夹。",
+      "Excluded folders",
+      "Folders where preset fields and fileClass options won't be applied. Useful for templates or settings folders.",
       "Enter/folders/paths/, comma/separated/",
       "fileIndexingExcludedFolders",
       (item) => item.replace(/\/?$/, "/")
@@ -15356,8 +15357,8 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     new SettingTextWithButtonComponent(
       this.plugin,
       globalSettings.containerEl,
-      "排除的扩展名",
-      "具有这些扩展名的文件将不会被索引。对于不包含元数据的大文件很有用。逗号分隔",
+      "Excluded extensions",
+      "Files with these extensions won't be indexed Useful for big files that don't contain metadata. Comma separated",
       "",
       "fileIndexingExcludedExtensions",
       (item) => item
@@ -15365,8 +15366,8 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     new SettingTextWithButtonComponent(
       this.plugin,
       globalSettings.containerEl,
-      "排除的文件名模式",
-      "名称与这些正则表达式匹配的文件将不会被索引。适用于非常特定的用例。逗号分隔 ",
+      "Excluded file name patterns",
+      "files with names matching those regex won't be indexed. Useful for very specific usecases. Comma separated ",
       "foo*, .md$",
       "fileIndexingExcludedRegex",
       (item) => item
@@ -15374,13 +15375,13 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     new SettingTextWithButtonComponent(
       this.plugin,
       globalSettings.containerEl,
-      "全局忽略的字段",
-      "插件将忽略的字段。逗号分隔 ",
+      "Globally ignored fields",
+      "Fields to be ignored by the plugin. Comma separated ",
       "",
       "globallyIgnoredFields",
       (item) => item
     );
-    const enableAutoComplete = new import_obsidian38.Setting(globalSettings.containerEl).setName("自动完成").setDesc("激活自动补全字段").addToggle((cb) => {
+    const enableAutoComplete = new import_obsidian38.Setting(globalSettings.containerEl).setName("Autocomplete").setDesc("Activate autocomplete fields").addToggle((cb) => {
       cb.setValue(this.plugin.settings.isAutosuggestEnabled);
       cb.onChange((value) => {
         this.plugin.settings.isAutosuggestEnabled = value;
@@ -15389,7 +15390,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     });
     enableAutoComplete.settingEl.addClass("no-border");
     enableAutoComplete.controlEl.addClass("full-width");
-    const enableAutoCalculation = new import_obsidian38.Setting(globalSettings.containerEl).setName("自动计算").setDesc("激活查找和公式字段全局自动计算").addToggle((cb) => {
+    const enableAutoCalculation = new import_obsidian38.Setting(globalSettings.containerEl).setName("Auto calculation").setDesc("Activate lookups and formulas fields global auto-calculation").addToggle((cb) => {
       cb.setValue(this.plugin.settings.isAutoCalculationEnabled);
       cb.onChange((value) => {
         this.plugin.settings.isAutoCalculationEnabled = value;
@@ -15398,7 +15399,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     });
     enableAutoCalculation.settingEl.addClass("no-border");
     enableAutoCalculation.controlEl.addClass("full-width");
-    const showIndexingStatus = new import_obsidian38.Setting(globalSettings.containerEl).setName("字段索引状态").setDesc("在状态工具栏中显示字段索引状态图标").addToggle((cb) => {
+    const showIndexingStatus = new import_obsidian38.Setting(globalSettings.containerEl).setName("Fields Indexing Status").setDesc("Show fields indexing status icon in status toolbar").addToggle((cb) => {
       cb.setValue(this.plugin.settings.showIndexingStatusInStatusBar);
       cb.onChange((value) => {
         this.plugin.settings.showIndexingStatusInStatusBar = value;
@@ -15413,7 +15414,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     });
     showIndexingStatus.settingEl.addClass("no-border");
     showIndexingStatus.controlEl.addClass("full-width");
-    const frontmatterListDisplay = new import_obsidian38.Setting(globalSettings.containerEl).setName("Frontmatter列表显示").setDesc("选择列表应在frontmatter中显示为数组还是缩进列表").addDropdown((cb) => {
+    const frontmatterListDisplay = new import_obsidian38.Setting(globalSettings.containerEl).setName("Frontmatter list display").setDesc("Choose wether lists should be displayed as arrays or indented lists in frontmatter").addDropdown((cb) => {
       [["Array", "asArray"], ["Indented List", "asList"]].forEach(([display, value]) => {
         cb.addOption(value, display);
       });
@@ -15425,7 +15426,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     });
     frontmatterListDisplay.settingEl.addClass("no-border");
     frontmatterListDisplay.controlEl.addClass("full-width");
-    new import_obsidian38.Setting(globalSettings.containerEl).setName("一周的第一天").setDesc("对于日期字段，日期选择器的周应从哪一天开始").addDropdown((cb) => {
+    new import_obsidian38.Setting(globalSettings.containerEl).setName("First day of week").setDesc("For date fields, which day the date picker's week should start with").addDropdown((cb) => {
       for (let i = 0; i < 2; i++) {
         cb.addOption(i.toString(), (0, import_obsidian38.moment)().day(i).format("dddd"));
       }
@@ -15435,16 +15436,28 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
         await this.plugin.saveSettings();
       });
     }).settingEl.addClass("no-border");
+    if (!this.app.plugins.enabledPlugins.has("dataview") || this.app.plugins.plugins["dataview"] && //@ts-ignore
+    !this.app.plugins.plugins["dataview"].settings.enableDataviewJs) {
+      new import_obsidian38.Setting(globalSettings.containerEl).setName("Disable dataview notice").setDesc(
+        "Dataview is not installed or enabled. Disable this notice"
+      ).addToggle((toggle) => {
+        toggle.setValue(this.plugin.settings.disableDataviewPrompt);
+        toggle.onChange(async (value) => {
+          this.plugin.settings.disableDataviewPrompt = value;
+          await this.plugin.saveSettings();
+        });
+      }).settingEl.addClass("no-border");
+    }
     containerEl.createDiv({ cls: "setting-divider" });
     const presetFieldsSettings = new PresetFieldsSettingGroup(
       this,
       "preset-fields-settings",
-      "预设字段设置",
-      "管理整个库中字段的全局预定义类型和选项",
+      "Preset Fields settings",
+      "Manage globally predefined type and options for a field throughout your whole vault",
       true
     );
-    new import_obsidian38.Setting(presetFieldsSettings.containerEl).setName("添加新字段设置").setDesc("添加一个新的Frontmatter属性，您需要为其预设选项。").addButton((button) => {
-      presetFieldsSettings.addNewButton = button.setTooltip("添加新属性管理器").setButtonText("添加新").setCta().onClick(async () => openSettings("", void 0, this.plugin, void 0, this.fieldsContainer));
+    new import_obsidian38.Setting(presetFieldsSettings.containerEl).setName("Add New Field Setting").setDesc("Add a new Frontmatter property for which you want preset options.").addButton((button) => {
+      presetFieldsSettings.addNewButton = button.setTooltip("Add New Property Manager").setButtonText("Add new").setCta().onClick(async () => openSettings("", void 0, this.plugin, void 0, this.fieldsContainer));
       return presetFieldsSettings.addNewButton;
     }).settingEl.addClass("no-border");
     this.fieldsContainer = presetFieldsSettings.containerEl.createDiv({ cls: "fields-container" });
@@ -15461,8 +15474,8 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     const classFilesSettings = new FileClassSettingGroup(
       this,
       "fileclass-settings",
-      "文件类设置",
-      "管理fileClass文件夹和别名。当注释定义了fileClass时，fileClass字段属性将覆盖相同字段名的全局预设字段设置",
+      "FileClass settings",
+      "Manage fileClass folder and alias. When a note has a fileClass defined, fileClass field properties will override global preset fields settings for the same field name",
       true
     );
     const cFS = classFilesSettings;
@@ -15474,10 +15487,10 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
       await this.plugin.saveSettings();
       cFS.fileClassesFolderSaveButton.removeCta();
     });
-    const path = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("类文件路径").setDesc("包含某类型注释的授权字段的文件路径").addSearch((cfs) => {
+    const path = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("Class Files path").setDesc("Path to the files containing the authorized fields for a type of note").addSearch((cfs) => {
       cFS.fileClassPathInput = cfs;
       new FolderSuggest(this.plugin, cfs.inputEl);
-      cfs.setPlaceholder("文件夹").setValue(this.plugin.settings.classFilesPath || "").onChange((new_folder) => {
+      cfs.setPlaceholder("Folder").setValue(this.plugin.settings.classFilesPath || "").onChange((new_folder) => {
         const newPath = new_folder.endsWith("/") || !new_folder ? new_folder : new_folder + "/";
         this.newFileClassesPath = newPath || null;
         cFS.fileClassesFolderSaveButton.setCta();
@@ -15495,7 +15508,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
       await this.plugin.saveSettings();
       aliasSaveButton.removeCta();
     });
-    const alias = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("FileClass字段别名").setDesc("为frontmatter中的fileClass字段选择另一个名称（例如：类别、类型...").addText((text) => {
+    const alias = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("FileClass field alias").setDesc("Choose another name for fileClass field in frontmatter (example: Category, type, ...").addText((text) => {
       text.setValue(this.plugin.settings.fileClassAlias).onChange(async (value) => {
         this.newFileClassAlias = value || "fileClass";
         aliasSaveButton.setCta();
@@ -15505,13 +15518,13 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     alias.settingEl.addClass("narrow-title");
     alias.controlEl.addClass("full-width");
     alias.settingEl.appendChild(aliasSaveButton.buttonEl);
-    const global = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("全局文件类").setDesc("选择一个fileClass以适用于所有文件（即使它在其frontmatter中不作为fileClass属性存在）。这将覆盖上面定义的预设字段").addSearch((cfs) => {
+    const global = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("Global fileClass").setDesc("Choose one fileClass to be applicable to all files (even it is not present as a fileClass attribute in their frontmatter). This will override the preset Fields defined above").addSearch((cfs) => {
       new FileSuggest(
         cfs.inputEl,
         this.plugin,
         this.plugin.settings.classFilesPath || ""
       );
-      cfs.setPlaceholder("全局文件类");
+      cfs.setPlaceholder("Global fileClass");
       cfs.setValue(
         this.plugin.settings.globalFileClass ? this.plugin.settings.classFilesPath + this.plugin.settings.globalFileClass + ".md" : ""
       ).onChange((newPath) => {
@@ -15532,7 +15545,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
       defaultIconSave.removeCta();
     });
     const iconManagerContainer = classFilesSettings.containerEl.createDiv({ cls: "icon" });
-    const defaultIconSetting = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("默认图标").setDesc("从lucidee.dev库中为文件类选择默认图标").addText((cb) => {
+    const defaultIconSetting = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("Default Icon").setDesc("Choose a default icon for fileclasses from lucide.dev library").addText((cb) => {
       cb.setValue(this.plugin.settings.fileClassIcon || DEFAULT_SETTINGS.fileClassIcon).onChange((value) => {
         this.newIcon = value;
         (0, import_obsidian38.setIcon)(iconManagerContainer, value);
@@ -15553,7 +15566,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
       await this.plugin.saveSettings();
       rowPerPageSaveButton.removeCta();
     });
-    const maxRows = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("每页结果").setDesc("表视图中每页的结果数").addText((text) => {
+    const maxRows = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("Result per page").setDesc("Number of result per page in table view").addText((text) => {
       text.setValue(`${this.plugin.settings.tableViewMaxRecords}`).onChange(async (value) => {
         this.newTableViewMaxRecords = parseInt(value || `${this.plugin.settings.tableViewMaxRecords}`);
         rowPerPageSaveButton.setCta();
@@ -15563,7 +15576,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     maxRows.settingEl.addClass("narrow-title");
     maxRows.controlEl.addClass("full-width");
     maxRows.settingEl.appendChild(rowPerPageSaveButton.buttonEl);
-    const chooseFileClassAtFileCreation = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("创建后添加文件类").setDesc("在文件创建时选择要添加到文件中的文件类").addToggle((cb) => {
+    const chooseFileClassAtFileCreation = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("Add a fileclass after create").setDesc("Select a fileclass at file creation to be added to the file").addToggle((cb) => {
       cb.setValue(this.plugin.settings.chooseFileClassAtFileCreation);
       cb.onChange((value) => {
         this.plugin.settings.chooseFileClassAtFileCreation = value;
@@ -15572,7 +15585,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     });
     chooseFileClassAtFileCreation.settingEl.addClass("no-border");
     chooseFileClassAtFileCreation.controlEl.addClass("full-width");
-    const autoInsertFieldsAtFileClassInsertion = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("插入fileClass字段").setDesc("在fileClass选择后在frontmatter中包含fileClass").addToggle((cb) => {
+    const autoInsertFieldsAtFileClassInsertion = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("Insert fileClass fields").setDesc("Includes fileClass in frontmatter after fileClass choice").addToggle((cb) => {
       cb.setValue(this.plugin.settings.autoInsertFieldsAtFileClassInsertion);
       cb.onChange((value) => {
         this.plugin.settings.autoInsertFieldsAtFileClassInsertion = value;
@@ -15581,7 +15594,7 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     });
     autoInsertFieldsAtFileClassInsertion.settingEl.addClass("no-border");
     autoInsertFieldsAtFileClassInsertion.controlEl.addClass("full-width");
-    const showFileClassSelectInModal = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("文件类选择").setDesc("在注释字段模态中显示文件类选择选项").addToggle((cb) => {
+    const showFileClassSelectInModal = new import_obsidian38.Setting(classFilesSettings.containerEl).setName("Fileclass Select").setDesc("Show fileclass select option in note fields modals").addToggle((cb) => {
       cb.setValue(this.plugin.settings.showFileClassSelectInModal);
       cb.onChange((value) => {
         this.plugin.settings.showFileClassSelectInModal = value;
@@ -15594,45 +15607,45 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     const metadataMenuBtnSettings = new SettingGroup(
       this,
       "metadata-menu-button",
-      "元数据菜单按钮",
-      "显示额外按钮以访问字段的元数据菜单模式",
+      "Metadata Menu button",
+      "Show extra button to access metadata menu modal of fields",
       true
     );
     [
       {
-        name: "阅读模式链接",
-        description: "在阅读模式下，在链接后显示一个额外的按钮来访问元数据菜单窗体",
+        name: "Reading mode links",
+        description: "Display an extra button to access metadata menu form after a link in reading mode",
         value: "enableLinks"
       },
       {
-        name: "实时预览模式",
-        description: "在实时预览中显示链接后，显示一个额外的按钮来访问元数据菜单窗体",
+        name: "Live preview mode",
+        description: "Display an extra button to access metadata menu form after a link in live preview",
         value: "enableEditor"
       },
       {
-        name: "选项卡标题",
-        description: "在选项卡标题中显示一个额外的按钮来访问元数据菜单窗体",
+        name: "Tab header",
+        description: "Display an extra button to access metadata menu form in the tab header",
         value: "enableTabHeader"
       },
       {
-        name: "导入链接",
-        description: "在反向链接面板中显示一个额外的按钮来访问元数据菜单窗体",
+        name: "Backlinks",
+        description: "Display an extra button to access metadata menu form in the backlinks panel",
         value: "enableBacklinks"
       },
       {
-        name: "搜索",
-        description: "在搜索面板中显示一个额外的按钮来访问元数据菜单窗体",
+        name: "Search",
+        description: "Display an extra button to access metadata menu form in the search panel",
         value: "enableSearch"
       },
       {
-        name: "文件资源管理器",
-        description: "在文件资源管理器中显示一个额外的按钮来访问元数据菜单窗体",
+        name: "File explorer",
+        description: "Display an extra button to access metadata menu form in the file explorer",
         value: "enableFileExplorer",
         needsReload: true
       },
       {
-        name: "属性",
-        description: "显示字段按钮，用于访问属性部分中的元数据表单",
+        name: "Properties",
+        description: "Display fields buttons to access metadata forms in the property section",
         value: "enableProperties"
       }
     ].forEach((s) => new ButtonDisplaySetting(this.plugin, metadataMenuBtnSettings.containerEl, s.name, s.description, s.value, s.needsReload));
@@ -15640,12 +15653,12 @@ var MetadataMenuSettingTab = class extends import_obsidian38.PluginSettingTab {
     const queryFileClassSettings = new SettingGroup(
       this,
       "fileclass-queries",
-      "基于查询的FileClass设置",
-      "管理与此查询匹配的字段的全局预定义类型和选项",
+      "Query based FileClass settings",
+      "Manage globally predefined type and options for a field matching this query",
       true
     );
-    new import_obsidian38.Setting(queryFileClassSettings.containerEl).setName("为fileClass添加新查询").setDesc("添加一个新查询和一个将应用于与此查询匹配的文件的FileClass。").addButton((button) => {
-      return button.setTooltip("添加新fileClass查询").setButtonText("添加新").setCta().onClick(async () => {
+    new import_obsidian38.Setting(queryFileClassSettings.containerEl).setName("Add New Query for fileClass").setDesc("Add a new query and a FileClass that will apply to files matching this query.").addButton((button) => {
+      return button.setTooltip("Add New fileClass query").setButtonText("Add new").setCta().onClick(async () => {
         let modal = new FileClassQuerySettingsModal(this.plugin, queryFileClassSettings.containerEl);
         modal.open();
       });
@@ -16014,10 +16027,10 @@ async function testFileClassSettingsView(plugin, fileClass, data, speed = 100) {
   const runner = plugin.testRunner;
   const fCView = plugin.app.workspace.getActiveViewOfType(FileClassView);
   if (!fCView || !fCView.settingsView)
-    return runner.log("错误", `${fileClass.name} view didn't open`);
+    return runner.log("ERROR", `${fileClass.name} view didn't open`);
   const settingsMenuHeader = fCView.containerEl.querySelector("#settingsOption");
   if (!settingsMenuHeader)
-    return runner.log("错误", `${fileClass.name} settings menu not found`);
+    return runner.log("ERROR", `${fileClass.name} settings menu not found`);
   settingsMenuHeader.click();
   await (0, import_promises.setTimeout)(speed);
   const container = fCView.settingsView.container;
@@ -16027,7 +16040,7 @@ async function testFileClassSettingsView(plugin, fileClass, data, speed = 100) {
       return;
     const addBtn = container.querySelector(`#fileclass-setting-${collection}-addBtn`);
     if (!addBtn || !(addBtn instanceof HTMLButtonElement))
-      return runner.log("错误", `add ${collection} button not found`);
+      return runner.log("ERROR", `add ${collection} button not found`);
     for (const item of items) {
       addBtn.click();
       await (0, import_promises.setTimeout)(speed);
@@ -16078,7 +16091,7 @@ async function testFileClassesCreation(plugin, speed = 100) {
   const tab = await openPluginSettings(plugin);
   const fileClassSettings = tab.groups.find((g) => g.id === "fileclass-settings");
   if (!fileClassSettings || !isFileClassSettingGroup(fileClassSettings))
-    return plugin.testRunner.log("错误", "文件类设置组未定义");
+    return plugin.testRunner.log("ERROR", "Fileclass setting group is undefined");
   await (0, import_promises2.setTimeout)(speed);
   fileClassSettings.settingsContainerShowButton.buttonEl.click();
   plugin.testRunner.insertInTextComponent(fileClassSettings.fileClassPathInput, fileClassFolder);
@@ -16090,7 +16103,7 @@ async function testFileClassesCreation(plugin, speed = 100) {
   }).sort((f1, f2) => f1.name < f2.basename ? -1 : 1);
   const addFileClassBtn = document.querySelector(".fileClass-add-button");
   if (!addFileClassBtn)
-    return plugin.testRunner.log("错误", "找不到文件类添加按钮");
+    return plugin.testRunner.log("ERROR", "Fileclass add button not found");
   for (const fileclass of fileclasses) {
     await testCreateFileClass(plugin, addFileClassBtn, fileclass, speed);
   }
@@ -16101,10 +16114,10 @@ async function testCreateFileClass(plugin, addBtn, fileClassDataFile, speed = 10
   addBtn.click();
   const modal = document.querySelector("#add-new-fileclass-modal");
   if (!modal)
-    return plugin.testRunner.log("错误", "未找到添加新文件类模式");
+    return plugin.testRunner.log("ERROR", "Add new fileclass modal not found");
   const input = modal.querySelector("#fileclass-name-input");
   if (!input)
-    return plugin.testRunner.log("错误", "找不到文件类名输入");
+    return plugin.testRunner.log("ERROR", "fileclass name input not found");
   plugin.testRunner.insertInInputEl(input, fileClassDataFile.basename);
   await (0, import_promises2.setTimeout)(50);
   const saveBtn = modal.querySelector("#new-fileclass-confirm-btn");
@@ -16113,11 +16126,11 @@ async function testCreateFileClass(plugin, addBtn, fileClassDataFile, speed = 10
   await (0, import_promises2.setTimeout)(50);
   const fileClass = plugin.fieldIndex.fileClassesName.get(fileClassName);
   if (!fileClass)
-    return plugin.testRunner.log("错误", `${fileClassName} wasn't create or indexed`);
+    return plugin.testRunner.log("ERROR", `${fileClassName} wasn't create or indexed`);
   await testFileClassViewNavigation(plugin, fileClass, speed);
   const data = (_a = plugin.app.metadataCache.getFileCache(fileClassDataFile)) == null ? void 0 : _a.frontmatter;
   if (!data)
-    return plugin.testRunner.log("错误", `${fileClassDataFile.basename} fixture data not found`);
+    return plugin.testRunner.log("ERROR", `${fileClassDataFile.basename} fixture data not found`);
   await testFileClassSettingsView(plugin, fileClass, data, speed);
 }
 
@@ -16125,11 +16138,11 @@ async function testCreateFileClass(plugin, addBtn, fileClassDataFile, speed = 10
 var import_obsidian41 = require("obsidian");
 var testFilePath = "Folder3/test3_1_fileclass_frontmatter.md";
 var numberTest = {
-  name: "俯卧撑",
+  name: "push-ups",
   value: 10
 };
 var inputTest = {
-  name: "卡路里",
+  name: "calories",
   value: "test"
 };
 async function testValueModification(plugin, speed = 100) {
@@ -16142,15 +16155,15 @@ async function testMetadataMenuButton(plugin, speed = 100) {
   await plugin.app.workspace.openLinkText(test3_1.path, test3_1.path);
   const leaf = plugin.app.workspace.getActiveViewOfType(import_obsidian41.MarkdownView);
   if (!(leaf == null ? void 0 : leaf.file) || !(leaf.file instanceof import_obsidian41.TFile) || leaf.file.path !== testFilePath)
-    return plugin.testRunner.log("错误", "活动窗格不是test3_1");
+    return plugin.testRunner.log("ERROR", "Active pane isn't test3_1");
   const addFileClassCommand = plugin.app.commands.commands["metadata-menu:add_fileclass_to_file"];
   if (!addFileClassCommand || !addFileClassCommand.checkCallback)
-    return plugin.testRunner.log("错误", "找不到AddFileClass命令");
+    return plugin.testRunner.log("ERROR", "AddFileClass command not found");
   addFileClassCommand.checkCallback(false);
   const fileClassName = "Fileclass1";
   const choice = document.querySelector(`#fileclass-${fileClassName}-add-choice`);
   if (!choice)
-    return plugin.testRunner.log("错误", "找不到文件类选择");
+    return plugin.testRunner.log("ERROR", "Fileclass choice not found");
   plugin.testRunner.planActionAfterMetadataCacheResolution(async () => {
     await checkFileClass(plugin, leaf.file, fileClassName, speed);
   });
@@ -16173,10 +16186,10 @@ async function checkFileClass(plugin, file, fileClassName, speed = 100) {
 async function openFieldsModal(plugin, file, speed = 100) {
   const tab = document.querySelector(".workspace-tab-header[aria-label=test3_1_fileclass_frontmatter]");
   if (!tab)
-    return plugin.testRunner.log("错误", "选项卡未找到");
+    return plugin.testRunner.log("ERROR", "tab not found");
   const button = tab.querySelector("a.metadata-menu.fileclass-icon");
   if (!button)
-    return plugin.testRunner.log("错误", "按钮未找到");
+    return plugin.testRunner.log("ERROR", "button not found");
   plugin.testRunner.planActionAfterFieldsModalBuilt(
     file,
     async () => {
@@ -16188,10 +16201,10 @@ async function openFieldsModal(plugin, file, speed = 100) {
 async function insertMissingFields2(plugin, file, speed = 100) {
   const modal = document.querySelector(".modal-container.metadata-menu.note-fields-modal");
   if (!modal)
-    return plugin.testRunner.log("错误", "未找到模态字段");
+    return plugin.testRunner.log("ERROR", "Fields Modal not found");
   const insertFieldsInFrontmatterBtn = modal.querySelector("button.in-frontmatter-btn");
   if (!insertFieldsInFrontmatterBtn)
-    return plugin.testRunner.log("错误", "在frontmatter按钮中插入缺失的字段未找到");
+    return plugin.testRunner.log("ERROR", "Insert missing fields in frontmatter button not found");
   plugin.testRunner.planActionAfterFieldsModalBuilt(file, () => {
     plugin.testRunner.planActionAfterFieldsModalBuilt(file, async () => {
       await testNumberFieldAction(plugin, modal, speed);
@@ -16206,10 +16219,10 @@ async function testNumberFieldAction(plugin, modal, speed = 100) {
   var _a;
   const numberField = (_a = plugin.fieldIndex.filesFields.get(testFilePath)) == null ? void 0 : _a.find((f) => f.name === numberTest.name);
   if (!numberField)
-    return plugin.testRunner.log("错误", `${numberTest.name} field not found`);
+    return plugin.testRunner.log("ERROR", `${numberTest.name} field not found`);
   const incrementBtn = modal.querySelector(`#field_${numberField.id}_increase`);
   if (!incrementBtn)
-    return plugin.testRunner.log("错误", `${numberField.name} increment button not found`);
+    return plugin.testRunner.log("ERROR", `${numberField.name} increment button not found`);
   plugin.testRunner.planActionAfterFieldIndex(() => {
     getNumberFieldResultAndTestInputField(plugin, numberField, modal, speed);
   });
@@ -16225,10 +16238,10 @@ async function getNumberFieldResultAndTestInputField(plugin, numberField, modal,
   plugin.testRunner.log(test ? "SUCCESS" : "ERROR", "Number field action from fields modal");
   const input = (_b = plugin.fieldIndex.filesFields.get(testFilePath)) == null ? void 0 : _b.find((f) => f.name === inputTest.name);
   if (!input)
-    return plugin.testRunner.log("错误", `${inputTest.name} field not found`);
+    return plugin.testRunner.log("ERROR", `${inputTest.name} field not found`);
   const updateBtn = modal.querySelector(`#field_${input.id}_update`);
   if (!updateBtn)
-    return plugin.testRunner.log("错误", `${input.name} increment button not found`);
+    return plugin.testRunner.log("ERROR", `${input.name} increment button not found`);
   plugin.testRunner.planActionAfterFieldUpdateModalBuilt(input.id, (modal2) => {
     testInputModal(plugin, input, modal2, speed);
   });
@@ -16237,10 +16250,10 @@ async function getNumberFieldResultAndTestInputField(plugin, numberField, modal,
 async function testInputModal(plugin, input, inputModal, speed = 100) {
   const modal = document.querySelector(`#field_${input.id}_update_modal`);
   if (!modal)
-    return plugin.testRunner.log("错误", `${input.name} update modal not found`);
+    return plugin.testRunner.log("ERROR", `${input.name} update modal not found`);
   const textArea = modal.querySelector("textarea");
   if (!textArea)
-    return plugin.testRunner.log("错误", `${input.name} text area not found`);
+    return plugin.testRunner.log("ERROR", `${input.name} text area not found`);
   plugin.testRunner.insertInInputEl(textArea, inputTest.value);
   plugin.testRunner.planActionAfterFieldIndex(() => {
     testInputUpdate(plugin, input, speed);
@@ -16255,10 +16268,10 @@ async function testInputUpdate(plugin, input, speed = 100) {
     return plugin.testRunner.log("ERROR", testFilePath + " file not found");
   const note = await Note.buildNote(plugin, file);
   const test = ((_a = note.existingFields.find((eF) => eF.field.id === input.id)) == null ? void 0 : _a.value) === inputTest.value;
-  plugin.testRunner.log(test ? "SUCCESS" : "ERROR", "从字段模式输入字段操作");
+  plugin.testRunner.log(test ? "SUCCESS" : "ERROR", "Input field action from fields modal");
   const modal = document.querySelector(".modal-container.metadata-menu.note-fields-modal");
   if (!modal)
-    return plugin.testRunner.log("错误", "未找到模态字段");
+    return plugin.testRunner.log("ERROR", "Fields Modal not found");
   modal.querySelector(".modal-close-button").click();
 }
 
@@ -16372,7 +16385,7 @@ var TestRunner = class extends import_obsidian42.Component {
     });
     const testFile = this.vault.getAbstractFileByPath(testFilePath);
     if (!(testFile instanceof import_obsidian42.TFile))
-      return this.plugin.testRunner.log("错误", `Didn't find ${testFilePath}`);
+      return this.plugin.testRunner.log("ERROR", `Didn't find ${testFilePath}`);
     await this.plugin.app.vault.modify(testFile, "");
     for (const fC of fileClassFiles)
       await this.vault.adapter.remove(fC.path);
@@ -16441,7 +16454,7 @@ async function openPluginSettings(plugin, speed = 100) {
   if (!mdmSettingTab || !isMetadataMenuSettingTab(mdmSettingTab))
     throw Error("Metadatamenu setting tab is undefined");
   mdmSettingTab.navEl.click();
-  plugin.testRunner.log("SUCCESS", "打开设置选项卡");
+  plugin.testRunner.log("SUCCESS", "openSettingTab");
   await (0, import_promises3.setTimeout)(speed);
   return mdmSettingTab;
 }
@@ -16451,7 +16464,7 @@ function getPresetFields(plugin, speed = 100) {
   var _a, _b;
   const presetFieldsFile = plugin.app.vault.getAbstractFileByPath("__fixtures__/settings/presetFields.md");
   if (!presetFieldsFile || !(presetFieldsFile instanceof import_obsidian43.TFile))
-    return plugin.testRunner.log("错误", "找不到预设字段文件设置");
+    return plugin.testRunner.log("ERROR", "Couldn't find preset fields File settings");
   const fields = ((_b = (_a = plugin.app.metadataCache.getFileCache(presetFieldsFile)) == null ? void 0 : _a.frontmatter) == null ? void 0 : _b["fields"]) || [];
   return fields;
 }
@@ -16459,13 +16472,13 @@ async function testPresetFieldsCreation(plugin, speed = 100) {
   const tab = await openPluginSettings(plugin, speed);
   const presetfields = tab.groups.find((g) => g.id === "preset-fields-settings");
   if (!presetfields || !isPresetFieldsSettingGroup(presetfields))
-    return plugin.testRunner.log("错误", "预设字段设置未定义");
+    return plugin.testRunner.log("ERROR", "Preset fields setting is undefined");
   await (0, import_promises4.setTimeout)(speed);
   presetfields.settingsContainerShowButton.buttonEl.click();
-  plugin.testRunner.log("SUCCESS", "打开预设字段");
+  plugin.testRunner.log("SUCCESS", "Opening preset fields");
   const fields = getPresetFields(plugin);
   if (!fields)
-    return plugin.testRunner.log("错误", "未找到预设字段");
+    return plugin.testRunner.log("ERROR", "Preset fields not found");
   for (const field2 of fields) {
     field2.plugin = plugin;
     await enterFieldSettings(field2, tab.fieldsContainer, void 0, speed);
@@ -16478,19 +16491,19 @@ async function enterFieldSettings(field2, container, fileClass, speed = 100) {
   const plugin = field2.plugin;
   const fieldModal = openSettings("", fileClass == null ? void 0 : fileClass.name, field2.plugin, void 0, container);
   if (!fieldModal)
-    return plugin.testRunner.log("错误", "无法构建新的字段模式");
+    return plugin.testRunner.log("ERROR", "Couldn't build new field modal");
   await (0, import_promises4.setTimeout)(speed);
   fieldModal.namePromptComponent.setValue(field2.name);
   await (0, import_promises4.setTimeout)(speed);
   const typeBtn = fieldModal.containerEl.querySelector("#field-type-selector-btn");
   if (!typeBtn)
-    return plugin.testRunner.log("错误", "找不到类型选择器按钮");
+    return plugin.testRunner.log("ERROR", "Type selector button not found");
   typeBtn.click();
   fieldModal.typeSelector.open();
   await (0, import_promises4.setTimeout)(speed);
   const type = fieldModal.typeSelector.resultContainerEl.querySelector(`.field-type-${field2.type}`);
   if (!type)
-    return plugin.testRunner.log("错误", `${type} type not found in type selector modal`);
+    return plugin.testRunner.log("ERROR", `${type} type not found in type selector modal`);
   fieldModal.typeSelector.close();
   fieldModal.close();
   const newTypeFieldModal = fieldModal.setType(field2.type, fieldModal.typeNameContainer);
@@ -16511,7 +16524,7 @@ async function enterFieldSettings(field2, container, fileClass, speed = 100) {
   if (_field.fileClassName) {
     const fileClass2 = plugin.fieldIndex.fileClassesName.get(_field.fileClassName);
     if (!fileClass2)
-      return plugin.testRunner.log("错误", `${_field.fileClassName} not found in index`);
+      return plugin.testRunner.log("ERROR", `${_field.fileClassName} not found in index`);
     const file = fileClass2.getClassFile();
     savedField = (((_c = (_b = plugin.app.metadataCache.getFileCache(file)) == null ? void 0 : _b.frontmatter) == null ? void 0 : _c.fields) || []).find((f) => f.name === _field.name && f.path === _field.path);
   } else {
@@ -16519,7 +16532,7 @@ async function enterFieldSettings(field2, container, fileClass, speed = 100) {
     savedField = presetFields.find((f) => f.name === _field.name);
   }
   if (!savedField)
-    return plugin.testRunner.log("错误", `${_field.name} not saved`);
+    return plugin.testRunner.log("ERROR", `${_field.name} not saved`);
   const STATUS = areFieldSettingsEqualWithoutId(savedField, field2) ? "SUCCESS" : "ERROR";
   plugin.testRunner.log(STATUS, `Field ${_field.name} creation`);
 }
@@ -16558,18 +16571,18 @@ var FileClassFieldSetting = class {
   addEditButton(container) {
     const btn = new import_obsidian44.ButtonComponent(container);
     btn.setIcon("pencil");
-    btn.setTooltip("编辑");
+    btn.setTooltip("Edit");
     btn.onClick(() => openSettings(this.fileClassAttribute.id, this.fileClass.name, this.plugin));
   }
   addDeleteButton(container) {
     const btn = new import_obsidian44.ButtonComponent(container);
     btn.setIcon("trash");
-    btn.setTooltip("删除");
+    btn.setTooltip("Delete");
     btn.setClass("cell");
     btn.onClick(() => {
       const confirmModal = new import_obsidian44.Modal(this.plugin.app);
       confirmModal.containerEl.addClass("metadata-menu");
-      confirmModal.titleEl.setText("请确认");
+      confirmModal.titleEl.setText("Please confirm");
       confirmModal.contentEl.createDiv().setText(`Do you really want to remove this field?`);
       const confirmFooter = confirmModal.contentEl.createDiv({ cls: "footer-actions" });
       confirmFooter.createDiv({ cls: "spacer" });
@@ -16626,7 +16639,7 @@ var FileClassFieldsView = class {
 async function testFileClassFieldsView(plugin, fileClass, data, speed = 100) {
   const fCView = plugin.app.workspace.getActiveViewOfType(FileClassView);
   if (!fCView || !fCView.fieldsView)
-    return plugin.testRunner.log("错误", `${fileClass.name} view didn't open`);
+    return plugin.testRunner.log("ERROR", `${fileClass.name} view didn't open`);
   openTab2(fCView, "fields", speed);
   for (const fieldData of data.fields) {
     const field2 = new (buildEmptyField(plugin, fileClass.name))();
@@ -16655,7 +16668,7 @@ var OptionsPriorityModal = class extends import_obsidian45.Modal {
     this.field = field2;
     this.parentFieldSet = parentFieldSet;
     this.rowSorterComponent = rowSorterComponent;
-    this.titleEl.setText("通过移动值来设置自定义顺序");
+    this.titleEl.setText("Set a custom order by moving the values");
     this.containerEl.addClass("metadata-menu");
     this.initialOrder = ((_a = this.rowSorterComponent.customOrder) == null ? void 0 : _a.length) ? this.rowSorterComponent.customOrder : this.getOptions();
     this.orderedOptions = [...this.initialOrder];
@@ -16756,10 +16769,10 @@ var OptionsPriorityModal = class extends import_obsidian45.Modal {
     const cancelButton = new import_obsidian45.ButtonComponent(footerActionsContainer);
     cancelButton.setIcon("cross");
     cancelButton.onClick(() => this.close());
-    cancelButton.setTooltip("取消");
+    cancelButton.setTooltip("Cancel");
     const refreshButton = new import_obsidian45.ButtonComponent(footerActionsContainer);
     refreshButton.setIcon("refresh-ccw");
-    refreshButton.setTooltip("取消更改");
+    refreshButton.setTooltip("Cancel changes");
     refreshButton.onClick(async () => {
       this.orderedOptions = this.rowSorterComponent.customOrder || this.getOptions();
       this.buildOrderedOptions();
@@ -16767,7 +16780,7 @@ var OptionsPriorityModal = class extends import_obsidian45.Modal {
     });
     const resetButton = new import_obsidian45.ButtonComponent(footerActionsContainer);
     resetButton.setIcon("eraser");
-    resetButton.setTooltip("重置初始排序");
+    resetButton.setTooltip("Reset initial ordering");
     resetButton.onClick(async () => {
       this.orderedOptions = this.getOptions();
       this.rowSorterComponent.toggleRowSorterButtonsState(void 0);
@@ -16984,10 +16997,10 @@ var OptionsMultiSelectModal = class extends import_obsidian47.SuggestModal {
     const cancelButton = new import_obsidian47.ButtonComponent(footerActionsContainer);
     cancelButton.setIcon("cross");
     cancelButton.onClick(() => this.close());
-    cancelButton.setTooltip("取消");
+    cancelButton.setTooltip("Cancel");
     const clearButton = new import_obsidian47.ButtonComponent(footerActionsContainer);
     clearButton.setIcon("filter-x");
-    clearButton.setTooltip("清除过滤值");
+    clearButton.setTooltip("Clear filtered value(s)");
     clearButton.onClick(async () => {
       this.input.setValue("");
       this.parentFieldSet.tableView.update();
@@ -17081,7 +17094,7 @@ var CustomFilterModal = class extends import_obsidian48.Modal {
     this.parentFieldSet = parentFieldSet;
     this.filterComponent = filterComponent;
     this.containerEl.addClass("metadata-menu");
-    this.titleEl.setText("输入自定义筛选函数");
+    this.titleEl.setText("Enter a custom filtering function");
     this.buildInput();
     cleanActions(this.containerEl, ".footer-actions");
     const footerActionsContainer = this.containerEl.createDiv({ cls: "footer-actions" });
@@ -17128,17 +17141,17 @@ var CustomFilterModal = class extends import_obsidian48.Modal {
     const cancelButton = new import_obsidian48.ButtonComponent(footerActionsContainer);
     cancelButton.setIcon("cross");
     cancelButton.onClick(() => this.close());
-    cancelButton.setTooltip("取消");
+    cancelButton.setTooltip("Cancel");
     const refreshButton = new import_obsidian48.ButtonComponent(footerActionsContainer);
     refreshButton.setIcon("refresh-ccw");
-    refreshButton.setTooltip("取消更改");
+    refreshButton.setTooltip("Cancel changes");
     refreshButton.onClick(async () => {
       this.filterFunctionInput.setValue(this.filterComponent.customFilter);
       this.confirmButton.removeCta();
     });
     const resetButton = new import_obsidian48.ButtonComponent(footerActionsContainer);
     resetButton.setIcon("eraser");
-    resetButton.setTooltip("重置初始排序");
+    resetButton.setTooltip("Reset initial ordering");
     resetButton.onClick(async () => {
       this.filterFunctionInput.setValue("");
       this.filterComponent.toggleCustomFilterState();
@@ -17665,7 +17678,7 @@ var FileClassDataviewTable = class {
         return values;
       } catch (e) {
         console.log(e);
-        console.error("无法构建文件列表");
+        console.error("unable to build the list of files");
       }
     } else {
       return [];
@@ -18170,10 +18183,10 @@ var ChildrenMultiSelectModal = class extends import_obsidian53.SuggestModal {
     const cancelButton = new import_obsidian53.ButtonComponent(footerActionsContainer);
     cancelButton.setIcon("cross");
     cancelButton.onClick(() => this.close());
-    cancelButton.setTooltip("取消");
+    cancelButton.setTooltip("Cancel");
     const clearButton = new import_obsidian53.ButtonComponent(footerActionsContainer);
     clearButton.setIcon("filter-x");
-    clearButton.setTooltip("清除过滤值");
+    clearButton.setTooltip("Clear filtered value(s)");
     clearButton.onClick(async () => {
       const fieldSet = this.parentFieldSet;
       const view = fieldSet.tableView;
@@ -18304,7 +18317,7 @@ var FileClassTableView = class {
   */
   buildLimitManager(container) {
     container.replaceChildren();
-    container.createDiv({ text: "每页结果：", cls: "label" });
+    container.createDiv({ text: "Results per page: ", cls: "label" });
     const limitInput = new import_obsidian54.TextComponent(container);
     limitInput.setValue(`${this.limit}`);
     const debounced = (0, import_obsidian54.debounce)((fieldset) => fieldset.tableView.update(this.limit), 1e3, true);
@@ -18377,10 +18390,10 @@ var FileClassTableView = class {
     if ((_a = options2.savedViews) == null ? void 0 : _a.length) {
       this.favoriteBtn.setDisabled(false);
       if (this.selectedView === favoriteView && !!favoriteView) {
-        this.favoriteBtn.setTooltip("取消选择此视图作为您的收藏夹视图");
+        this.favoriteBtn.setTooltip("Unselect this view as your favorite view");
         this.favoriteBtn.buttonEl.addClass("favorite");
       } else if (this.selectedView !== void 0) {
-        this.favoriteBtn.setTooltip("选择此视图作为您最喜欢的视图");
+        this.favoriteBtn.setTooltip("Select this view as your favorite view");
         this.favoriteBtn.buttonEl.removeClass("favorite");
       } else {
         this.favoriteBtn.setDisabled(true);
@@ -18388,7 +18401,7 @@ var FileClassTableView = class {
       }
     } else {
       this.favoriteBtn.setDisabled(true);
-      this.favoriteBtn.setTooltip("您还没有保存任何视图");
+      this.favoriteBtn.setTooltip("You don't have any saved view yet");
     }
   }
   buildFavoriteViewManager(container) {
@@ -18416,28 +18429,28 @@ var FileClassTableView = class {
     const btnContainer = container.createDiv({ cls: "cell" });
     const cleanFilterBtn = new import_obsidian54.ButtonComponent(btnContainer);
     cleanFilterBtn.setIcon("eraser");
-    cleanFilterBtn.setTooltip("清除所有过滤器、分拣器和订购");
+    cleanFilterBtn.setTooltip("Clear all filters, sorters and ordering");
     cleanFilterBtn.onClick(() => this.fieldSet.reset());
   }
   buildSaveView(container) {
     const btnContainer = container.createDiv({ cls: "cell" });
-    this.saveViewBtn = new import_obsidian54.ButtonComponent(btnContainer).setIcon("save").setTooltip("保存当前视图（过滤器和排序器）").onClick(() => new CreateSavedViewModal(this.plugin, this).open());
+    this.saveViewBtn = new import_obsidian54.ButtonComponent(btnContainer).setIcon("save").setTooltip("Save current view (filters and sorters)").onClick(() => new CreateSavedViewModal(this.plugin, this).open());
   }
   buildHideFilters(container) {
     const btnContainer = container.createDiv({ cls: "cell" });
     const hideFilterBtn = new import_obsidian54.ButtonComponent(btnContainer);
     this.fieldsContainer.style.display = "none";
     hideFilterBtn.setIcon("list-end");
-    hideFilterBtn.setTooltip("显示过滤器");
+    hideFilterBtn.setTooltip("display filters");
     const toggleState = () => {
       if (this.fieldsContainer.getCssPropertyValue("display") !== "none") {
         this.fieldsContainer.style.display = "none";
         hideFilterBtn.setIcon("list-end");
-        hideFilterBtn.setTooltip("显示过滤器");
+        hideFilterBtn.setTooltip("display filters");
       } else {
         this.fieldsContainer.style.display = "flex";
         hideFilterBtn.setIcon("list-start");
-        hideFilterBtn.setTooltip("折叠过滤器");
+        hideFilterBtn.setTooltip("collapse filters");
       }
     };
     hideFilterBtn.onClick(() => toggleState());
@@ -18446,7 +18459,7 @@ var FileClassTableView = class {
     const btnContainer = container.createDiv({ cls: "cell" });
     const hideInsertBtn = new import_obsidian54.ButtonComponent(btnContainer);
     hideInsertBtn.setIcon("plus-circle");
-    hideInsertBtn.setTooltip("在每个单元格中显示插入字段按钮（速度较慢）");
+    hideInsertBtn.setTooltip("Show insert field button in each cell (slower)");
     const toggleState = () => {
       if (this.manager.showAddField) {
         hideInsertBtn.removeCta();
@@ -18469,7 +18482,7 @@ var FileClassTableView = class {
     const btnContainer = container.createDiv({ cls: "cell" });
     this.refreshBtn = new import_obsidian54.ButtonComponent(btnContainer);
     this.refreshBtn.setIcon("refresh-cw");
-    this.refreshBtn.setTooltip("刷新表格结果");
+    this.refreshBtn.setTooltip("Refresh table results");
     this.refreshBtn.buttonEl.hide();
     this.refreshBtn.onClick(() => {
       this.refreshBtn.removeCta();
@@ -18484,7 +18497,7 @@ var FileClassTableView = class {
     const btnContainer = container.createDiv({ cls: "cell" });
     const childrenBtn = new import_obsidian54.ButtonComponent(btnContainer);
     childrenBtn.setIcon("network");
-    childrenBtn.setTooltip("显示子选择器");
+    childrenBtn.setTooltip("display children selector");
     childrenBtn.onClick(() => {
       new ChildrenMultiSelectModal(this.plugin, this.fileClass, this.fieldSet).open();
     });
@@ -18605,14 +18618,14 @@ async function openTab2(fCView, tab, speed = 100) {
   const menuHeader = fCView.containerEl.querySelector(`#${tab}Option`);
   const runner = fCView.fileClass.plugin.testRunner;
   if (!menuHeader)
-    return runner.log("错误", `${fCView.fileClass.name} ${tab} menu not found`);
+    return runner.log("ERROR", `${fCView.fileClass.name} ${tab} menu not found`);
   menuHeader.click();
   await (0, import_promises5.setTimeout)(speed);
 }
 async function testFileClassViewNavigation(plugin, fileClass, speed = 100) {
   const fCView = plugin.app.workspace.getActiveViewOfType(FileClassView);
   if (!fCView)
-    return plugin.testRunner.log("错误", `${fileClass.name} view didn't open`);
+    return plugin.testRunner.log("ERROR", `${fileClass.name} view didn't open`);
   await openTab2(fCView, "table", speed);
   await openTab2(fCView, "fields", speed);
   await openTab2(fCView, "settings", speed);
@@ -18834,7 +18847,7 @@ var FileClassOptionsList = class {
     const fileClass = this.fileClass;
     const currentFieldsNames = [];
     let addMissingFieldsAction = () => {
-      new import_obsidian58.Notice("出现问题，请检查您的fileClass定义");
+      new import_obsidian58.Notice("Something went wrong, please check your fileClass definitions");
     };
     if (this.fromFile) {
       const dvApi = (_a = this.plugin.app.plugins.plugins.dataview) == null ? void 0 : _a.api;
@@ -18944,7 +18957,7 @@ var FileClassOptionsList = class {
     const action = () => openSettings("", this.fileClass.name, this.plugin);
     if (isMenu(this.location) && this.fileClass) {
       this.location.addItem((item) => {
-        item.setTitle("添加新字段");
+        item.setTitle("Add new field");
         item.setIcon("plus-circle");
         item.onClick(action);
         item.setSection(`metadata-menu-fileclass.${this.fileClass.name}.fileclass-fields`);
@@ -19013,7 +19026,7 @@ var OptionsList = class {
           break;
       }
     } else {
-      new import_obsidian59.Notice("此位置没有定义字段", 2e3);
+      new import_obsidian59.Notice("No field with definition at this position", 2e3);
     }
   }
   createContextMenuOptionsList() {
@@ -19122,7 +19135,7 @@ var OptionsList = class {
     if (isMenu2(this.location)) {
       this.location.addItem((item) => {
         item.setIcon("clipboard-list");
-        item.setTitle("管理所有字段");
+        item.setTitle("Manage all fields");
         item.onClick(async (evt) => {
           const fieldCommandSuggestModal = new FieldCommandSuggestModal(this.plugin.app);
           const optionsList = new OptionsList(this.plugin, this.file, fieldCommandSuggestModal);
@@ -19141,11 +19154,11 @@ var OptionsList = class {
           if (node)
             optionsList.createAndOpenNodeFieldModal(node);
           else
-            new import_obsidian59.Notice("此位置没有定义字段", 2e3);
+            new import_obsidian59.Notice("No field with definition at this position", 2e3);
         };
         this.location.addItem((item) => {
           item.setIcon("map-pin");
-          item.setTitle("管理光标处的字段");
+          item.setTitle("Manage field at cursor");
           item.onClick(async () => await action());
           item.setSection("metadata-menu");
         });
@@ -19179,7 +19192,7 @@ var OptionsList = class {
     if (isMenu2(this.location)) {
       this.location.addItem((item) => {
         item.setIcon("enter");
-        item.setTitle("在部分添加字段。。。");
+        item.setTitle("Add field at section...");
         item.onClick((evt) => {
           modal.open();
         });
@@ -19210,7 +19223,7 @@ var OptionsList = class {
     if (isMenu2(this.location)) {
       this.location.addItem((item) => {
         item.setIcon("battery-full");
-        item.setTitle("在部分添加缺失的字段。。。");
+        item.setTitle("Add missing fields at section...");
         item.onClick((evt) => {
           modal.open();
         });
@@ -19232,7 +19245,7 @@ var OptionsList = class {
       if (isMenu2(this.location)) {
         this.location.addItem((item) => {
           item.setIcon("align-vertical-space-around");
-          item.setTitle("在frontmatter中添加字段");
+          item.setTitle("Add field in frontmatter");
           item.onClick(async (evt) => {
             openFieldModal(this.plugin, this.file, void 0, -1, false, false);
           });
@@ -19270,7 +19283,7 @@ var OptionsList = class {
       if (isMenu2(this.location)) {
         this.location.addItem((item) => {
           item.setIcon("list-plus");
-          item.setTitle("在光标处添加字段");
+          item.setTitle("Add field at cursor");
           item.onClick((evt) => {
             openFieldModal(
               this.plugin,
@@ -19363,8 +19376,8 @@ function settingsModal27(Base25) {
     createSettingContainer() {
       const container = this.optionsContainer;
       const objectDisplayTemplateTopContainer = container.createDiv({ cls: "vstacked" });
-      objectDisplayTemplateTopContainer.createEl("span", { text: "对象显示模板", cls: "label" });
-      objectDisplayTemplateTopContainer.createEl("span", { text: "关键字“itemsCount”引用了项目数", cls: "sub-text" });
+      objectDisplayTemplateTopContainer.createEl("span", { text: "Object display template", cls: "label" });
+      objectDisplayTemplateTopContainer.createEl("span", { text: "The number of items is referenced by the keyword 'itemsCount'", cls: "sub-text" });
       const objectDisplayTemplateContainer = objectDisplayTemplateTopContainer.createDiv({ cls: "field-container" });
       const objectTemplate = new import_obsidian60.TextAreaComponent(objectDisplayTemplateContainer);
       objectTemplate.inputEl.addClass("full-width");
@@ -19452,7 +19465,7 @@ function valueModal21(managedField, plugin) {
     buildBackButton(container) {
       new import_obsidian60.ButtonComponent(container).setIcon("left-arrow").onClick(async () => {
         this.onEscape();
-      }).setCta().setTooltip("转到父字段");
+      }).setCta().setTooltip("Go to parent field");
       const infoContainer = container.createDiv({ cls: "info" });
       infoContainer.setText("Alt+Esc to go back");
     }
@@ -19546,7 +19559,7 @@ function valueModal22(managedField, plugin) {
         fieldVM && (fieldVM == null ? void 0 : fieldVM.value) !== "" ? displayValue27(item.field.type)(fieldVM, valueContainer) : valueContainer.setText("<empty>");
       } else {
         container.createDiv({ text: `${item.name} :`, cls: "label-container" });
-        container.createDiv({ text: "<缺失>" });
+        container.createDiv({ text: "<missing>" });
       }
     }
     async onChooseSuggestion(item, evt) {
@@ -19701,8 +19714,8 @@ function settingsModal29(Base25) {
         super.createSettingContainer();
         const container = this.optionsContainer;
         const itemDisplayTemplateTopContainer = container.createDiv({ cls: "vstacked" });
-        itemDisplayTemplateTopContainer.createEl("span", { text: "项目显示模板", cls: "label" });
-        itemDisplayTemplateTopContainer.createEl("span", { text: "所有子字段都可以使用花括号括起它们的名称。他们的索引由关键字“itemIndex”引用", cls: "sub-text" });
+        itemDisplayTemplateTopContainer.createEl("span", { text: "Item display template", cls: "label" });
+        itemDisplayTemplateTopContainer.createEl("span", { text: "all child fields are available with their name enclosed in curly braces. Their index is referenced by the keyword 'itemIndex'", cls: "sub-text" });
         const itemDisplayTemplateContainer = itemDisplayTemplateTopContainer.createDiv({ cls: "field-container" });
         const template = new import_obsidian61.TextAreaComponent(itemDisplayTemplateContainer);
         template.inputEl.addClass("full-width");
@@ -19737,7 +19750,7 @@ function valueModal23(managedField, plugin) {
         this.onAdd();
       });
       addButton.setCta();
-      addButton.setTooltip("添加新项目");
+      addButton.setTooltip("Add a new item");
     }
     async onAdd() {
       const mF = this.managedField;
@@ -21837,7 +21850,7 @@ ${"  ".repeat(indentationLevel + 1)}`;
       const parentFieldIndexedPath = upperPath2.replace(/\[\w+\]$/, "");
       const parentNode = this.getNodeForIndexedPath(parentFieldIndexedPath);
       if (!parentNode) {
-        new import_obsidian64.Notice("缺少父字段，无法添加此字段");
+        new import_obsidian64.Notice("A parent field is missing, this field can't be added");
         return;
       }
       const field2 = this.getField(id);
@@ -21996,7 +22009,7 @@ var FieldsModal = class extends import_obsidian65.Modal {
         const objectListIndexedPath = upperIndexedPathObjectPath(this.indexedPath || "");
         const eF = this.note.getExistingFieldForIndexedPath(objectListIndexedPath);
         const display = `${eF.name}[${index}]`;
-        this.titleEl.setText(`${baseTitle}${display}`);
+        this.titleEl.setText(`${baseTitle} ${display}`);
       } else {
         const eF = this.note.getExistingFieldForIndexedPath(indexedPath);
         this.titleEl.setText(`${baseTitle} ${eF == null ? void 0 : eF.name}`);
@@ -22120,7 +22133,7 @@ var FieldsModal = class extends import_obsidian65.Modal {
       const fieldBtnContainer = fieldOptionsWrapper.createDiv({ cls: "field-item field-option" });
       const fieldBtn = new import_obsidian65.ButtonComponent(fieldBtnContainer);
       fieldBtn.setIcon("list-plus");
-      fieldBtn.setTooltip("在部分添加字段");
+      fieldBtn.setTooltip("Add field at section");
       fieldBtn.onClick(async () => {
         var _a;
         if (objectTypes.includes(field2.type) && this.note) {
@@ -22153,7 +22166,7 @@ var FieldsModal = class extends import_obsidian65.Modal {
       value = (eF == null ? void 0 : eF.getItemDisplayForIndex(this.plugin, index)) || "";
     }
     const fieldNameWrapper = container.createDiv({ cls: "field-name-wrapper" });
-    const fieldNameContainer = fieldNameWrapper.createDiv({ text: `${field2.name}[${index}]`, cls: "field-item field-name" });
+    const fieldNameContainer = fieldNameWrapper.createDiv({ text: `${field2.name} [${index}]`, cls: "field-item field-name" });
     this.buildFieldSetting(container, field2, fieldNameContainer, true);
     const fieldValueWrapper = container.createDiv({ cls: "field-value-wrapper" });
     const fieldValueContainer = fieldValueWrapper.createDiv({
@@ -22242,7 +22255,7 @@ var FieldsModal = class extends import_obsidian65.Modal {
   }
   buildInsertMissingFieldsBtn() {
     const insertMissingFieldsContainer = this.contentEl.createDiv({ cls: "insert-all-fields" });
-    insertMissingFieldsContainer.createDiv({ text: "插入缺失的字段" });
+    insertMissingFieldsContainer.createDiv({ text: "Insert missing fields" });
     const insertMissingFieldsInFrontmatterBtn = new import_obsidian65.ButtonComponent(insertMissingFieldsContainer);
     insertMissingFieldsInFrontmatterBtn.setIcon("align-vertical-space-around");
     insertMissingFieldsInFrontmatterBtn.setTooltip("In Frontmatter");
@@ -22259,7 +22272,7 @@ var FieldsModal = class extends import_obsidian65.Modal {
     });
     const insertMissingFieldsBtn = new import_obsidian65.ButtonComponent(insertMissingFieldsContainer);
     insertMissingFieldsBtn.setIcon("log-in");
-    insertMissingFieldsBtn.setTooltip("排队。。。");
+    insertMissingFieldsBtn.setTooltip("At line...");
     insertMissingFieldsBtn.buttonEl.addClass("at-line-btn");
     insertMissingFieldsBtn.onClick(() => {
       var _a;
@@ -22292,7 +22305,7 @@ var FieldsModal = class extends import_obsidian65.Modal {
   }
   buildInsertNewItem(field2, indexedPath) {
     const insertNewItemContainer = this.contentEl.createDiv({ cls: "insert-all-fields" });
-    insertNewItemContainer.createDiv({ text: "添加新项目" });
+    insertNewItemContainer.createDiv({ text: "Add a new item" });
     const insertNewItemBtn = new import_obsidian65.ButtonComponent(insertNewItemContainer);
     insertNewItemBtn.setIcon("list-plus");
     insertNewItemBtn.onClick(async () => {
@@ -22370,7 +22383,7 @@ function fileClassAttributeOptionsCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "fileClassAttr_options",
-    name: "所有fileClass属性选项",
+    name: "All fileClass attributes options",
     icon: "gear",
     checkCallback: (checking) => {
       const view = plugin.app.workspace.getActiveViewOfType(import_obsidian66.MarkdownView);
@@ -22390,7 +22403,7 @@ function insertFileClassAttributeCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "insert_fileClassAttr",
-    name: "插入新的fileClass属性",
+    name: "Insert a new fileClass attribute",
     icon: "list-plus",
     checkCallback: (checking) => {
       const view = plugin.app.workspace.getActiveViewOfType(import_obsidian66.MarkdownView);
@@ -22404,7 +22417,7 @@ function insertFileClassAttributeCommand(plugin) {
           if (fileClassName)
             openSettings("", fileClassName, plugin);
         } catch (error) {
-          new import_obsidian66.Notice("插件不是有效的fileClass");
+          new import_obsidian66.Notice("plugin is not a valid fileClass");
         }
       }
     }
@@ -22414,7 +22427,7 @@ function insertFieldAtPositionCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "insert_field_at_cursor",
-    name: "选择要在光标处插入的字段",
+    name: "Choose a field to insert at cursor",
     icon: "list-plus",
     checkCallback: (checking) => {
       const view = plugin.app.workspace.getActiveViewOfType(import_obsidian66.MarkdownView);
@@ -22433,7 +22446,7 @@ function fieldOptionsCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "field_options",
-    name: "字段选项",
+    name: "Fields options",
     icon: "gear",
     checkCallback: (checking) => {
       const view = plugin.app.workspace.getActiveViewOfType(import_obsidian66.MarkdownView);
@@ -22453,7 +22466,7 @@ function manageFieldAtCursorCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "field_at_cursor_options",
-    name: "管理光标处的字段",
+    name: "Manage field at cursor",
     icon: "text-cursor-input",
     checkCallback: (checking) => {
       const view = plugin.app.workspace.getActiveViewOfType(import_obsidian66.MarkdownView);
@@ -22474,7 +22487,7 @@ function manageFieldAtCursorCommand(plugin) {
                 if (node)
                   optionsList.createAndOpenNodeFieldModal(node);
                 else
-                  new import_obsidian66.Notice("此位置没有定义字段", 2e3);
+                  new import_obsidian66.Notice("No field with definition at this position", 2e3);
               }
               break;
             case "preview": {
@@ -22487,13 +22500,13 @@ function manageFieldAtCursorCommand(plugin) {
                   if (node)
                     optionsList.createAndOpenNodeFieldModal(node);
                   else
-                    new import_obsidian66.Notice("此位置没有定义字段", 2e3);
+                    new import_obsidian66.Notice("No field with definition at this position", 2e3);
                 } else if (key === plugin.settings.fileClassAlias) {
                   const node = note.getNodeForIndexedPath(`fileclass-field-${plugin.settings.fileClassAlias}`);
                   if (node)
                     optionsList.createAndOpenNodeFieldModal(node);
                   else
-                    new import_obsidian66.Notice("此位置没有定义字段", 2e3);
+                    new import_obsidian66.Notice("No field with definition at this position", 2e3);
                 }
               }
               break;
@@ -22508,7 +22521,7 @@ function insertMissingFieldsCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "insert_missing_fields",
-    name: "批量插入缺失字段",
+    name: "Bulk insert missing fields",
     icon: "battery-full",
     checkCallback: (checking) => {
       const view = plugin.app.workspace.getActiveViewOfType(import_obsidian66.MarkdownView);
@@ -22543,7 +22556,7 @@ function openFieldsModalCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "open_fields_modal",
-    name: "打开此笔记的字段模式",
+    name: "Open this note's fields modal",
     icon: "clipboard-list",
     checkCallback: (checking) => {
       const view = plugin.app.workspace.getActiveViewOfType(import_obsidian66.MarkdownView);
@@ -22635,7 +22648,7 @@ function insertFieldsCommand(plugin) {
 function openFileclassViewCommand(plugin) {
   plugin.addCommand({
     id: "open_fileclass_view",
-    name: "打开fileClass视图",
+    name: "Open fileClass view",
     icon: "package",
     checkCallback: (checking) => {
       var _a;
@@ -22653,7 +22666,7 @@ function openFileclassViewCommand(plugin) {
 function fileclassToFileCommand(plugin) {
   plugin.addCommand({
     id: "add_fileclass_to_file",
-    name: "将fileClass添加到文件",
+    name: "Add fileClass to file",
     icon: "package-plus",
     checkCallback: (checking) => {
       const activeFile = plugin.app.workspace.getActiveFile();
@@ -22670,7 +22683,7 @@ function fileclassToFileCommand(plugin) {
 function updateLookupsAndFormulasCommand(plugin) {
   plugin.addCommand({
     id: "update_all_lookups",
-    name: "更新所有查找和公式",
+    name: "Update all lookups and formulas",
     icon: "file-search",
     checkCallback: (checking) => {
       if (checking)
@@ -22683,7 +22696,7 @@ function updateFileLookupsCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "update_file_lookups",
-    name: "更新活动文件查找字段",
+    name: "Update active file lookups fields",
     icon: "file-search",
     checkCallback: (checking) => {
       var _a;
@@ -22709,7 +22722,7 @@ function updateFileFormulasCommand(plugin) {
   const classFilesPath = plugin.settings.classFilesPath;
   plugin.addCommand({
     id: "update_file_formulas",
-    name: "更新活动文件公式字段",
+    name: "Update active file formulas fields",
     icon: "function-square",
     checkCallback: (checking) => {
       var _a;
@@ -22807,7 +22820,7 @@ var ContextMenu = class extends import_obsidian67.Component {
       } else {
         menu.addItem((item) => {
           item.setIcon("list");
-          item.setTitle("字段选项");
+          item.setTitle("Field Options");
           item.onClick(async () => {
             const fieldCommandSuggestModal = new FieldCommandSuggestModal(this.plugin.app);
             const optionsList = new OptionsList(this.plugin, file, fieldCommandSuggestModal);
@@ -23881,7 +23894,7 @@ var FieldIndex = class extends FieldIndexBuilder {
     );
     this.registerEvent(
       this.plugin.app.metadataCache.on("dataview:index-ready", async () => {
-        MDM_DEBUG && console.log("数据视图索引就绪");
+        MDM_DEBUG && console.log("dataview index ready");
         this.dv = this.plugin.app.plugins.plugins.dataview;
       })
     );
@@ -23945,7 +23958,7 @@ var FieldIndex = class extends FieldIndexBuilder {
     this.getFilesLookupAndFormulaFieldsExists();
     if (this.updatedManagedField)
       await this.updatedManagedField.goToPreviousModal();
-    MDM_DEBUG && console.log("indexed FIELDS for ", 文件的索引字段," files in ", (Date.now() - start2) / 1e3, "s");
+    MDM_DEBUG && console.log("indexed FIELDS for ", indexedFiles, " files in ", (Date.now() - start2) / 1e3, "s");
   }
   pushPayloadToUpdate(filePath, fieldsPayloadToUpdate) {
     const currentFieldsPayloadToUpdate = this.dVRelatedFieldsToUpdate.get(filePath) || { status: "toProcess", fieldsPayload: [] };
@@ -24683,7 +24696,7 @@ var LocationWrapper = {
 async function postNamedFieldsValues(plugin, payload, fileOrFilePath, lineNumber, after = true, asList = false, asComment = false) {
   var _a;
   if (payload.some((_payload) => !_payload.name)) {
-    console.error("一个有效负载的字段缺少名称");
+    console.error("One payload's field is missing a name");
     return;
   }
   const file = getFileFromFileOrPath(plugin, fileOrFilePath);
@@ -24899,7 +24912,7 @@ var migrateSettingsV1toV2 = async (plugin) => {
   });
   plugin.settings.settingsVersion = 2;
   await plugin.saveData(plugin.settings);
-  MDM_DEBUG && console.log("元数据菜单设置已迁移到版本2");
+  MDM_DEBUG && console.log("Metadata menu settings migrated to version 2");
 };
 var migrateSettingsV2toV3 = async (plugin) => {
   const presetFields = plugin.presetFields;
@@ -24923,19 +24936,19 @@ var migrateSettingsV2toV3 = async (plugin) => {
   });
   plugin.settings.settingsVersion = 3;
   await plugin.saveData(plugin.settings);
-  MDM_DEBUG && console.log("元数据菜单设置已迁移到版本3");
+  MDM_DEBUG && console.log("Metadata menu settings migrated to version 3");
 };
 var migrateSettingsV3toV4 = async (plugin) => {
   plugin.settings.fileClassExcludedFolders = [];
   plugin.settings.settingsVersion = 4;
   await plugin.saveData(plugin.settings);
-  MDM_DEBUG && console.log("元数据菜单设置已迁移到版本4");
+  MDM_DEBUG && console.log("Metadata menu settings migrated to version 4");
 };
 var migrateSettingsV4toV5 = async (plugin) => {
   plugin.settings.fileClassExcludedFolders = [];
   plugin.settings.settingsVersion = "5.0";
   await plugin.saveData(plugin.settings);
-  MDM_DEBUG && console.log("元数据菜单设置已迁移到版本5");
+  MDM_DEBUG && console.log("Metadata menu settings migrated to version 5");
 };
 
 // src/suggester/metadataSuggester.ts
@@ -25219,7 +25232,7 @@ var ValueSuggest = class extends import_obsidian78.EditorSuggest {
           editor.setCursor({ line: endFieldLineNumber2, ch: editor.getLine(endFieldLineNumber2).length });
         }
       } catch (error) {
-        new import_obsidian78.Notice("前体格式不正确", 2e3);
+        new import_obsidian78.Notice("incorrect frontmatter format", 2e3);
         this.close();
         return;
       }
@@ -25338,7 +25351,7 @@ async function updatePropertiesSection(plugin) {
   for (const leaf of leaves) {
     const view = leaf.view;
     if (!(view instanceof import_obsidian79.MarkdownView) || !(view.file instanceof import_obsidian79.TFile) || view.file === void 0)
-      return;
+      continue;
     const file = view.file;
     if (!plugin.app.vault.getAbstractFileByPath(file.path))
       continue;
@@ -25472,12 +25485,12 @@ var StoreManager = class extends import_obsidian81.Component {
             const store = transaction.objectStore(this.storeName);
             resolve(func(store));
           } else {
-            MDM_DEBUG && console.error("未找到商店");
+            MDM_DEBUG && console.error("store not found");
             reject();
           }
         };
         open.onerror = () => {
-          MDM_DEBUG && console.error("无法打开数据库");
+          MDM_DEBUG && console.error("unable to open db");
           reject();
         };
       });
@@ -25515,7 +25528,7 @@ var StoreManager = class extends import_obsidian81.Component {
           payload.forEach((item) => {
             request = store.get(item.id);
             request.onerror = () => {
-              MDM_DEBUG && console.log("获取时出错", item.id);
+              MDM_DEBUG && console.log("error on getting ", item.id);
               reject(request.error);
             };
             request.onsuccess = () => {
@@ -25571,7 +25584,7 @@ var FileClassViewStore = class extends StoreManager {
 // src/db/DatabaseManager.ts
 var INDEXES = {
   fileClassView: [
-    { name: "文件类别视图", fields: "fileClassName", unique: true }
+    { name: "fileClassView", fields: "fileClassName", unique: true }
   ]
 };
 var IndexDatabase = class extends import_obsidian82.Component {
@@ -25584,7 +25597,7 @@ var IndexDatabase = class extends import_obsidian82.Component {
   onload() {
   }
   init() {
-    MDM_DEBUG && console.log("创建或打开数据库");
+    MDM_DEBUG && console.log("create or open db");
     this.name = `metadata_menu_${this.plugin.app.appId || this.plugin.app.vault.adapter.basePath || this.plugin.app.vault.getName()}`;
     if (!this.name)
       return;
@@ -25753,18 +25766,18 @@ var MetadataMenu = class extends import_obsidian85.Plugin {
     this.indexName = `metadata_menu_${this.app.appId || this.app.vault.adapter.basePath || this.app.vault.getName()}`;
     (window["MetadataMenuAPI"] = this.api) && this.register(() => delete window["MetadataMenuAPI"]);
     (window["MetadataMenu"] = this) && this.register(() => delete window["MetadataMenu"]);
-    if (!this.app.plugins.enabledPlugins.has("dataview") || //@ts-ignore
-    this.app.plugins.plugins["dataview"] && !this.app.plugins.plugins["dataview"].settings.enableDataviewJs) {
+    await this.loadSettings();
+    await migrateSettings(this);
+    if (!this.settings.disableDataviewPrompt && (!this.app.plugins.enabledPlugins.has("dataview") || this.app.plugins.plugins["dataview"] && //@ts-ignore
+    !this.app.plugins.plugins["dataview"].settings.enableDataviewJs)) {
       new import_obsidian85.Notice(
         `------------------------------------------
-(!) 信息 (!) 
-安装并启用dataview和dataviewJS以获得额外的元数据菜单功能
+(!) INFO (!) 
+Install and enable dataview and dataviewJS for extra Metadata Menu features
 ------------------------------------------`,
         6e4
       );
     }
-    await this.loadSettings();
-    await migrateSettings(this);
     this.indexStatus = this.addChild(new IndexStatus(this));
     this.codeBlockListManager = this.addChild(new FileClassCodeBlockListManager(this));
     this.fieldIndex = this.addChild(new FieldIndex(this));
@@ -25814,19 +25827,32 @@ var MetadataMenu = class extends import_obsidian85.Plugin {
       })
     );
     this.indexDB = this.addChild(new IndexDatabase(this));
-    await this.fieldIndex.fullIndex();
     this.extraButton = this.addChild(new ExtraButton(this));
     if (this.settings.enableFileExplorer)
       this.addChild(new FileClassFolderButton(this));
+    this.app.workspace.onLayoutReady(async () => {
+      await this.fieldIndex.fullIndex();
+      this.launched = true;
+      addCommands(this);
+      const leaves = this.app.workspace.getLeavesOfType("markdown");
+      leaves.forEach((leaf) => {
+        if (leaf.view instanceof import_obsidian85.MarkdownView) {
+          this.indexStatus.checkForUpdate(leaf.view);
+        }
+      });
+      this.app.workspace.trigger("layout-change");
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          updatePropertiesCommands(this);
+        });
+      });
+    });
     this.registerEditorSuggest(new ValueSuggest(this));
-    this.launched = true;
-    addCommands(this);
     this.registerMarkdownCodeBlockProcessor("mdm", async (source, el, ctx) => {
       const fileClassCodeBlockManager = new FileClassCodeBlockManager(this, el, source, ctx);
       this.codeBlockListManager.addChild(fileClassCodeBlockManager);
       ctx.addChild(fileClassCodeBlockManager);
     });
-    this.app.workspace.trigger("layout-change");
     this.testRunner = this.addChild(new TestRunner(this));
     if (MDM_DEBUG && this.app.vault.getName() === "test-vault-mdm") {
       MDM_DEBUG = false;
