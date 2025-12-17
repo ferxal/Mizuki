@@ -4,7 +4,7 @@ export const defaultFavicons: Favicon[] = [
 	{
 		src: "/favicon/icon_light_32.ico",
 		theme: "light",
-		sizes: "32x32",
+		sizes: "64x64",
 	},
 	{
 		src: "/favicon/icon_light_128.ico",
