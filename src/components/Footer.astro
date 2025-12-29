@@ -38,15 +38,17 @@ if (footerConfig.enable) {
 <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
 <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
     <div class="transition text-50 text-sm text-center">
+        {customFooterHtml && (
+            <div class="mb-2" set:html={customFooterHtml}></div>
+        )}
+        &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
+        <a class="transition link text-[var(--primary)] font-medium" href={url('rss/')} onclick={`event.preventDefault(); navigateToPage('${url('rss/')}')`}>RSS</a> /
+		<a class="transition link text-[var(--primary)] font-medium" href={url('atom/')} onclick={`event.preventDefault(); navigateToPage('${url('atom/')}')`}>Atom</a> /
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/matsuzaka-yuki/mizuki">Mizuki</a>&nbsp; Version <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/matsuzaka-yuki/mizuki">7.6.5</a><br>
         
-        <div class="flex flex-wrap justify-center gap-3 mb-4">
-            <a target="_blank" href="https://astro.build/" rel="external nofollow noreferrer noopener"><img title="博客框架为Astro" alt="博客框架为Astro" src="https://img.shields.io/badge/Frame-Astro-d021d6?style=flat&amp;logo=astro" data-ll-status="loading"></a>
-            <a target="_blank" href="https://github.com/matsuzaka-yuki/Mizuki" rel="external nofollow noreferrer noopener"><img title="主题采用Mizuki" alt="主题采用Mizuki" src="https://img.shields.io/badge/Theme-Mizuki-6513df?style=flat&amp;logo=thumbtack" data-ll-status="loading"></a>
-            <a target="_blank" href="https://www.cloudflare.com/" rel="external nofollow noreferrer noopener"><img title="Cloudflaret提供加速与防护" alt="Cloudflaret提供加速与防护" src="https://img.shields.io/badge/CDN-Cloudflare-f38020?style=flat&amp&logo=cloudflare" data-ll-status="loading"></a>
-            <a target="_blank" href="https://vercel.com" rel="external nofollow noreferrer noopener"><img title="本站部署于Vercel" alt="本站部署于Vercel" src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" data-ll-status="loading"></a>
-            <a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer noopener"><img title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" alt="知识共享署名" src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" data-ll-status="loading"></a>
-        </div>
-    </div>
-</div>
+
     </div>
 </div>

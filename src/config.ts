@@ -50,7 +50,7 @@ export const siteConfig: SiteConfig = {
 
 	// 聊天室配置
 	chat: {
-		serverUrl: "ws://[2408:8256:8e80:ad8e:1e86:bff:fe37:f628]:11431", // WebSocket服务器地址（通过Nginx代理）
+		serverUrl: "", // WebSocket服务器地址（通过Nginx代理）
 		maxMessageLength: 1000, // 最大消息长度
 		maxNicknameLength: 20, // 最大昵称长度
 		enableStats: true, // 是否显示统计信息
@@ -104,28 +104,22 @@ export const siteConfig: SiteConfig = {
 		src: {
 			desktop: [
 				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc#1",
 				"https://t.alcy.cc/pc",
 				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
+				
 			],
 			mobile: [
 				"https://t.alcy.cc/mp",
 				"https://t.alcy.cc/mp",
 				"https://t.alcy.cc/mp",
-				"https://t.alcy.cc/mp",
-				"https://t.alcy.cc/mp",
-				"https://t.alcy.cc/mp",
-				"https://t.alcy.cc/mp",
+				
 			],
 		},
 
 		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 
 		carousel: {
-			enable: true, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
+			enable: false, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
 
 			interval: 1.5, // 轮播间隔时间（秒）
 		},
@@ -220,10 +214,15 @@ export const siteConfig: SiteConfig = {
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
 			desktop: [
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1800w.webp",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
 			],
 			mobile: [
-				"https://proxy.chenhen.top/https://i0.hdslb.com/bfs/openplatform/39f7866a66031e02ff52bf887f9e834e9026b807.png@1400w.webp",
+				"https://t.alcy.cc/mp",
+				"https://t.alcy.cc/mp",
+				"https://t.alcy.cc/mp",
 			],
 	}, // 使用本地横幅图片
 	position: "center", // 壁纸位置，等同于 object-position
