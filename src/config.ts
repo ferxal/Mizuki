@@ -104,8 +104,20 @@ export const siteConfig: SiteConfig = {
 		src: {
 			desktop: [
 				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc#1",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
 			],
 			mobile: [
+				"https://t.alcy.cc/mp",
+				"https://t.alcy.cc/mp",
+				"https://t.alcy.cc/mp",
+				"https://t.alcy.cc/mp",
+				"https://t.alcy.cc/mp",
+				"https://t.alcy.cc/mp",
 				"https://t.alcy.cc/mp",
 			],
 		},
