@@ -62,18 +62,24 @@ export const zh_CN: Translation = {
 
 	// 番剧页面
 	[Key.animeTitle]: "我的追番记录",
-	[Key.animeSubtitle]: "记录我的二次元之旅",
-	[Key.animeStatusWatching]: "在看",
-	[Key.animeStatusCompleted]: "看过",
-	[Key.animeStatusPlanned]: "想看",
-	[Key.animeStatusOnHold]: "搁置",
-	[Key.animeStatusDropped]: "抛弃",
+	[Key.animeSubtitle]: "记录私の二次元之旅",
+	[Key.animeList]: "追番列表",
+	[Key.animeTotal]: "总数",
+	[Key.animeWatching]: "追番中",
+	[Key.animeCompleted]: "已追完",
+	[Key.animeAvgRating]: "平均评分",
 	[Key.animeFilterAll]: "全部",
+	[Key.animeStatusWatching]: "追番中",
+	[Key.animeStatusCompleted]: "已追完",
+	[Key.animeStatusPlanned]: "计划中",
 	[Key.animeYear]: "年份",
 	[Key.animeStudio]: "制作",
 	[Key.animeEmpty]: "暂无追番数据",
 	[Key.animeEmptyBangumi]: "请检查 Bangumi 配置或网络连接",
 	[Key.animeEmptyLocal]: "请在 src/data/anime.ts 文件中添加番剧信息",
+
+	// 追番评价
+	[Key.animeReview]: "评价",
 
 	// 短文页面
 	[Key.diarySubtitle]: "随时随地，分享生活",
