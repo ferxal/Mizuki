@@ -281,9 +281,16 @@ enum I18nKey {
 	calendarNovember = "calendarNovember",
 	calendarDecember = "calendarDecember",
 
-	// 聊天室页面
-	chat = "chat",
-	chatSubtitle = "chatSubtitle",
+	// 分享功能
+	shareArticle = "shareArticle",
+	generatingPoster = "generatingPoster",
+	copied = "copied",
+	copyLink = "copyLink",
+	savePoster = "savePoster",
+	scanToRead = "scanToRead",
+	shareOnSocial = "shareOnSocial",
+	shareOnSocialDescription = "shareOnSocialDescription",
 }
 
 export default I18nKey;
+

@@ -294,7 +294,14 @@ export const zh_CN: Translation = {
 	[Key.calendarNovember]: "11月",
 	[Key.calendarDecember]: "12月",
 
-	// 聊天室
-	[Key.chat]: "聊天室",
-	[Key.chatSubtitle]: "实时聊天，即时交流",
+	// 分享功能
+	[Key.shareArticle]: "分享",
+	[Key.generatingPoster]: "正在生成海报...",
+	[Key.copied]: "已复制",
+	[Key.copyLink]: "复制链接",
+	[Key.savePoster]: "保存海报",
+	[Key.scanToRead]: "扫码阅读",
+	[Key.shareOnSocial]: "分享",
+	[Key.shareOnSocialDescription]:
+		"如果这篇文章对你有帮助，欢迎分享给更多人！",
 };
