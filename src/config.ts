@@ -97,9 +97,8 @@ export const siteConfig: SiteConfig = {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
 			desktop: [
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
+				"https://tc.alcy.cc/q/20250908/c8187551a635573ca79ec6b2d3f44031.webp",
+				"https://eopfapi.acofork.com/ri/h/118.webp",
 				
 			],
 			mobile: [
@@ -115,7 +114,7 @@ export const siteConfig: SiteConfig = {
 		carousel: {
 			enable: true, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
 
-			interval: 1.5, // 轮播间隔时间（秒）
+			interval: 2, // 轮播间隔时间（秒）
 		},
 
 		waves: {
@@ -208,10 +207,8 @@ export const siteConfig: SiteConfig = {
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
 			desktop: [
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
+				"https://tc.alcy.cc/q/20250908/c8187551a635573ca79ec6b2d3f44031.webp",
+				"https://eopfapi.acofork.com/ri/h/118.webp",
 			],
 			mobile: [
 				"https://t.alcy.cc/mp",

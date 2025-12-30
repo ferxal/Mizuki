@@ -855,7 +855,11 @@ function disableAnimation() {
 		await fancyboxInitPromise;
 	}
 
-	window.swup.hooks.on('content:replace', () => {
+	function setupSwupContentReplaceHook() {
+		if (!(window as any)?.swup?.hooks) {
+			return false;
+		}
+		window.swup.hooks.on('content:replace', () => {
 		// 只处理新的katex元素的滚动条，使用原生CSS滚动条
 		initCustomScrollbar();
 		
@@ -908,7 +912,18 @@ function disableAnimation() {
 			}
 		}
 	})
-	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
+		return true;
+	}
+
+	if (!setupSwupContentReplaceHook()) {
+		document.addEventListener('swup:enable', setupSwupContentReplaceHook, { once: true });
+	}
+
+	function setupSwupVisitStartHook() {
+		if (!(window as any)?.swup?.hooks) {
+			return false;
+		}
+		window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
 		const isHomePage = pathsEqual(visit.to.url, url('/'))
@@ -987,6 +1002,12 @@ function disableAnimation() {
 			fancyboxSelectors.push(singleFancyboxSelector);
 		});
 	});
+		return true;
+	}
+
+	if (!setupSwupVisitStartHook()) {
+		document.addEventListener('swup:enable', setupSwupVisitStartHook, { once: true });
+	}
 
 	// 清理 Fancybox 实例
 	function cleanupFancybox() {
@@ -1375,11 +1396,11 @@ function disableAnimation() {
 </script>
 
 <!-- 代码块折叠功能 -->
-<script>
+<script type="module">
 	import "../scripts/code-collapse.js";
 </script>
 
 <!-- 主题切换综合性能优化器（包含代码块优化、重型元素优化、性能诊断） -->
-<script>
+<script type="module">
 	import "../scripts/theme-optimizer.js";
 </script>
