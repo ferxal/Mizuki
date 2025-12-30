@@ -52,6 +52,8 @@ export type SiteConfig = {
 		| "tr"
 		| "id";
 
+	imageHostAllowlist?: string[]; // Host allowlist for runtime-random images
+
 	themeColor: {
 		hue: number;
 		fixed: boolean;

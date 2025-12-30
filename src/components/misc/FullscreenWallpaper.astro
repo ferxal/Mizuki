@@ -1,6 +1,6 @@
 ---
-// import { Image } from "astro:assets";
 import { siteConfig } from "../../config";
+// import { Image } from "astro:assets";
 import type { FullscreenWallpaperConfig } from "../../types/config";
 
 interface Props {
@@ -15,23 +15,8 @@ const getImageSources = async () => {
 	let srcConfig = config.src;
 
 	// 如果启用了图片API，使用API图片
-	if (siteConfig.banner.imageApi?.enable && siteConfig.banner.imageApi?.url) {
-		try {
-			const response = await fetch(siteConfig.banner.imageApi.url);
-			const text = await response.text();
-			const apiImages = text.split("\n").filter((line) => line.trim());
+	// Wallpaper image API is not used here; runtime allowlist handles remote random URLs.
 
-			if (apiImages.length > 0) {
-				// 将API图片同时用于桌面端和移动端
-				return {
-					desktop: apiImages,
-					mobile: apiImages,
-				};
-			}
-		} catch (error) {
-			console.warn("Failed to fetch images from API for wallpaper:", error);
-		}
-	}
 
 	const toArray = (src: string | string[] | undefined): string[] => {
 		if (Array.isArray(src)) return src;
@@ -117,6 +102,91 @@ const positionClass = getPositionClass(position);
 	}
 })();
 </script>
+	<script is:inline define:vars={{ wallpaperSrc: config.src, imageHostAllowlist: siteConfig.imageHostAllowlist || [] }}>
+		(function() {
+			const allowlist = Array.isArray(imageHostAllowlist) ? imageHostAllowlist : [];
+
+			function toArray(src) {
+				if (Array.isArray(src)) return src;
+				if (typeof src === "string") return [src];
+				return [];
+			}
+
+			function collectUrls(src) {
+				if (src && typeof src === "object" && !Array.isArray(src)) {
+					const desktop = toArray(src.desktop);
+					const mobile = toArray(src.mobile);
+					return desktop.concat(mobile);
+				}
+				return toArray(src);
+			}
+
+			function isAllowed(url) {
+				try {
+					const u = new URL(url, window.location.origin);
+					return allowlist.some((host) => u.host === host || u.host.endsWith("." + host));
+				} catch (_e) {
+					return false;
+				}
+			}
+
+			function withCacheBuster(url, suffix) {
+				const joiner = url.includes("?") ? "&" : "?";
+				return `${url}${joiner}cb=${Date.now()}-${suffix}`;
+			}
+
+		function pick(list, index) {
+			if (!list.length) return "";
+			if (list.length === 1) return list[0];
+			return list[index % list.length];
+		}
+
+		function preloadAndSwap(img, url) {
+			const preloader = new Image();
+			preloader.onload = () => {
+				img.src = url;
+			};
+			preloader.onerror = () => {
+				img.src = url;
+			};
+			preloader.src = url;
+		}
+
+		function applyRandomWallpaper() {
+			const urls = collectUrls(wallpaperSrc).filter(Boolean);
+			const allowed = urls.filter(isAllowed);
+			if (!allowed.length) return;
+
+			const container = document.querySelector("[data-fullscreen-wallpaper]");
+			if (!container) return;
+			const imgs = container.querySelectorAll("img");
+			if (!imgs.length) return;
+
+			const prevOpacity = (container as HTMLElement).style.opacity;
+			const prevTransition = (container as HTMLElement).style.transition;
+			(container as HTMLElement).style.transition = "opacity 0.2s ease";
+			(container as HTMLElement).style.opacity = "0";
+
+			imgs.forEach((img, idx) => {
+				const src = pick(allowed, idx + Math.floor(Math.random() * allowed.length));
+				if (!src) return;
+				preloadAndSwap(img, withCacheBuster(src, idx));
+			});
+
+			requestAnimationFrame(() => {
+				(container as HTMLElement).style.opacity = prevOpacity || "1";
+				(container as HTMLElement).style.transition = prevTransition || "";
+			});
+		}
+
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", applyRandomWallpaper);
+			} else {
+				applyRandomWallpaper();
+			}
+		})();
+	</script>
+
 	<!-- 桌面端壁纸 -->
 	{hasDesktopImages && (
 		<div class="hidden lg:block w-full h-full relative">

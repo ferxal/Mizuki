@@ -31,6 +31,8 @@ export const siteConfig: SiteConfig = {
 
 	lang: SITE_LANG,
 
+	imageHostAllowlist: ["t.alcy.cc"],
+
 	themeColor: {
 		hue: 240, // 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
 		fixed: true, // 对访问者隐藏主题色选择器
@@ -97,8 +99,13 @@ export const siteConfig: SiteConfig = {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
 			desktop: [
-				"https://tc.alcy.cc/q/20250908/c8187551a635573ca79ec6b2d3f44031.webp",
-				"https://eopfapi.acofork.com/ri/h/118.webp",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				//"https://img.072103.xyz/h",
+				//"https://eopfapi.acofork.com/pic?img=ua",
+				
 				
 			],
 			mobile: [
@@ -207,8 +214,9 @@ export const siteConfig: SiteConfig = {
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
 			desktop: [
-				"https://tc.alcy.cc/q/20250908/c8187551a635573ca79ec6b2d3f44031.webp",
-				"https://eopfapi.acofork.com/ri/h/118.webp",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
+				"https://t.alcy.cc/pc",
 			],
 			mobile: [
 				"https://t.alcy.cc/mp",
