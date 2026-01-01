@@ -153,6 +153,9 @@ const positionClass = getPositionClass(position);
 		}
 
 		function applyRandomWallpaper() {
+			const mode = localStorage.getItem("wallpaperMode") || "banner";
+			if (mode !== "fullscreen") return;
+
 			const urls = collectUrls(wallpaperSrc).filter(Boolean);
 			const allowed = urls.filter(isAllowed);
 			if (!allowed.length) return;
@@ -179,11 +182,19 @@ const positionClass = getPositionClass(position);
 			});
 		}
 
-			if (document.readyState === "loading") {
-				document.addEventListener("DOMContentLoaded", applyRandomWallpaper);
-			} else {
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", applyRandomWallpaper);
+		} else {
+			applyRandomWallpaper();
+		}
+
+		// 当壁纸模式切换到 fullscreen 时再尝试替换
+		window.addEventListener("wallpaper-mode-change", (e) => {
+			const mode = e.detail?.mode || localStorage.getItem("wallpaperMode") || "banner";
+			if (mode === "fullscreen") {
 				applyRandomWallpaper();
 			}
+		});
 		})();
 	</script>
 
@@ -202,6 +213,9 @@ const positionClass = getPositionClass(position);
 							alt={`Desktop wallpaper ${index + 1}`}
 							class={imageClass}
 							data-carousel-item={isCarouselEnabled ? index : undefined}
+							loading="lazy"
+							decoding="async"
+							fetchpriority="low"
 							style={blur > 0 ? `filter: blur(${blur}px);` : undefined}
 						/>
 					);
@@ -212,6 +226,9 @@ const positionClass = getPositionClass(position);
 							alt={`Desktop wallpaper ${index + 1}`}
 							class={imageClass}
 							data-carousel-item={isCarouselEnabled ? index : undefined}
+							loading="lazy"
+							decoding="async"
+							fetchpriority="low"
 							style={blur > 0 ? `filter: blur(${blur}px);` : undefined}
 						/>
 					);
@@ -235,6 +252,9 @@ const positionClass = getPositionClass(position);
 							alt={`Mobile wallpaper ${index + 1}`}
 							class={imageClass}
 							data-carousel-item={isCarouselEnabled ? index : undefined}
+							loading="lazy"
+							decoding="async"
+							fetchpriority="low"
 							style={blur > 0 ? `filter: blur(${blur}px);` : undefined}
 						/>
 					);
@@ -245,6 +265,9 @@ const positionClass = getPositionClass(position);
 							alt={`Mobile wallpaper ${index + 1}`}
 							class={imageClass}
 							data-carousel-item={isCarouselEnabled ? index : undefined}
+							loading="lazy"
+							decoding="async"
+							fetchpriority="low"
 							style={blur > 0 ? `filter: blur(${blur}px);` : undefined}
 						/>
 					);
@@ -256,51 +279,103 @@ const positionClass = getPositionClass(position);
 
 {isCarouselEnabled && (
 	<script is:inline define:vars={{ carouselInterval }}>
-		// 全屏壁纸轮播逻辑
-		function initFullscreenWallpaperCarousel() {
-			const wallpaperContainer = document.querySelector('[data-fullscreen-wallpaper]');
-			if (!wallpaperContainer) return;
+		// 全屏壁纸轮播逻辑（按需启动，避免重复初始化和隐藏状态下运行）
+		(function() {
+			const activeIntervals = [];
 
-			const desktopItems = wallpaperContainer.querySelectorAll('.hidden.lg\\:block [data-carousel-item]');
-			const mobileItems = wallpaperContainer.querySelectorAll('.block.lg\\:hidden [data-carousel-item]');
-
-			function startCarousel(items) {
-				if (items.length <= 1) return;
-
-				let currentIndex = 0;
-				
-				// 初始化：显示第一张，隐藏其他
-				items.forEach((item, index) => {
-					item.style.opacity = index === 0 ? '1' : '0';
-				});
-
-				// 开始轮播
-				setInterval(() => {
-					// 隐藏当前图片
-					items[currentIndex].style.opacity = '0';
-					
-					// 切换到下一张
-					currentIndex = (currentIndex + 1) % items.length;
-					
-					// 显示下一张图片
-					items[currentIndex].style.opacity = '1';
-				}, carouselInterval * 1000);
+			function clearCarousels() {
+				while (activeIntervals.length) {
+					const id = activeIntervals.pop();
+					clearInterval(id);
+				}
 			}
 
-			// 分别为桌面端和移动端启动轮播
-			if (desktopItems.length > 0) {
-				startCarousel(desktopItems);
-			}
-			if (mobileItems.length > 0) {
-				startCarousel(mobileItems);
-			}
-		}
+			function initFullscreenWallpaperCarousel() {
+				const wallpaperContainer = document.querySelector('[data-fullscreen-wallpaper]');
+				if (!wallpaperContainer) return;
 
-		// 页面加载完成后初始化轮播
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', initFullscreenWallpaperCarousel);
-		} else {
-			initFullscreenWallpaperCarousel();
-		}
+				// 避免重复初始化
+				if (wallpaperContainer.dataset.carouselReady === 'true') return;
+
+				// 仅在全屏模式下启动
+				const mode = localStorage.getItem('wallpaperMode') || 'banner';
+				if (mode !== 'fullscreen') return;
+
+				const desktopItems = wallpaperContainer.querySelectorAll('.hidden.lg\\:block [data-carousel-item]');
+				const mobileItems = wallpaperContainer.querySelectorAll('.block.lg\\:hidden [data-carousel-item]');
+
+				function startCarousel(items) {
+					if (items.length <= 1) return;
+
+					let currentIndex = 0;
+
+					// 初始化：显示第一张，隐藏其他
+					items.forEach((item, index) => {
+						item.style.opacity = index === 0 ? '1' : '0';
+					});
+
+					const id = setInterval(() => {
+						items[currentIndex].style.opacity = '0';
+						currentIndex = (currentIndex + 1) % items.length;
+						items[currentIndex].style.opacity = '1';
+					}, carouselInterval * 1000);
+
+					activeIntervals.push(id);
+				}
+
+				if (desktopItems.length > 0) {
+					startCarousel(desktopItems);
+				}
+				if (mobileItems.length > 0) {
+					startCarousel(mobileItems);
+				}
+
+				wallpaperContainer.dataset.carouselReady = 'true';
+			}
+
+			function maybeInit() {
+				clearCarousels();
+				const wallpaperContainer = document.querySelector('[data-fullscreen-wallpaper]');
+				if (wallpaperContainer) {
+					delete wallpaperContainer.dataset.carouselReady;
+				}
+				initFullscreenWallpaperCarousel();
+			}
+
+			// 页面加载完成后初始化轮播
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', maybeInit, { once: true });
+			} else {
+				maybeInit();
+			}
+
+			// 监听壁纸模式变化，切换时停止或重新初始化
+			window.addEventListener('wallpaper-mode-change', (e) => {
+				const mode = e.detail?.mode || localStorage.getItem('wallpaperMode') || 'banner';
+				if (mode !== 'fullscreen') {
+					clearCarousels();
+					const wallpaperContainer = document.querySelector('[data-fullscreen-wallpaper]');
+					if (wallpaperContainer) {
+						delete wallpaperContainer.dataset.carouselReady;
+					}
+				} else {
+					maybeInit();
+				}
+			});
+
+			// 页面隐藏/显示时暂停或恢复
+			document.addEventListener('visibilitychange', () => {
+				const mode = localStorage.getItem('wallpaperMode') || 'banner';
+				if (document.hidden || mode !== 'fullscreen') {
+					clearCarousels();
+					const wallpaperContainer = document.querySelector('[data-fullscreen-wallpaper]');
+					if (wallpaperContainer) {
+						delete wallpaperContainer.dataset.carouselReady;
+					}
+					return;
+				}
+				maybeInit();
+			});
+		})();
 	</script>
 )}

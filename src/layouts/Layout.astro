@@ -2,6 +2,7 @@
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import MusicPlayer from "@components/widget/MusicPlayer.svelte";
 import Pio from "@components/widget/Pio.svelte"; // 使用 Svelte 版本的 Pio 组件
+import Analytics from '@vercel/analytics/astro'
 import {
 	musicPlayerConfig,
 	pioConfig,
@@ -174,9 +175,10 @@ if (siteConfig.font) {
 >
 	<head>
 		<!-- 第三方分析脚本 - 延迟加载优化 -->
-		<script is:inline>
+		<script is:inline define:vars={{ isProd: import.meta.env.PROD }}>
 			// 使用 requestIdleCallback 延迟加载第三方脚本
 			function loadAnalytics() {
+				if (!isProd) return;
 				// Google Tag Manager
 				(function (w, d, s, l, i) {
 					w[l] = w[l] || [];
@@ -246,6 +248,7 @@ if (siteConfig.font) {
 		<meta name="twitter:description" content={description || pageTitle} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<Analytics/>
 		{
 			favicons.map((favicon) => (
 				<link
@@ -810,6 +813,17 @@ function disableAnimation() {
 
 			// 开始自动轮播
 			startCarousel();
+
+			// 页面不可见时暂停，恢复时继续
+			document.addEventListener('visibilitychange', () => {
+				if (document.hidden) {
+					isPaused = true;
+					clearInterval(carouselInterval);
+				} else {
+					isPaused = false;
+					startCarousel();
+				}
+			});
 		}
 	}
 
@@ -936,6 +950,12 @@ function disableAnimation() {
 
 		if (fancyboxSelectors.length > 0) {
 			return; // ??????????
+		}
+
+		// 若页面不存在 fancybox 目标则跳过初始化
+		const hasFancyboxTarget = document.querySelector('[data-fancybox]');
+		if (!hasFancyboxTarget) {
+			return;
 		}
 
 		initFancybox().then(() => {
