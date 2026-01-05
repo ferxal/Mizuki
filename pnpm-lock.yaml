@@ -159,7 +159,7 @@ importers:
         specifier: ^0.64.0
         version: 0.64.0
       svelte:
-        specifier: ^5.45.5
+        specifier: ^5.46.1
         version: 5.46.1
       tailwindcss:
         specifier: ^3.4.18

@@ -14,74 +14,75 @@ const { config, className } = Astro.props;
 const getImageSources = async () => {
 	let srcConfig = config.src;
 
-	// 如果启用了图片API，使用API图片
-	// Wallpaper image API is not used here; runtime allowlist handles remote random URLs.
+	// API 图片逻辑
+	if (siteConfig.banner.imageApi?.enable && siteConfig.banner.imageApi?.url) {
+		try {
+			const response = await fetch(siteConfig.banner.imageApi.url);
+			const text = await response.text();
+			const apiImages = text.split("\n").filter((line) => line.trim());
+			if (apiImages.length > 0) {
+				return { desktop: apiImages, mobile: apiImages };
+			}
+		} catch (error) {
+			console.warn("Failed to fetch images from API:", error);
+		}
+	}
 
+	const toArray = (src: string | string[] | undefined): string[] => 
+		Array.isArray(src) ? src : (typeof src === "string" ? [src] : []);
 
-	const toArray = (src: string | string[] | undefined): string[] => {
-		if (Array.isArray(src)) return src;
-		if (typeof src === "string") return [src];
-		return [];
-	};
-	if (
-		typeof srcConfig === "object" &&
-		srcConfig !== null &&
-		!Array.isArray(srcConfig) &&
-		("desktop" in srcConfig || "mobile" in srcConfig)
-	) {
-		const srcObj = srcConfig as {
-			desktop?: string | string[];
-			mobile?: string | string[];
-		};
-		const desktop = toArray(srcObj.desktop);
-		const mobile = toArray(srcObj.mobile);
+	if (typeof srcConfig === "object" && srcConfig !== null && !Array.isArray(srcConfig)) {
+		const desktop = toArray(srcConfig.desktop);
+		const mobile = toArray(srcConfig.mobile);
 		return {
 			desktop: desktop.length > 0 ? desktop : mobile,
 			mobile: mobile.length > 0 ? mobile : desktop,
 		};
 	}
+
 	// 如果是字符串或字符串数组，同时用于桌面端和移动端
 	const allImages = toArray(srcConfig as string | string[]);
-	return {
-		desktop: allImages,
-		mobile: allImages,
-	};
+	return { desktop: allImages, mobile: allImages };
 };
 
 const imageSources = await getImageSources();
 const hasDesktopImages = imageSources.desktop.length > 0;
 const hasMobileImages = imageSources.mobile.length > 0;
 
-// 如果没有任何图片源，不渲染
-if (!hasDesktopImages && !hasMobileImages) {
-	return null;
-}
+if (!hasDesktopImages && !hasMobileImages) return null;
 
-// 轮播相关逻辑
-const isCarouselEnabled =
-	config.carousel?.enable &&
+// 轮播配置
+const isCarouselEnabled = config.carousel?.enable && 
 	(imageSources.desktop.length > 1 || imageSources.mobile.length > 1);
 const carouselInterval = config.carousel?.interval || 5;
 
-// 样式相关
+// 样式配置
 const position = config.position || "center";
 const zIndex = config.zIndex || -1;
 const opacity = config.opacity || 0.8;
 const blur = config.blur || 0;
-
-// 生成位置类名
-const getPositionClass = (pos: string) => {
-	switch (pos) {
-		case "top":
-			return "object-top";
-		case "bottom":
-			return "object-bottom";
-		default:
-			return "object-center";
+const positionClass = (() => {
+	switch (position) {
+		case "top": return "object-top";
+		case "bottom": return "object-bottom";
+		default: return "object-center";
 	}
-};
+})();
 
-const positionClass = getPositionClass(position);
+const renderGroups = [
+	{
+		key: 'desktop',
+		images: imageSources.desktop,
+		containerClass: "hidden lg:block",
+		hasImages: hasDesktopImages
+	},
+	{
+		key: 'mobile',
+		images: imageSources.mobile,
+		containerClass: "block lg:hidden",
+		hasImages: hasMobileImages
+	}
+];
 ---
 
 <div 
@@ -89,7 +90,7 @@ const positionClass = getPositionClass(position);
 		"fixed inset-0 w-full h-full overflow-hidden pointer-events-none",
 		className
 	]}
-	style={`z-index: ${zIndex}; opacity: ${opacity};`}
+	style={`z-index: ${zIndex}; opacity: ${opacity}; transform: translateZ(0); perspective: 1000px;`}
 	data-fullscreen-wallpaper
 >
 <script is:inline>
@@ -274,7 +275,7 @@ const positionClass = getPositionClass(position);
 				}
 			})}
 		</div>
-	)}
+	))}
 </div>
 
 {isCarouselEnabled && (
