@@ -444,7 +444,7 @@
 		return new Promise((resolve, reject) => {
 			const script = document.createElement("script");
 			script.src =
-				"https://jsd-proxy.ygxz.in/npm/mermaid@11/dist/mermaid.min.js";
+				"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
 
 			script.onload = () => {
 				console.log("Mermaid library loaded successfully");

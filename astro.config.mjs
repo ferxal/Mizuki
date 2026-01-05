@@ -39,7 +39,7 @@ export default defineConfig({
 			nesting: true,
 		}),
 		swup({
-			theme: true,
+			theme: false,
 			animationClass: "transition-swup-",
 			containers: ["main"],
 			smoothScrolling: false, // 禁用平滑滚动以提升性能，避免与锚点导航冲突

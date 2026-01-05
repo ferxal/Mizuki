@@ -22,41 +22,38 @@ import { LinkPreset } from "./types/config";
 const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
 export const siteConfig: SiteConfig = {
-	title: "风萧のBlog",
-	subtitle: "净整没用的",
-	siteURL: "https://blog.chenhen.top/", // 请替换为你的站点URL，以斜杠结尾
-	siteStartDate: "2025-8-23", // 站点开始运行日期，用于站点统计组件计算运行天数
+	title: "FerXlog",
+	subtitle: "记录与分享",
+	siteURL: "https://mizuki.mysqil.com/", // 请替换为你的站点URL，以斜杠结尾
+	siteStartDate: "2026-01-05", // 站点开始运行日期，用于站点统计组件计算运行天数
 
 	timeZone: SITE_TIMEZONE,
 
 	lang: SITE_LANG,
 
-	imageHostAllowlist: ["t.alcy.cc"],
-
 	themeColor: {
-		hue: 240, // 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		fixed: true, // 对访问者隐藏主题色选择器
+		hue: 230, // 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
+		fixed: false, // 对访问者隐藏主题色选择器
 	},
 
 	// 特色页面开关配置(关闭不在使用的页面有助于提升SEO,关闭后直接在顶部导航删除对应的页面就行)
 	featurePages: {
 		anime: true, // 番剧页面开关
-		diary: true, // 日记页面开关
+		diary: false, // 日记页面开关
 		friends: true, // 友链页面开关
-		projects: true, // 项目页面开关
-		skills: true, // 技能页面开关
-		timeline: true, // 时间线页面开关
-		albums: true, // 相册页面开关
-		devices: true, // 设备页面开关
-		chat: true, // 聊天室页面开关
+		projects: false, // 项目页面开关
+		skills: false, // 技能页面开关
+		timeline: false, // 时间线页面开关
+		albums: false, // 相册页面开关
+		devices: false, // 设备页面开关
 	},
 
 	// 顶栏标题配置
 	navbarTitle: {
 		// 顶栏标题文本
-		text: "Ferxa1",
+		text: "FerXlog",
 		// 顶栏标题图标路径，默认使用 public/assets/home/home.png
-		icon: "assets/home/home.png",
+		icon: "assets/home/home.webp",
 	},
 
 	bangumi: {
@@ -80,13 +77,13 @@ export const siteConfig: SiteConfig = {
 	// 标签样式配置
 	tagStyle: {
 		// 是否使用新样式（悬停高亮样式）还是旧样式（外框常亮样式）
-		useNewStyle: true,
+		useNewStyle: false,
 	},
 
 	// 壁纸模式配置
 	wallpaperMode: {
 		// 默认壁纸模式：banner=顶部横幅，fullscreen=全屏壁纸，none=无壁纸
-		defaultMode: "banner",
+		defaultMode: "fullscreen",
 		// 整体布局方案切换按钮显示设置（默认："desktop"）
 		// "off" = 不显示
 		// "mobile" = 仅在移动端显示
@@ -100,28 +97,18 @@ export const siteConfig: SiteConfig = {
 		src: {
 			desktop: [
 				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				//"https://img.072103.xyz/h",
-				//"https://eopfapi.acofork.com/pic?img=ua",
-				
-				
-			],
+			], // 桌面横幅图片
 			mobile: [
 				"https://t.alcy.cc/mp",
-				"https://t.alcy.cc/mp",
-				"https://t.alcy.cc/mp",
-				
-			],
-		},
+			], // 移动横幅图片
+		}, // 使用本地横幅图片
 
 		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 
 		carousel: {
 			enable: true, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
 
-			interval: 2, // 轮播间隔时间（秒）
+			interval: 1.5, // 轮播间隔时间（秒）
 		},
 
 		waves: {
@@ -133,7 +120,7 @@ export const siteConfig: SiteConfig = {
 		// PicFlow API支持(智能图片API)
 		imageApi: {
 			enable: false, // 启用图片API
-			url: "http://domain.com/api_v2.php?format=text&count=4", // API地址，返回每行一个图片链接的文本
+			url: "http://picflow.api.chenhen.top/api_v2.php?format=text&count=4", // API地址，返回每行一个图片链接的文本
 		},
 		// 这里需要使用PicFlow API的Text返回类型,所以我们需要format=text参数
 		// 项目地址:https://github.com/matsuzaka-yuki/PicFlow-API
@@ -141,14 +128,17 @@ export const siteConfig: SiteConfig = {
 
 		homeText: {
 			enable: true, // 在主页显示自定义文本
-			title: "风萧のBlog", // 主页横幅主标题
+			title: "美しいミズキ", // 主页横幅主标题
 
 			subtitle: [
-				"学习记录",
-				"交流分享",
-			], // 主页横幅副标题，支持多文本
+				"特別なことはないけど、君がいると十分です",
+				"今でもあなたは私の光",
+				"君ってさ、知らないうちに私の毎日になってたよ",
+				"君と話すと、なんか毎日がちょっと楽しくなるんだ",
+				"今日はなんでもない日。でも、ちょっとだけいい日",
+			],
 			typewriter: {
-				enable: true, // 启用副标题打字机效果
+				enable: false, // 启用副标题打字机效果
 
 				speed: 100, // 打字速度（毫秒）
 				deleteSpeed: 50, // 删除速度（毫秒）
@@ -157,10 +147,10 @@ export const siteConfig: SiteConfig = {
 		},
 
 		credit: {
-			enable: false, // Display banner image source text
+			enable: false, // 显示横幅图片来源文本
 
-			text: "关于背景图", // Source text to display
-			url: "", // (Optional) URL link to original artwork or artist page
+			text: "Describe", // 要显示的来源文本
+			url: "", // （可选）原始艺术品或艺术家页面的 URL 链接
 		},
 
 		navbar: {
@@ -176,17 +166,12 @@ export const siteConfig: SiteConfig = {
 	showCoverInContent: true, // 在文章内容页显示文章封面
 	generateOgImages: false, // 启用生成OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	favicon: [
-		// 留空则使用默认favicon
+		// 留空以使用默认 favicon
 		{
-			src: "/favicon/icon_light_32.ico", // 图标文件路径
-			theme: "light", // 可选，指定主题 'light' | 'dark'
-			sizes: "32x32", // 可选，图标尺寸
-		},
-		{
-			src: "/favicon/icon_dark_32.ico", // 图标文件路径
-			theme: "dark", // 可选，指定主题 'light' | 'dark'
-			sizes: "32x32", // 可选，图标尺寸
-		},
+		   src: '/favicon/favicon-32x32.ico',    // 图标文件路径
+		   //   theme: 'light',              // 可选，指定主题 'light' | 'dark'
+		   sizes: '32x32',              // 可选，图标大小
+		}
 	],
 
 	// 字体配置
@@ -213,16 +198,12 @@ export const siteConfig: SiteConfig = {
 };
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
-			desktop: [
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-				"https://t.alcy.cc/pc",
-			],
-			mobile: [
-				"https://t.alcy.cc/mp",
-				"https://t.alcy.cc/mp",
-				"https://t.alcy.cc/mp",
-			],
+		desktop: [
+			"https://t.alcy.cc/pc",
+		], // 桌面横幅图片
+		mobile: [
+			"https://t.alcy.cc/mp",
+		], // 移动横幅图片
 	}, // 使用本地横幅图片
 	position: "center", // 壁纸位置，等同于 object-position
 	carousel: {
@@ -238,112 +219,43 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-		//自定义链接格式：
-		//		{
-		//			name: "GitHub",
-		//			url: "https://github.com/matsuzaka-yuki",
-		//			external: true,
-		//		},
-		// 支持自定义导航栏链接,并且支持多级菜单,3.1版本新加
 		{
-			name: "我的",
-			url: "/content/",
-			icon: "material-symbols:person",
-			children: [
-				{
+					name: "Friends",
+					url: "/friends/",
+					icon: "material-symbols:group",
+		},
+		{
 					name: "番剧",
 					url: "/anime/",
 					icon: "material-symbols:movie",
-				},
-				// {
-				// 	name: "Diary",
-				// 	url: "/diary/",
-				// 	icon: "material-symbols:book",
-				// },
-				// {
-				// 	name: "Gallery",
-				// 	url: "/albums/",
-				// 	icon: "material-symbols:photo-library",
-				// },
-				{
-					name: "设备",
-					url: "devices/",
-					icon: "material-symbols:devices",
-					external: false,
-				},
-			],
 		},
-		// {
-		// 	name: "About",
-		// 	url: "/content/",
-		// 	icon: "material-symbols:info",
-		// 	children: [
-		// 		{
-		// 			name: "About",
-		// 			url: "/about/",
-		// 			icon: "material-symbols:person",
-		// 		},
-		// 		{
-		// 			name: "Friends",
-		// 			url: "/friends/",
-		// 			icon: "material-symbols:group",
-		// 		},
-		// 	],
-		// },
-		{
-			name: "友链",
-			url: "/friends/",
-			icon: "material-symbols:group",
-		},
-		// {
-		// 	name: "Others",
-		// 	url: "#",
-		// 	icon: "material-symbols:more-horiz",
-		// 	children: [
-		// 		// {
-		// 		// 	name: "Projects",
-		// 		// 	url: "/projects/",
-		// 		// 	icon: "material-symbols:work",
-		// 		// },
-		// 		// {
-		// 		// 	name: "Skills",
-		// 		// 	url: "/skills/",
-		// 		// 	icon: "material-symbols:psychology",
-		// 		// },
-		// 		// {
-		// 		// 	name: "Timeline",
-		// 		// 	url: "/timeline/",
-		// 		// 	icon: "material-symbols:timeline",
-		// 		// },
-		// 	],
-		// },
 	],
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "https://proxy.chenhen.top/https://i1.hdslb.com/bfs/face/bef090121de5e2aad3848a2db22e916a6898f7dc.jpg@400w_400h.webp", // 相对于 /src 目录。如果以 '/' 开头，则相对于 /public 目录
-	name: "Ferxa1",
-	bio: "净整没用的",
+	avatar: "assets/images/avatar.webp", // 相对于 /src 目录。如果以 '/' 开头，则相对于 /public 目录
+	name: "风萧li",
+	bio: "Oh my god code",
 	typewriter: {
-		enable: true, // 启用个人简介打字机效果
+		enable: false, // 启用个人简介打字机效果
 		speed: 80, // 打字速度（毫秒）
 	},
 	links: [
 		{
-			name: "B站", // 保留B站链接
+			name: "Bilibli",
 			icon: "fa6-brands:bilibili",
-			url: "https://space.bilibili.com/1197710906", // 修改为指定链接
+			url: "https://space.bilibili.com/1197710906",
 		},
 		{
-			name: "GitHub", // 修改为GitHub链接
-			icon: "fa6-brands:github", // 修改为指定图标
-			url: "https://github.com/ferxal", // 修改为指定链接
+			name: "GitHub",
+			icon: "fa6-brands:github",
+			url: "https://github.com/ferxal",
 		},
 	],
 };
 
 export const licenseConfig: LicenseConfig = {
-	enable: false, // 禁用许可证显示
+	enable: true,
 	name: "CC BY-NC-SA 4.0",
 	url: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
 };
@@ -383,10 +295,10 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 };
 
 export const commentConfig: CommentConfig = {
-	enable: true, // 启用评论功能
+	enable: true, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
 	twikoo: {
 		envId: "https://twikoo.api.chenhen.top",
-		lang: "zh", // 设置 Twikoo 评论系统语言为英文
+		lang: SITE_LANG,
 	},
 };
 
@@ -395,11 +307,11 @@ export const shareConfig: ShareConfig = {
 };
 
 export const announcementConfig: AnnouncementConfig = {
-	title: "公告", // Announcement title
-	content: "欢迎来到我的博客🤓不过我的技术含量不高，仅供参考~", // Announcement content
-	closable: false, // Allow users to close the announcement
+	title: "Announcement", // 公告标题
+	content: "Welcome to my blog! This is a sample announcement.", // 公告内容
+	closable: true, // 允许用户关闭公告
 	link: {
-		enable: false, // 启用链接
+		enable: true, // 启用链接
 		text: "Learn More", // 链接文本
 		url: "/about/", // 链接 URL
 		external: false, // 内部链接
@@ -407,7 +319,7 @@ export const announcementConfig: AnnouncementConfig = {
 };
 
 export const musicPlayerConfig: MusicPlayerConfig = {
-	enable: true, // 启用音乐播放器功能
+	enable: false, // 启用音乐播放器功能
 	mode: "meting", // 音乐播放器模式，可选 "local" 或 "meting"
 	meting_api:
 		"https://www.bilibili.uno/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // Meting API 地址
@@ -455,7 +367,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件类型：公告组件
 			type: "announcement",
 			// 是否启用该组件（现在通过统一配置控制）
-			enable: true,
+			enable: false,
 			// 组件显示顺序
 			order: 2,
 			// 组件位置："top" 表示固定在顶部
@@ -529,7 +441,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件类型：日历组件(移动端不显示)
 			type: "calendar",
 			// 是否启用该组件
-			enable: true,
+			enable: false,
 			// 组件显示顺序
 			order: 6,
 			// 组件位置
@@ -606,7 +518,7 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: true, // 启用看板娘
+	enable: false, // 启用看板娘
 	models: ["/pio/models/pio/model.json"], // 默认模型路径
 	position: "left", // 默认位置在右侧
 	width: 280, // 默认宽度
@@ -614,15 +526,16 @@ export const pioConfig: import("./types/config").PioConfig = {
 	mode: "draggable", // 默认为可拖拽模式
 	hiddenOnMobile: true, // 默认在移动设备上隐藏
 	dialog: {
-		welcome: "欢迎来到Ferxal的博客！", // 欢迎词
+		welcome: "Welcome to Mizuki Website!", // 欢迎词
 		touch: [
-			"你干嘛？！",
-			"别碰我！",
-			"止めてください！",
+			"What are you doing?",
+			"Stop touching me!",
+			"HENTAI!",
+			"Don't bully me like that!",
 		], // 触摸提示
-		home: "点击这里返回首页！", // 首页提示
-		skin: ["想看看我的新衣服吗？", "新衣服 looks great~"], // 换装提示
-		close: "QwQ 下次再见！", // 关闭提示
+		home: "Click here to go back to homepage!", // 首页提示
+		skin: ["Want to see my new outfit?", "The new outfit looks great~"], // 换装提示
+		close: "QWQ See you next time~", // 关闭提示
 		link: "https://github.com/matsuzaka-yuki/Mizuki", // 关于链接
 	},
 };
@@ -641,7 +554,7 @@ export const widgetConfigs = {
 
 export const umamiConfig = {
 	enabled: true, // 是否显示Umami统计
-	apiKey: import.meta.env.UMAMI_API_KEY || "api_xxxxxxxx", // API密钥优先从环境变量读取，否则使用配置文件中的值
+	apiKey: import.meta.env.UMAMI_API_KEY || "api_StHKYaGphwW6hkUmCEE1jAJqrYqiXBWb", // API密钥优先从环境变量读取，否则使用配置文件中的值
 	baseUrl: "https://api.umami.is", // Umami Cloud API地址
 	scripts: `
 <script defer src="https://cloud.umami.is/script.js" data-website-id="2cf65cda-3884-4d50-a29c-5091a2a474c2"></script>

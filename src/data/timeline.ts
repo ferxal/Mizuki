@@ -192,9 +192,9 @@ export const timelineData: TimelineItem[] = [
 	},
 	{
 		id: "first-programming-experience",
-		title: "科技创意大赛 广东省二等奖",
+		title: "First Programming Experience",
 		description:
-			"在 青少年科技创意实践比赛中得到了 广东省二等奖",
+			"First encountered programming in high school IT class, started learning Python basic syntax.",
 		type: "education",
 		startDate: "2021-03-01",
 		skills: ["Python", "Basic Programming Concepts"],

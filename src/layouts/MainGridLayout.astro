@@ -61,8 +61,19 @@ const getBannerImages = async () => {
 	let bannerSrc = siteConfig.banner.src;
 
 	// 如果启用了图片API，获取API图片
-	// Banner image API is not used here; runtime allowlist handles remote random URLs.
+	if (siteConfig.banner.imageApi?.enable && siteConfig.banner.imageApi?.url) {
+		try {
+			const response = await fetch(siteConfig.banner.imageApi.url);
+			const text = await response.text();
+			const apiImages = text.split("\n").filter((line) => line.trim());
 
+			if (apiImages.length > 0) {
+				bannerSrc = apiImages;
+			}
+		} catch (error) {
+			console.warn("Failed to fetch images from API:", error);
+		}
+	}
 
 	if (
 		typeof bannerSrc === "object" &&
@@ -196,7 +207,7 @@ const transparentClass = shouldEnableTransparency
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
 
-<script is:inline define:vars={{BANNER_HEIGHT, navbarTransparentMode: siteConfig.banner?.navbar?.transparentMode || "semi", defaultWallpaperMode: siteConfig.wallpaperMode.defaultMode, defaultPostListLayout: siteConfig.postListLayout?.defaultMode || "list"}}>
+<script is:inline define:vars={{navbarTransparentMode: siteConfig.banner?.navbar?.transparentMode || "semi", defaultWallpaperMode: siteConfig.wallpaperMode.defaultMode, defaultPostListLayout: siteConfig.postListLayout?.defaultMode || "list"}}>
 	// 立即执行，在页面渲染前应用壁纸模式和布局模式，避免闪烁
 	(function() {
 		const wallpaperMode = localStorage.getItem('wallpaperMode') || defaultWallpaperMode;
@@ -689,95 +700,6 @@ const transparentClass = shouldEnableTransparency
         </div>
     )}
     
-
-<script is:inline define:vars={{ bannerSrc: siteConfig.banner.src, imageHostAllowlist: siteConfig.imageHostAllowlist || [] }}>
-	(function() {
-		const allowlist = Array.isArray(imageHostAllowlist) ? imageHostAllowlist : [];
-
-		function toArray(src) {
-			if (Array.isArray(src)) return src;
-			if (typeof src === "string") return [src];
-			return [];
-		}
-
-		function collectUrls(src) {
-			if (src && typeof src === "object" && !Array.isArray(src)) {
-				const desktop = toArray(src.desktop);
-				const mobile = toArray(src.mobile);
-				return desktop.concat(mobile);
-			}
-			return toArray(src);
-		}
-
-		function isAllowed(url) {
-			try {
-				const u = new URL(url, window.location.origin);
-				return allowlist.some((host) => u.host === host || u.host.endsWith("." + host));
-			} catch (_e) {
-				return false;
-			}
-		}
-
-		function withCacheBuster(url, suffix) {
-			const joiner = url.includes("?") ? "&" : "?";
-			return `${url}${joiner}cb=${Date.now()}-${suffix}`;
-		}
-
-		function pick(list, index) {
-			if (!list.length) return "";
-			if (list.length === 1) return list[0];
-			// simple per-index shuffle
-			return list[index % list.length];
-		}
-
-		function preloadAndSwap(img, url) {
-			const preloader = new Image();
-			preloader.onload = () => {
-				img.src = url;
-			};
-			preloader.onerror = () => {
-				img.src = url;
-			};
-			preloader.src = url;
-		}
-
-		function applyRandomImages() {
-			const urls = collectUrls(bannerSrc).filter(Boolean);
-			const allowed = urls.filter(isAllowed);
-			if (!allowed.length) return;
-
-			const imgs = document.querySelectorAll("#banner-wrapper img");
-			if (!imgs.length) return;
-
-			const wrapper = document.getElementById("banner-wrapper");
-			const prevOpacity = wrapper?.style.opacity;
-			const prevTransition = wrapper?.style.transition;
-			if (wrapper) {
-				wrapper.style.transition = "opacity 0.2s ease";
-				wrapper.style.opacity = "0";
-			}
-
-			imgs.forEach((img, idx) => {
-				const src = pick(allowed, idx + Math.floor(Math.random() * allowed.length));
-				if (!src) return;
-				preloadAndSwap(img, withCacheBuster(src, idx));
-			});
-
-			if (wrapper) {
-				requestAnimationFrame(() => {
-					wrapper.style.opacity = prevOpacity || "1";
-					wrapper.style.transition = prevTransition || "";
-				});
-			}
-		}
-
-		if (document.readyState === "loading") {
-			document.addEventListener("DOMContentLoaded", applyRandomImages);
-		} else {
-			applyRandomImages();
-		}
-	})();
-</script>
 
 </div>
 

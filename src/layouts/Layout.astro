@@ -2,7 +2,6 @@
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import MusicPlayer from "@components/widget/MusicPlayer.svelte";
 import Pio from "@components/widget/Pio.svelte"; // 使用 Svelte 版本的 Pio 组件
-import Analytics from '@vercel/analytics/astro'
 import {
 	musicPlayerConfig,
 	pioConfig,
@@ -175,10 +174,9 @@ if (siteConfig.font) {
 >
 	<head>
 		<!-- 第三方分析脚本 - 延迟加载优化 -->
-		<script is:inline define:vars={{ isProd: import.meta.env.PROD }}>
+		<script is:inline>
 			// 使用 requestIdleCallback 延迟加载第三方脚本
 			function loadAnalytics() {
-				if (!isProd) return;
 				// Google Tag Manager
 				(function (w, d, s, l, i) {
 					w[l] = w[l] || [];
@@ -248,7 +246,6 @@ if (siteConfig.font) {
 		<meta name="twitter:description" content={description || pageTitle} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<Analytics/>
 		{
 			favicons.map((favicon) => (
 				<link
@@ -813,17 +810,6 @@ function disableAnimation() {
 
 			// 开始自动轮播
 			startCarousel();
-
-			// 页面不可见时暂停，恢复时继续
-			document.addEventListener('visibilitychange', () => {
-				if (document.hidden) {
-					isPaused = true;
-					clearInterval(carouselInterval);
-				} else {
-					isPaused = false;
-					startCarousel();
-				}
-			});
 		}
 	}
 
@@ -843,10 +829,6 @@ function disableAnimation() {
 
 	let fancyboxSelectors: string[] = [];
 	let Fancybox: any;
-	const albumImagesSelector = '[data-fancybox="gallery"] img';
-	const albumLinksSelector = '[data-fancybox="gallery"]';
-	const singleFancyboxSelector = '[data-fancybox]:not([data-fancybox="gallery"])';
-	let fancyboxInitPromise: Promise<void> | null = null;
 
 	// 数学公式按需加载
 	function checkKatex() {
@@ -855,178 +837,89 @@ function disableAnimation() {
 		}
 	}
 
+	// 图片灯箱按需加载
 	async function initFancybox() {
-		if (Fancybox) return;
-		if (!fancyboxInitPromise) {
-			fancyboxInitPromise = (async () => {
-				const module = await import("@fancyapps/ui");
-				await import("@fancyapps/ui/dist/fancybox/fancybox.css");
-				Fancybox = module.Fancybox || module.default;
-			})().catch((error) => {
-				console.error("Failed to load Fancybox:", error);
-			});
-		}
-		await fancyboxInitPromise;
-	}
+		const albumImagesSelector =
+			".custom-md img, #post-cover img, .moment-images img";
+		const albumLinksSelector = ".moment-images a[data-fancybox]";
+		const singleFancyboxSelector = "[data-fancybox]:not(.moment-images a)";
 
-	function setupSwupContentReplaceHook() {
-		if (!(window as any)?.swup?.hooks) {
-			return false;
-		}
-		window.swup.hooks.on('content:replace', () => {
-		// 只处理新的katex元素的滚动条，使用原生CSS滚动条
-		initCustomScrollbar();
-		
-		// 检查当前页面是否为文章页面（有TOC元素）
-		const tocWrapper = document.getElementById('toc-wrapper');
-		const isArticlePage = tocWrapper !== null;
-		
-		// 只在文章页面重新初始化 TOC 组件
-		if (isArticlePage) {
-			const tocElement = document.querySelector('table-of-contents');
-			if (tocElement && typeof (tocElement as any).init === 'function') {
-				setTimeout(() => {
-					(tocElement as any).init();
-				}, 100);
-			}
-			
-			// 重新初始化移动端 TOC 组件
-			if (typeof (window as any).mobileTOCInit === 'function') {
-				setTimeout(() => {
-					(window as any).mobileTOCInit();
-				}, 100);
-			}
-		}
-		
-		// 重新初始化番剧页面标签页
-		if (typeof window.initBangumiTabs === 'function') {
-			setTimeout(() => {
-				console.log('Swup content:replace - 初始化番剧标签页');
-				window.initBangumiTabs();
-			}, 300); // 增加延迟确保DOM完全加载
-		}
-		
-		// 页面内容替换后重新执行翻译（仅在翻译已加载时）
-		setTimeout(() => {
-			if (siteConfig.translate?.enable && typeof (window as any).translate !== 'undefined') {
-				(window as any).translate.execute();
-			}
-		}, 100);
-		
-		// 重新初始化semifull模式的滚动检测
-		const navbar = document.getElementById('navbar')
-		if (navbar) {
-			const transparentMode = navbar.getAttribute('data-transparent-mode')
-			
-			if (transparentMode === 'semifull') {
-				// 重新调用初始化函数来重新绑定滚动事件
-				if (typeof (window as any).initSemifullScrollDetection === 'function') {
-					(window as any).initSemifullScrollDetection()
-				}
-			}
-		}
-	})
-		return true;
-	}
+		const hasImages =
+			document.querySelector(albumImagesSelector) ||
+			document.querySelector(albumLinksSelector) ||
+			document.querySelector(singleFancyboxSelector);
 
-	if (!setupSwupContentReplaceHook()) {
-		document.addEventListener('swup:enable', setupSwupContentReplaceHook, { once: true });
-	}
+		if (!hasImages) return;
 
-	function setupSwupVisitStartHook() {
-		if (!(window as any)?.swup?.hooks) {
-			return false;
-		}
-		window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
-		// change banner height immediately when a link is clicked
-		const bodyElement = document.querySelector('body')
-		const isHomePage = pathsEqual(visit.to.url, url('/'))
-		
-		if (isHomePage) {
-			bodyElement!.classList.add('lg:is-home');
-		} else {
-			bodyElement!.classList.remove('lg:is-home');
+		if (!Fancybox) {
+			const mod = await import("@fancyapps/ui");
+			Fancybox = mod.Fancybox;
+			await import("@fancyapps/ui/dist/fancybox/fancybox.css");
 		}
 
 		if (fancyboxSelectors.length > 0) {
-			return; // ??????????
+			return; // 已经初始化，直接返回
 		}
 
-		// 若页面不存在 fancybox 目标则跳过初始化
-		const hasFancyboxTarget = document.querySelector('[data-fancybox]');
-		if (!hasFancyboxTarget) {
-			return;
-		}
-
-		initFancybox().then(() => {
-			if (!Fancybox) return;
-
-			const commonConfig = {
-				Thumbs: { autoStart: true, showOnStart: "yes" },
-				Toolbar: {
-					display: {
-						left: ["infobar"],
-						middle: [
-							"zoomIn",
-							"zoomOut",
-							"toggle1to1",
-							"rotateCCW",
-							"rotateCW",
-							"flipX",
-							"flipY",
-						],
-						right: ["slideshow", "thumbs", "close"],
-					},
+		const commonConfig = {
+			Thumbs: { autoStart: true, showOnStart: "yes" },
+			Toolbar: {
+				display: {
+					left: ["infobar"],
+					middle: [
+						"zoomIn",
+						"zoomOut",
+						"toggle1to1",
+						"rotateCCW",
+						"rotateCW",
+						"flipX",
+						"flipY",
+					],
+					right: ["slideshow", "thumbs", "close"],
 				},
-				animated: true,
-				dragToClose: true,
-				keyboard: {
-					Escape: "close",
-					Delete: "close",
-					Backspace: "close",
-					PageUp: "next",
-					PageDown: "prev",
-					ArrowUp: "next",
-					ArrowDown: "prev",
-					ArrowRight: "next",
-					ArrowLeft: "prev",
-				},
-				fitToView: true,
-				preload: 3,
-				infinite: true,
-				Panzoom: { maxScale: 3, minScale: 1 },
-				caption: false,
-			};
+			},
+			animated: true,
+			dragToClose: true,
+			keyboard: {
+				Escape: "close",
+				Delete: "close",
+				Backspace: "close",
+				PageUp: "next",
+				PageDown: "prev",
+				ArrowUp: "next",
+				ArrowDown: "prev",
+				ArrowRight: "next",
+				ArrowLeft: "prev",
+			},
+			fitToView: true,
+			preload: 3,
+			infinite: true,
+			Panzoom: { maxScale: 3, minScale: 1 },
+			caption: false,
+		};
 
-			// ????/????
-			Fancybox.bind(albumImagesSelector, {
-				...commonConfig,
-				groupAll: true,
-				Carousel: {
-					transition: "slide",
-					preload: 2,
-				},
-			});
-			fancyboxSelectors.push(albumImagesSelector);
-
-			Fancybox.bind(albumLinksSelector, {
-				...commonConfig,
-				source: (el: any) => {
-					return el.getAttribute("data-src") || el.getAttribute("href");
-				},
-			});
-			fancyboxSelectors.push(albumLinksSelector);
-
-			// ????? fancybox ??
-			Fancybox.bind(singleFancyboxSelector, commonConfig);
-			fancyboxSelectors.push(singleFancyboxSelector);
+		// 绑定相册/文章图片
+		Fancybox.bind(albumImagesSelector, {
+			...commonConfig,
+			groupAll: true,
+			Carousel: {
+				transition: "slide",
+				preload: 2,
+			},
 		});
-	});
-		return true;
-	}
+		fancyboxSelectors.push(albumImagesSelector);
 
-	if (!setupSwupVisitStartHook()) {
-		document.addEventListener('swup:enable', setupSwupVisitStartHook, { once: true });
+		Fancybox.bind(albumLinksSelector, {
+			...commonConfig,
+			source: (el: any) => {
+				return el.getAttribute("data-src") || el.getAttribute("href");
+			},
+		});
+		fancyboxSelectors.push(albumLinksSelector);
+
+		// 绑定单独的 fancybox 图片
+		Fancybox.bind(singleFancyboxSelector, commonConfig);
+		fancyboxSelectors.push(singleFancyboxSelector);
 	}
 
 	// 清理 Fancybox 实例
@@ -1416,11 +1309,11 @@ function disableAnimation() {
 </script>
 
 <!-- 代码块折叠功能 -->
-<script type="module">
+<script>
 	import "../scripts/code-collapse.js";
 </script>
 
 <!-- 主题切换综合性能优化器（包含代码块优化、重型元素优化、性能诊断） -->
-<script type="module">
+<script>
 	import "../scripts/theme-optimizer.js";
 </script>
